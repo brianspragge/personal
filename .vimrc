@@ -45,9 +45,7 @@ syntax on
 " =======================
 " ===      Ruler      ===
 let g:ruler_place = 79
-if !exists('b:ruler_column')
-  let b:ruler_column = g:ruler_place
-endif
+let b:ruler_column = g:ruler_place
 highlight Ruler ctermbg=yellow ctermfg=black
 " remove match if exists
 function! ClearRuler()

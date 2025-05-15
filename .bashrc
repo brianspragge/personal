@@ -4,7 +4,7 @@
 
 ##
 # Aliases
-alias ll='ls --group-directories-first -1A'
+alias ll='ls --group-directories-first -A'
 
 ##
 # Variables
