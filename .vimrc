@@ -52,21 +52,26 @@ filetype plugin indent on
 " vim: set filetype=vim :
 
 " =======================
-" ===    !python     ====
-let mapleader = "\\"
-" execute highlighted code in new terminal buffer
-vnoremap <leader>p :<C-U>'<,'>w! /tmp/vim_temp.py \| !clear; python /tmp/vim_temp.py<CR>
-
-" =======================
 " ===      !gcc      ====
 " compile current file
-autocmd FileType c setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd FileType c setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 nnoremap <leader>c :w<CR>:!gcc % -o %< && ./%<<CR>
 
 " =======================
 " ===      !g++      ====
-autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd FileType cpp setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 nnoremap <leader>+ :w<CR>:!g++ % -o %< && ./%<<CR>
+
+" =======================
+" ===      !py       ====
+let mapleader = "\\"
+autocmd FileType py setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+" execute highlighted code in new terminal buffer
+vnoremap <leader>p :<C-U>'<,'>w! /tmp/vim_temp.py \| !clear; python /tmp/vim_temp.py<CR>
+
+" =======================
+" ===     !text      ====
+autocmd FileType text setlocal noexpandtab tabstop=5 shiftwidth=5 softtabstop=5
 
 " =======================
 " ===    Plugins     ====
