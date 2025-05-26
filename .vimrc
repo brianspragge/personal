@@ -1,3 +1,5 @@
+" =======================
+" ===    Settings    ====
 version 9.1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
@@ -19,7 +21,7 @@ set backspace=indent,eol,start
 set backupdir=~/.cache/vim/backup//
 set directory=~/.cache/vim/swap//
 set display=truncate
-set expandtab
+set expandtab  " Tab to spaces
 set fileencodings=ucs-bom,utf-8,default,latin1
 set helplang=en
 set history=200
@@ -31,16 +33,84 @@ set nrformats=bin,hex
 set number
 set ruler
 set tabstop=4
+set tags=./tags;~/tags/python_stdlib.tags;~/tags/python_venv_libs.tags
 set scrolloff=5
-set shiftwidth=4
+set shiftwidth=4  " Tab width 
 set showcmd
+set softtabstop=4  " Insert mode
 set suffixes=.bak,~,.o,.info,.swp,.aux,.bbl,.blg,.brf,.cb,.dvi,.idx,.ilg,.ind,.inx,.jpg,.log,.out,.png,.toc
 set ttimeout
 set ttimeoutlen=100
 set undodir=~/.cache/vim/undo//
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/node_modules/*,*/dist/*,*/build/*,*/coverage/*,*/__pycache__/*
+set wildignore+=*.o,*.obj,*.pyc,*.pyo,*.exe,*.dll,*.so,*.zip,*.tar.gz,*.tar.bz2,*.rar,*.min.js,*.min.css
+set wildignore+=*.log,*.tmp,*.swp,*.swo,*.DS_Store
 set wildmenu
+set wildmode=longest:full,full
 syntax on
+filetype plugin indent on
 " vim: set filetype=vim :
+
+" =======================
+" ===    !python     ====
+let mapleader = "\\"
+" execute highlighted code in new terminal buffer
+vnoremap <leader>p :<C-U>'<,'>w! /tmp/vim_temp.py \| !clear; python /tmp/vim_temp.py<CR>
+
+" =======================
+" ===      !gcc      ====
+" compile current file
+autocmd FileType c setlocal tabstop=4 shiftwidth=4 softtabstop=4
+nnoremap <leader>c :w<CR>:!gcc % -o %< && ./%<<CR>
+
+" =======================
+" ===      !g++      ====
+autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
+nnoremap <leader>+ :w<CR>:!g++ % -o %< && ./%<<CR>
+
+" =======================
+" ===    Plugins     ====
+call plug#begin('~/.vim/plugged')
+" List plugins here:
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/vim-lsp'
+call plug#end()
+" asyncomplete settings
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_auto_hover = 1
+let g:asyncomplete_sources = ['vim-lsp']
+set completeopt=menuone,noinsert,noselect,preview
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+" lsp server
+if executable('jedi-language-server')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'jedi',
+        \ 'cmd': {server_info->['jedi-language-server']},
+        \ 'allowlist': ['python'],
+        \ })
+endif
+if executable('clangd')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd']},
+        \ 'allowlist': ['c', 'objc', 'cpp', 'objcpp'],
+        \ })
+endif
+" vim-lsp settings
+noremap <leader>f :LspDocumentFormat<CR>
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd <plug>(lsp-definition)
+    let g:lsp_format_sync_timeout = 1000
+endfunction
+augroup lsp_install
+    au!
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+    autocmd BufWritePre *.py,*.c,*.cpp call execute('LspDocumentFormatSync')
+augroup END
 
 " =======================
 " ===      Ruler      ===
@@ -104,3 +174,6 @@ command! RulerToggle call ToggleRuler()
 " apply to all buffers
 autocmd BufWinEnter * call HighlightRuler()
 autocmd BufWinLeave * call ClearRuler()
+
+" =======================
+" ===      Extra      ===
