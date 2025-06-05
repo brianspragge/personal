@@ -1,0 +1,38 @@
+How to:
+	Create a GPG key
+	Revoke a non expired and or compromised GPG key
+	Delete an unuseable GPG key
+
+Create:
+	Bash:
+		$ gpg --full-generate-key
+		# prompts
+		$ gpg --list-secret-keys --keyid-format=long
+		- 5050A/5AA5A55555555AA5
+		#	   ^ copy section ^ 
+		$ gpg --armor --export <paste here>
+		# Copy output
+	Github.com -> Settings -> SSH and GPG keys -> New GPG key -> :	
+		Title:
+			$ Personal Key
+		Key:
+			# Paste output
+
+Revoke:
+	Bash:
+		$ gpg --list-secret-keys --keyid-format=long
+		- aa50505 2000-01-01 [SC] [expires: 2000-01-08]
+		- A505A50A50AA50AA5A50A505050A50AA50AAAAAA
+		# ^			copy section			 ^
+		$ gpg --gen-revoke <paste here> revoke.asc
+		$ gpg --import revoke.asc
+		$ gpg --send-keys <paste here>
+		# ^ if fail -> create default keyserver...
+
+Delete:
+	Bash:
+		$ gpg --list-secret-keys --keyid-format=long
+		- aa50505 2000-01-01 [SC] [expires: 2000-01-08]
+		- A505A50A50AA50AA5A50A505050A50AA50AAAAAA
+		# ^			copy section			 ^
+		$ gpg --delete-secret-keys <paste here>
