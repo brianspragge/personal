@@ -3,6 +3,10 @@ How to:
 	Revoke a non expired and or compromised GPG key
 	Delete an unuseable GPG key
 
+# = comments
+$ = commands
+- = output
+
 Create:
 	Bash:
 		$ gpg --full-generate-key
@@ -23,7 +27,6 @@ Create:
 		- A505A50A50AA50AA5A50A505050A50AA50AAAAAA
 		# ^			copy section			 ^
 		$ git config --global user.signingkey <paste section>
-
 Revoke:
 	Bash:
 		$ gpg --list-secret-keys --keyid-format=long
@@ -34,7 +37,6 @@ Revoke:
 		$ gpg --import revoke.asc
 		$ gpg --send-keys <paste section>
 		# ^ if fail -> create default keyserver...
-
 Delete:
 	Bash:
 		$ gpg --list-secret-keys --keyid-format=long
