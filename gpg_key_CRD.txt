@@ -1,3 +1,6 @@
+-- CRD --
+Create - Revoke - Delete
+
 How to:
 	Create a GPG key
 	Revoke a non expired and or compromised GPG key
