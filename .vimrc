@@ -3,7 +3,14 @@
 " source .env/bin/activate
 " sudo steamos-readonly disable
 " pip install jedi-language-server
-" sudo pacman -S --needed clangd ctags base-devel
+" sudo rm -rf /etc/pacman.d/gnupg
+" sudo pacman-key --init
+" sudo pacman-key --populate archlinux
+" sudo pacman-key --refresh-keys --keyserver hkps://keys.openpgp.org
+" uname -r
+" sudo pacman -Syu
+" sudo pacman -S --needed clang ctags base-devel linux-neptune-headers nodejs npm
+" sudo npm install -g bash-language-server
 " sudo steamos-readonly activate
 
 " =======================
@@ -60,6 +67,10 @@ filetype plugin indent on
 " vim: set filetype=vim :
 
 " =======================
+" ===     !Bash      ====
+autocmd FileType sh setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+
+" =======================
 " ===       !C       ====
 " compile current file
 autocmd FileType c setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
@@ -110,65 +121,49 @@ if executable('clangd')
         \ 'allowlist': ['c', 'objc', 'cpp', 'objcpp'],
         \ })
 endif
+if executable('bash-language-server')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'bash',
+        \ 'cmd': {server_info->['bash-language-server', 'start']},
+        \ 'allowlist': ['sh', 'bash'],
+        \ })
+endif
 " vim-lsp settings
 noremap <leader>f :LspDocumentFormat<CR>
 function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
-    setlocal signcolumn=yes
-    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-    nmap <buffer> gd <plug>(lsp-definition)
-    let g:lsp_format_sync_timeout = 1000 
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+  nmap <buffer> gd <plug>(lsp-definition)
+  let g:lsp_format_sync_timeout = 1000 
 endfunction
 augroup lsp_install
-    au!
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-    " autocmd BufWritePre *.py,*.c,*.cpp call execute('LspDocumentFormatSync')
+  au!
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+  " autocmd BufWritePre *.py,*.c,*.cpp call execute('LspDocumentFormatSync')
 augroup END
 
 " =======================
-" ===     Indent     ===
-highlight IndentLevel0 ctermbg=233
-highlight IndentLevel1 ctermbg=234
-highlight IndentLevel2 ctermbg=235
-highlight IndentLevel3 ctermbg=236
-highlight IndentLevel4 ctermbg=237
-highlight IndentLevel5 ctermbg=238
-highlight IndentLevel6 ctermbg=239
-highlight IndentLevel7 ctermbg=240
-highlight IndentLevel8 ctermbg=241
-highlight IndentLevel9 ctermbg=242
+" ===     Indent      ===
+highlight IndentGuide ctermfg=245
 let g:indent_levels = 5
-let b:indent_levels = g:indent_levels
-" 0=disabled 1=enabled by default
-let b:indent_enabled = 0
-" remove indent highlights
-function! ClearIndent()
-  for i in range(0, 9)
-    let l:match_var = 'w:indent_match' . i
-    if exists(l:match_var) && {l:match_var} >= 1
-      call matchdelete({l:match_var})
-      unlet {l:match_var}
+set conceallevel=1
+" define highlight groups
+for i in range(0, g:indent_levels)
+  execute 'highlight default link IndentLevel' . i . ' IndentGuide'
+endfor
+" clear previous indent matches
+function! ClearIndent() abort
+  for i in range(0, g:indent_levels)
+    let varbase = 'indent_match' . i
+    if exists('w:' . varbase)
+      call matchdelete(get(w:, varbase))
+      execute 'unlet w:' . varbase
     endif
   endfor
 endfunction
-" indent highlight per <shiftwidth> ability
-function! HighlightIndent()
-  if getbufvar('%', 'indent_enabled', 0)
-    call ClearIndent()
-    let l:sw = &shiftwidth
-    let l:levels = min([getbufvar('%', 'indent_levels', g:indent_levels), 10])
-    for i in range(0, l:levels - 1)
-      let l:group = 'IndentLevel' . i
-      let l:match_var = 'w:indent_match' . i
-      if !exists('b:indent_removed') || index(b:indent_removed, i) == -1
-        let l:pattern = '^ \{'.(i*l:sw).'\}\zs \{'.l:sw.'\}\ze\S'
-        let {l:match_var} = matchadd(l:group, l:pattern)
-      endif
-    endfor
-  endif
-endfunction
-" toggle indent on/off for current buffer
-function! ToggleIndent()
+" toggle function
+function! ToggleIndent() abort
   if getbufvar('%', 'indent_enabled', 0)
     call setbufvar('%', 'indent_enabled', 0)
     call ClearIndent()
@@ -179,156 +174,57 @@ function! ToggleIndent()
     echo "Indent enabled"
   endif
 endfunction
-" set number of indents
-function! SetIndent(levels)
-  if a:levels >= 1 && a:levels <= 10
-    call setbufvar('%', 'indent_levels', a:levels)
-    call HighlightIndent()
-    echo "Indent set to " . a:levels . " levels"
-  else
-    echohl ErrorMsg
-    echo "IndentSet: Number of levels must be between 1 and 10"
-    echohl None
-  endif
-endfunction
-" reset default number of indents(5)
-function! ResetIndent()
-  call setbufvar('%', 'indent_levels', g:indent_levels)
-  if exists('b:indent_removed')
-    unlet b:indent_removed
-  endif
-  call HighlightIndent()
-  echo "Indent reset to 5 levels"
-endfunction
-" remove specific indent levels
-function! RemoveIndent(...)
-  if a:0 == 0
-    echohl ErrorMsg
-    echo "IndentRemove: At least one level (1-10) required"
-    echohl None
-    return
-  endif
-  let l:removed = []
-  let l:skipped = []
-  if !exists('b:indent_removed')
-    let b:indent_removed = []
-  endif
-  for level in a:000
-    let l:internal_level = level - 1
-    if l:internal_level >= 0 && l:internal_level <= 9
-      if index(b:indent_removed, l:internal_level) == -1
-        call add(b:indent_removed, l:internal_level)
-        call add(l:removed, level)
-      else
-        call add(l:skipped, level)
-      endif
-    else
-      echohl ErrorMsg
-      echo "IndentRemove: Level " . level . " must be between 1 and 10"
-      echohl None
-    endif
-  endfor
-  if !empty(l:removed) || !empty(l:skipped)
-    call HighlightIndent()
-    let l:msg = ""
-    if !empty(l:removed)
-      let l:msg .= "Indent removed for level" . (len(l:removed) > 1 ? "s " : " ") . join(l:removed, ", ")
-    endif
-    if !empty(l:skipped)
-      let l:msg .= (empty(l:msg) ? "" : "; ") . "Level" . (len(l:skipped) > 1 ? "s " : " ") . join(l:skipped, ", ") . " already removed"
-    endif
-    echo l:msg
-  endif
-endfunction
-" add specific indent levels ability
-function! AddIndent(...)
-  if a:0 == 0
-    echohl ErrorMsg
-    echo "IndentAdd: At least one level (1-10) required"
-    echohl None
-    return
-  endif
-  let l:added = []
-  let l:skipped = []
-  if exists('b:indent_removed')
-    for level in a:000
-      let l:internal_level = level - 1
-      if l:internal_level >= 0 && l:internal_level <= 9
-        if index(b:indent_removed, l:internal_level) != -1
-          let b:indent_removed = filter(b:indent_removed, 'v:val != ' . l:internal_level)
-          call add(l:added, level)
+" indent highlight per <shiftwidth> or tab ability
+function! HighlightIndent()
+  if getbufvar('%', 'indent_enabled', 0)
+    call ClearIndent()
+    let l:sw = &shiftwidth
+    let l:ts = &tabstop
+    let l:et = &expandtab
+    if l:sw == 0 | return | endif
+    let l:conceal = '┊'
+    for i in range(1, g:indent_levels)
+      let l:group = 'IndentLevel' . (i - 1)
+      let l:varbase = 'indent_match' . (i - 1)
+      if !exists('b:indent_removed') || index(b:indent_removed, i - 1) == -1
+        if l:et
+          let l:pattern = '^' . repeat('\%(' . repeat(' ', l:sw) . '\)', i)
         else
-          call add(l:skipped, level)
+          let l:pattern = '^' . repeat('\t', i)
         endif
-      else
-        echohl ErrorMsg
-        echo "IndentAdd: Level " . level . " must be between 1 and 10"
-        echohl None
+        execute 'let w:' . l:varbase . ' = matchadd("' . l:group . '", "' . l:pattern . '", 10, -1, {"conceal":"' . l:conceal . '"})'
       endif
     endfor
-    if empty(b:indent_removed)
-      unlet b:indent_removed
-    endif
-  else
-    for level in a:000
-      if level >= 1 && level <= 10
-        call add(l:skipped, level)
-      else
-        echohl ErrorMsg
-        echo "IndentAdd: Level " . level . " must be between 1 and 10"
-        echohl None
-      endif
-    endfor
-  endif
-  if !empty(l:added) || !empty(l:skipped)
-    call HighlightIndent()
-    let l:msg = ""
-    if !empty(l:added)
-      let l:msg .= "Indent added for level" . (len(l:added) > 1 ? "s " : " ") . join(l:added, ", ")
-    endif
-    if !empty(l:skipped)
-      let l:msg .= (empty(l:msg) ? "" : "; ") . "Level" . (len(l:skipped) > 1 ? "s " : " ") . join(l:skipped, ", ") . " already active"
-    endif
-    echo l:msg
   endif
 endfunction
-" help message ability
-function! IndentHelp()
+" help message
+function! IndentHelp() abort
   echohl Title
-  echo "Indent Help:"
+  echo "Indent Guide Help:"
   echohl None
-  echo "     Highlight indentation levels with vertical lines"
-  echo "     Uses buffer's shiftwidth (" . &shiftwidth . " spaces)"
-  echo "     Enabled by default for filetypes: c, cpp, py"
-  echo "     Current number of levels: " . getbufvar('%', 'indent_levels', g:indent_levels)
-  echo "     Enabled: " . (getbufvar('%', 'indent_enabled', 0) ? "Yes" : "No")
-  echo "     Removed levels: " . (exists('b:indent_removed') ? join(map(copy(b:indent_removed), 'v:val + 1'), ", ") : 'None')
+  echo "  • Uses ┊ as indent guide."
+  echo "  • Enabled = " . (getbufvar('%', 'indent_enabled', 0) ? "Yes" : "No")
   echohl Statement
-  echo "  Indent:             - Show this help menu"
-  echo "  IndentOn:           - Enable indent"
-  echo "  IndentOff:          - Disable indent"
-  echo "  IndentToggle:       - Toggle indent on/off"
-  echo "  IndentSet <n>:      - Set number of levels (1-10)"
-  echo "  IndentReset:        - Reset to default 5 levels"
-  echo "  IndentRemove <n>...: - Remove coloring for level(s) (1-10)"
-  echo "  IndentAdd <n>...:   - Add coloring for level(s) (1-10)"
+  echo "Commands:"
+  echo "  :Indent        – This help menu"
+  echo "  :IndentOn      – Enable for this buffer"
+  echo "  :IndentOff     – Disable for this buffer"
+  echo "  :IndentToggle  – Toggle on/off"
   echohl None
 endfunction
-" defined commands
-command! Indent call IndentHelp()
-command! IndentOn call setbufvar('%', 'indent_enabled', 1) | call HighlightIndent() | echo "Indent enabled"
-command! IndentOff call setbufvar('%', 'indent_enabled', 0) | call ClearIndent() | echo "Indent disabled"
-command! -nargs=1 IndentSet call SetIndent(<args>)
-command! IndentReset call ResetIndent()
-command! -nargs=+ IndentRemove call RemoveIndent(<f-args>)
-command! -nargs=+ IndentAdd call AddIndent(<f-args>)
+" define commands
+command! Indent       call IndentHelp()
+command! IndentOn     call setbufvar('%', 'indent_enabled', 1) | call HighlightIndent() | echo "Indent enabled"
+command! IndentOff    call setbufvar('%', 'indent_enabled', 0) | call ClearIndent()  | echo "Indent disabled"
 command! IndentToggle call ToggleIndent()
-" AUTO ON FOR THESE FILES:
+" auto-enable for certain filetypes
 autocmd FileType c,cpp,python call setbufvar('%', 'indent_enabled', 1) | call HighlightIndent()
-" apply to all buffers
-autocmd BufWinEnter * call HighlightIndent()
-autocmd BufWinLeave * call ClearIndent()
-autocmd OptionSet shiftwidth call HighlightIndent()
+" refresh on WinEnter/Leave
+autocmd BufWinEnter * if getbufvar('%', 'indent_enabled', 0) | call HighlightIndent() | endif
+autocmd BufWinLeave * if getbufvar('%', 'indent_enabled', 0) | call ClearIndent()    | endif
+" Re-highlight when shiftwidth changes
+autocmd OptionSet shiftwidth if getbufvar('%', 'indent_enabled', 0) | call HighlightIndent() | endif
+
 
 " =======================
 " ===      Ruler      ===
@@ -395,3 +291,4 @@ autocmd BufWinLeave * call ClearRuler()
 
 " =======================
 " ===      Extra      ===
+" :help thesaurus
