@@ -23,6 +23,7 @@ list_keys() {
   are_keys keys
 }
 
+# TODO: Fix PUBLIC KEY BLOCK: not copyable.
 create_key() {
   gpg --full-generate-key
   list_keys
@@ -44,6 +45,8 @@ EOF
   done
 }
 
+# TODO: Clear screen after deleting key before prints new menu state:
+#         shows four lines of deletion above "Choose GPG key: " menu.
 key_actions() {
   local key="$1"
   local key_id="${key%% *}"
@@ -77,11 +80,12 @@ key_actions() {
           fi
           ;;
         3)
-          echo 'Returning to Main Menu'
+          printf "\n%s" 'Returning to Main Menu'
           return 0
           ;;
         *)
-          echo 'Nope, not even close.'
+          printf "\n%s\n" 'Nope, not even close.'
+          read -srn1 -p 'Press any key to continue...'
           ;;
         esac
         clear
@@ -124,3 +128,4 @@ done
 
 # TODO: I believe there are unnecessary global vars,
 #       which should be passed and returned locally instead.
+
