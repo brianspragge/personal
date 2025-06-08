@@ -8,7 +8,8 @@
 # Program: GPG_CRD - Create, Revoke, Delete for GPG keys(My first bash program)
 
 are_keys() {
-  if [ ${#keys[@]} -eq 0 ]; then
+  local -n _keys="$1"
+  if [ ${#_keys[@]} -eq 0 ]; then
     echo 'No secret keys found.'
     return 1
   fi
@@ -19,7 +20,7 @@ list_keys() {
     gpg --list-secret-keys --keyid-format=long --with-colons |
     awk -F: '/^sec:/ { key=$5; next } /^uid:/ && key { print key " - " $10 }'
   )
-  are_keys
+  are_keys keys
 }
 
 create_key() {
@@ -30,9 +31,11 @@ create_key() {
     if [[ -n "$key" ]]; then
       local key_id="${key%% *}"
       clear
-      echo "You chose: $key"
-      echo 'Copy and paste into GitHub:'
-      echo
+      cat <<EOF
+You chose: $key
+Copy and paste into GitHub:
+
+EOF
       gpg --armor --export "$key_id"
       break
     else
@@ -49,7 +52,7 @@ key_actions() {
     select action in 'Revoke key' 'Delete key' 'Main Menu'; do
       case "$REPLY" in
         1)
-          read -p "Are you sure you wish to revoke? (y/N): " confirm
+          read -p 'Are you sure you wish to revoke? (y/N): ' confirm
           if [[ "$confirm" =~ ^[Yy]$ ]]; then
             clear
             gpg --output revoke.asc --gen-revoke "$key_id"
@@ -58,11 +61,11 @@ key_actions() {
             printf "\n%s" 'Key revoked.'
             return 0
           else
-            echo "Cancelled."
+            echo 'Cancelled.'
           fi
           ;;
         2)
-          read -p "Are you sure you wish to delete? (y/N): " confirm
+          read -p 'Are you sure you wish to delete? (y/N): ' confirm
           if [[ "$confirm" =~ ^[Yy]$ ]]; then
             clear
             gpg --delete-secret-keys "$key_id"
@@ -70,15 +73,15 @@ key_actions() {
             printf "\n%s" 'Key deleted.'
             return 0
           else
-            echo "Cancelled."
+            echo 'Cancelled.'
           fi
           ;;
         3)
-          echo "Returning to Main Menu"
+          echo 'Returning to Main Menu'
           return 0
           ;;
         *)
-          echo "Nope, not even close."
+          echo 'Nope, not even close.'
           ;;
         esac
         clear
@@ -115,7 +118,7 @@ while true; do
     fi
   done
   echo
-  read -srn1 -p "Press any key to continue..."
+  read -srn1 -p 'Press any key to continue...'
 done
 
 
