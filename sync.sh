@@ -16,10 +16,10 @@ link_file() {
     fi
 }
 
-link_file "$HOME/.rc/.bashrc"           "$HOME/.bashrc"
-link_file "$HOME/.rc/.clang-format"     "$HOME/.clang-format"
-link_file "$HOME/.rc/.gpg_crd_cmds.txt" "$HOME/.gpg_crd_cmds.txt"
-link_file "$HOME/.rc/.gpg_crd.sh"       "$HOME/.gpg_crd.sh"
-link_file "$HOME/.rc/.inputrc"          "$HOME/.inputrc"
-link_file "$HOME/.rc/.vimrc"            "$HOME/.vimrc"
+link_file "$HOME/personal/.rc/.bashrc"           "$HOME/.bashrc"
+link_file "$HOME/personal/.rc/.clang-format"     "$HOME/.clang-format"
+link_file "$HOME/personal/.rc/gpg_crd_cmds.txt" "$HOME/gpg_crd_cmds.txt"
+link_file "$HOME/personal/.rc/gpg_crd.sh"       "$HOME/gpg_crd.sh"
+link_file "$HOME/personal/.rc/.inputrc"          "$HOME/.inputrc"
+link_file "$HOME/personal/.rc/.vimrc"            "$HOME/.vimrc"
 
