@@ -1,17 +1,6 @@
 " =======================
 " ===     Setup      ====
-" source .env/bin/activate
-" sudo steamos-readonly disable
-" pip install jedi-language-server
-" sudo rm -rf /etc/pacman.d/gnupg
-" sudo pacman-key --init
-" sudo pacman-key --populate archlinux
-" sudo pacman-key --refresh-keys --keyserver hkps://keys.openpgp.org
-" uname -r
-" sudo pacman -Syu
-" sudo pacman -S --needed clang ctags base-devel linux-neptune-headers nodejs npm
-" sudo npm install -g bash-language-server
-" sudo steamos-readonly activate
+" Use vim.sh from repo personal/dev/setup/
 
 " =======================
 " ===    Settings    ====

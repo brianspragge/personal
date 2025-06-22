@@ -17,7 +17,7 @@ EOF
 fi
 
 echo 'Activating .env...'
-source .env/bin/activate
+source ~/.env/bin/activate
 if [[ -z "$VIRTUAL_ENV" ]]; then
   cat <<EOF
 Activation of .env: FAILED.
@@ -30,7 +30,7 @@ else
 fi
 
 echo 'Installing Jedi LSP server for Vim...'
-pip install jedi-language-server
+pip install plugged jedi-language-server
 
 # This should really be in another file...
 echo 'Resetting pacman GPG keyring...'
