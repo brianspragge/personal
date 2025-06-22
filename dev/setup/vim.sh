@@ -29,6 +29,10 @@ else
   echo 'Activation of .env: SUCCESS.'
 fi
 
+echo 'Intalling Plugged, a vim plugin handler...'
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 echo 'Installing Jedi LSP server for Vim...'
 pip install plugged jedi-language-server
 
@@ -43,5 +47,9 @@ echo 'Installing packages for Bash LSP server for Vim...'
 sudo pacman -S --needed --noconfirm clang ctags base-devel nodejs npm
 sudo npm install -g bash-language-server
 
-echo 'Setup complete.'
+cat <<EOF
+Setup complete!'
+Well, almost.  You still need to <:PlugInstall> in vim.
 
+EOF
+read -srn1 -p 'Press any key to continue...'
