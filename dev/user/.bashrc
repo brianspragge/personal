@@ -32,3 +32,4 @@ export PATH="$HOME/bin:$PATH"
 # ===    Variables    ===
 ENV() { echo "$VIRTUAL_ENV"; }
 export GPG_TTY=$(tty)
+export EDITOR=Vim

@@ -132,88 +132,88 @@ augroup lsp_install
   " autocmd BufWritePre *.py,*.c,*.cpp call execute('LspDocumentFormatSync')
 augroup END
 
-" =======================
-" ===     Indent      ===
-highlight IndentGuide ctermfg=245
-let g:indent_levels = 5
-set conceallevel=1
-" define highlight groups
-for i in range(0, g:indent_levels)
-  execute 'highlight default link IndentLevel' . i . ' IndentGuide'
-endfor
-" clear previous indent matches
-function! ClearIndent() abort
-  for i in range(0, g:indent_levels)
-    let varbase = 'indent_match' . i
-    if exists('w:' . varbase)
-      call matchdelete(get(w:, varbase))
-      execute 'unlet w:' . varbase
-    endif
-  endfor
-endfunction
-" toggle function
-function! ToggleIndent() abort
-  if getbufvar('%', 'indent_enabled', 0)
-    call setbufvar('%', 'indent_enabled', 0)
-    call ClearIndent()
-    echo "Indent disabled"
-  else
-    call setbufvar('%', 'indent_enabled', 1)
-    call HighlightIndent()
-    echo "Indent enabled"
-  endif
-endfunction
-" indent highlight per <shiftwidth> or tab ability
-function! HighlightIndent()
-  if getbufvar('%', 'indent_enabled', 0)
-    call ClearIndent()
-    let l:sw = &shiftwidth
-    let l:ts = &tabstop
-    let l:et = &expandtab
-    if l:sw == 0 | return | endif
-    let l:conceal = '┊'
-    for i in range(1, g:indent_levels)
-      let l:group = 'IndentLevel' . (i - 1)
-      let l:varbase = 'indent_match' . (i - 1)
-      if !exists('b:indent_removed') || index(b:indent_removed, i - 1) == -1
-        if l:et
-          let l:pattern = '^' . repeat('\%(' . repeat(' ', l:sw) . '\)', i)
-        else
-          let l:pattern = '^' . repeat('\t', i)
-        endif
-        execute 'let w:' . l:varbase . ' = matchadd("' . l:group . '", "' . l:pattern . '", 10, -1, {"conceal":"' . l:conceal . '"})'
-      endif
-    endfor
-  endif
-endfunction
-" help message
-function! IndentHelp() abort
-  echohl Title
-  echo "Indent Guide Help:"
-  echohl None
-  echo "  • Uses ┊ as indent guide."
-  echo "  • Enabled = " . (getbufvar('%', 'indent_enabled', 0) ? "Yes" : "No")
-  echohl Statement
-  echo "Commands:"
-  echo "  :Indent        – This help menu"
-  echo "  :IndentOn      – Enable for this buffer"
-  echo "  :IndentOff     – Disable for this buffer"
-  echo "  :IndentToggle  – Toggle on/off"
-  echohl None
-endfunction
-" define commands
-command! Indent       call IndentHelp()
-command! IndentOn     call setbufvar('%', 'indent_enabled', 1) | call HighlightIndent() | echo "Indent enabled"
-command! IndentOff    call setbufvar('%', 'indent_enabled', 0) | call ClearIndent()  | echo "Indent disabled"
-command! IndentToggle call ToggleIndent()
-" auto-enable for certain filetypes
-autocmd FileType c,cpp,python call setbufvar('%', 'indent_enabled', 1) | call HighlightIndent()
-" refresh on WinEnter/Leave
-autocmd BufWinEnter * if getbufvar('%', 'indent_enabled', 0) | call HighlightIndent() | endif
-autocmd BufWinLeave * if getbufvar('%', 'indent_enabled', 0) | call ClearIndent()    | endif
-" Re-highlight when shiftwidth changes
-autocmd OptionSet shiftwidth if getbufvar('%', 'indent_enabled', 0) | call HighlightIndent() | endif
-
+"" =======================
+"" ===     Indent      ===
+"highlight IndentGuide ctermfg=245
+"let g:indent_levels = 5
+"set conceallevel=1
+"" define highlight groups
+"for i in range(0, g:indent_levels)
+"  execute 'highlight default link IndentLevel' . i . ' IndentGuide'
+"endfor
+"" clear previous indent matches
+"function! ClearIndent() abort
+"  for i in range(0, g:indent_levels)
+"    let varbase = 'indent_match' . i
+"    if exists('w:' . varbase)
+"      call matchdelete(get(w:, varbase))
+"      execute 'unlet w:' . varbase
+"    endif
+"  endfor
+"endfunction
+"" toggle function
+"function! ToggleIndent() abort
+"  if getbufvar('%', 'indent_enabled', 0)
+"    call setbufvar('%', 'indent_enabled', 0)
+"    call ClearIndent()
+"    echo "Indent disabled"
+"  else
+"    call setbufvar('%', 'indent_enabled', 1)
+"    call HighlightIndent()
+"    echo "Indent enabled"
+"  endif
+"endfunction
+"" indent highlight per <shiftwidth> or tab ability
+"function! HighlightIndent()
+"  if getbufvar('%', 'indent_enabled', 0)
+"    call ClearIndent()
+"    let l:sw = &shiftwidth
+"    let l:ts = &tabstop
+"    let l:et = &expandtab
+"    if l:sw == 0 | return | endif
+"    let l:conceal = '┊'
+"    for i in range(1, g:indent_levels)
+"      let l:group = 'IndentLevel' . (i - 1)
+"      let l:varbase = 'indent_match' . (i - 1)
+"      if !exists('b:indent_removed') || index(b:indent_removed, i - 1) == -1
+"        if l:et
+"          let l:pattern = '^' . repeat('\%(' . repeat(' ', l:sw) . '\)', i)
+"        else
+"          let l:pattern = '^' . repeat('\t', i)
+"        endif
+"        execute 'let w:' . l:varbase . ' = matchadd("' . l:group . '", "' . l:pattern . '", 10, -1, {"conceal":"' . l:conceal . '"})'
+"      endif
+"    endfor
+"  endif
+"endfunction
+"" help message
+"function! IndentHelp() abort
+"  echohl Title
+"  echo "Indent Guide Help:"
+"  echohl None
+"  echo "  • Uses ┊ as indent guide."
+"  echo "  • Enabled = " . (getbufvar('%', 'indent_enabled', 0) ? "Yes" : "No")
+"  echohl Statement
+"  echo "Commands:"
+"  echo "  :Indent        – This help menu"
+"  echo "  :IndentOn      – Enable for this buffer"
+"  echo "  :IndentOff     – Disable for this buffer"
+"  echo "  :IndentToggle  – Toggle on/off"
+"  echohl None
+"endfunction
+"" define commands
+"command! Indent       call IndentHelp()
+"command! IndentOn     call setbufvar('%', 'indent_enabled', 1) | call HighlightIndent() | echo "Indent enabled"
+"command! IndentOff    call setbufvar('%', 'indent_enabled', 0) | call ClearIndent()  | echo "Indent disabled"
+"command! IndentToggle call ToggleIndent()
+"" auto-enable for certain filetypes
+"autocmd FileType c,cpp,python call setbufvar('%', 'indent_enabled', 1) | call HighlightIndent()
+"" refresh on WinEnter/Leave
+"autocmd BufWinEnter * if getbufvar('%', 'indent_enabled', 0) | call HighlightIndent() | endif
+"autocmd BufWinLeave * if getbufvar('%', 'indent_enabled', 0) | call ClearIndent()    | endif
+"" Re-highlight when shiftwidth changes
+"autocmd OptionSet shiftwidth if getbufvar('%', 'indent_enabled', 0) | call HighlightIndent() | endif
+"
 
 " =======================
 " ===      Ruler      ===
