@@ -27,4 +27,4 @@ link_file "$HOME/personal/dev/user/gpg_crd.sh"       "$HOME/gpg_crd.sh"
 link_file "$HOME/personal/dev/user/.inputrc"          "$HOME/.inputrc"
 link_file "$HOME/personal/dev/user/.vimrc"            "$HOME/.vimrc"
 link_file "$HOME/personal/dev/user/fastfetch/config.jsonc"   "$HOME/.config/fastfetch/config.jsonc"
-
+link_file "$HOME/personal/dev/user/.drirc"            "$HOME/.drirc"

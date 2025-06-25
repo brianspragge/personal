@@ -23,7 +23,7 @@ list_keys() {
   are_keys keys
 }
 
-# TODO: Fix PUBLIC KEY BLOCK: not copyable.
+# SUGGESTION: Pipe key into text file? As an option?
 create_key() {
   gpg --full-generate-key
   list_keys

@@ -1,0 +1,13 @@
+<!-- Disables Vulkan for all programs, forcing OpenGL to be used. -->
+
+cat > ~/.drirc <<EOF
+<?xml version="1.0"?>
+<driconf>
+  <device>
+    <application name="all">
+      <option name="vulkan" value="false"/>
+    </application>
+  </device>
+</driconf>
+EOF
+
