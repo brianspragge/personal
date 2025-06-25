@@ -1,0 +1,5 @@
+# SECURITY
+#
+1) purpose: delays login attempts by 4 seconds after failed attempt
+	path: /etc/pam.d/system-login
+	insert: auth optional pam_faildelay.so delay=4000000
