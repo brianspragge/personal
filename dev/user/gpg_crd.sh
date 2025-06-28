@@ -7,6 +7,9 @@
 
 # Program: GPG_CRD - Create, Revoke, Delete for GPG keys(My first bash program)
 
+#TODO: Need to add -batch.  Read manpages, specifically the
+#      'unnattended key gen' section.
+
 are_keys() {
   local -n _keys="$1"
   if [ ${#_keys[@]} -eq 0 ]; then
@@ -58,6 +61,7 @@ key_actions() {
           read -p 'Are you sure you wish to revoke? (y/N): ' confirm
           if [[ "$confirm" =~ ^[Yy]$ ]]; then
             clear
+            echo "confirm='$confirm'"
             gpg --output revoke.asc --gen-revoke "$key_id"
             gpg --import revoke.asc
             gpg --send-keys "$key_id"
