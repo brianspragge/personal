@@ -33,3 +33,4 @@ export PATH="$HOME/bin:$PATH"
 ENV() { echo "$VIRTUAL_ENV"; }
 export GPG_TTY=$(tty)
 export EDITOR=vim
+#export LESS="-R --use-color -Dd+r -Du+b"

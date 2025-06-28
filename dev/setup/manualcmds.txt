@@ -2,4 +2,12 @@
 #
 1) purpose: delays login attempts by 4 seconds after failed attempt
 	path: /etc/pam.d/system-login
-	insert: auth optional pam_faildelay.so delay=4000000
+	insert: auth optional pam_faildelay.so delay=10000000
+2) purpose: must know user name for sshd, not allowing root
+	path: /etc/ssh/sshd_config
+	insert: PermitRootLogin no  # already there, remove \# and replace with 'no'
+
+# DRIVERS
+#
+2) purpose: check if direct rendering is enabled for improved gpu perf
+	insert: glxinfo | grep "direct rendering"

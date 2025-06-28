@@ -18,8 +18,12 @@ sudo yay --aur ast-firmware
 sudo yay --aur aic94xx-firmware 
 sudo yay --aur wd719x-firmware
 
+sudo yay --repo -S dosfstools hardparm mesa-utils
+sudo yay --repo -S ntfs-3g
 sudo yay --repo -S less man mandb man-pages glibc
-sudo yay --repo -S nano vim
+sudo yay --repo -S nano vim cups cups-pdf
 sudo yay --repo -S brightnessctl playerctl
-sudo yay --repo -S chromium
+sudo yay --repo -S wayland
+sudo yay --repo -S chromium brave
 sudo yay --repo -S pkgstats
+echo 'use pkgstats to send list of packages installed to distro devs'
