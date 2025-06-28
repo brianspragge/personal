@@ -281,3 +281,4 @@ autocmd BufWinLeave * call ClearRuler()
 " =======================
 " ===      Extra      ===
 " :help thesaurus
+
