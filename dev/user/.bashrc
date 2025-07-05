@@ -2,9 +2,13 @@
 # ~/.bashrc
 #
 
+# Auto-load hyprland at startup for tty1
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec Hyprland
+
 # =======================
 # ===     Aliases     ===
-alias ll='ls --group-directories-first -A'
+alias ls='ls --color=auto --group-directories-first -A'
+alias lsc='clear; ls'
 
 # =======================
 # ===    Defaults     ===
