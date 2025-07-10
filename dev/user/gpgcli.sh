@@ -7,8 +7,8 @@
 
 # Program: GPG_CRD - Create, Revoke, Delete for GPG keys(My first bash program)
 
-#TODO: Need to add -batch.  Read manpages, specifically the
-#      'unnattended key gen' section.
+#TODO: Need to add -batch.  Read gpg manpage, specifically the
+#      'unnattended key gen' section.  Use / when in man.
 
 are_keys() {
   local -n _keys="$1"
