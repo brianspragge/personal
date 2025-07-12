@@ -9,5 +9,10 @@
 
 # DRIVERS
 #
-2) purpose: check if direct rendering is enabled for improved gpu perf
+1) purpose: check if direct rendering is enabled for improved gpu perf
 	insert: glxinfo | grep "direct rendering"
+
+# UPDATE
+#
+1) purpose: check latest news on how to update system
+	insert: <yay -Qw> for most recent news, or <yay -Qww> for past news
