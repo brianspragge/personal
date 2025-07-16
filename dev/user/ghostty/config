@@ -1,0 +1,12 @@
+# /home/monk/.config/ghostty/config
+
+font-family = Press Start 2P
+font-size = 12
+theme =
+background =
+foreground =
+adjust-cell-height = 7
+window-padding-x = 4
+window-padding-y = 4
+window-padding-balance = true
+cursor-style = block

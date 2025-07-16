@@ -1,0 +1,42 @@
+* {
+    font-family: "Press Start 2P", FontAwesome, sans-serif;
+    font-size: 10px;
+    color: #4E4E4D;
+}
+
+window#waybar {
+    background-color: #F8F8F8;
+    text-shadow: 2px 2px 0 #DBDBD6;
+    border-radius: 16px;
+    border: 7px solid #706880;
+}
+
+window#waybar.hidden {
+    opacity: 0.5;
+}
+
+#workspaces button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #c82828;
+    color: #ffffff;
+    animation: blink 0.5s steps(12) infinite alternate;
+}
+
+#temperature.critical {
+    background-color: #c82828;
+    color: #ffffff;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #5F5F5F;
+    }
+}
+

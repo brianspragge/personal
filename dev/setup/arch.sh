@@ -9,21 +9,23 @@ sudo git clone https://aur.archlinux.org/yay.git
 cd yay
 sudo makepkg -si
 
-sudo yay --repo -S pigz pbzip2  # For AUR config(faster go brrr)
+sudo pacman -S --noconfirm --needed pigz pbzip2  # For AUR config(faster go brrr)
 
 # Firmware: remove warning messages for x230 laptop Arch build 
-sudo yay --aur mkinitcpio
-sudo yay --aur linux-firmware-qlogic 
-sudo yay --aur ast-firmware 
-sudo yay --aur aic94xx-firmware 
-sudo yay --aur wd719x-firmware
+yay -S --noconfirm --needed mkinitcpio
+yay -S --noconfirm --needed linux-firmware-qlogic 
+yay -S --noconfirm --needed ast-firmware 
+yay -S --noconfirm --needed aic94xx-firmware 
+yay -S --noconfirm --needed wd719x-firmware
 
-sudo yay --repo -S dosfstools hardparm mesa-utils
-sudo yay --repo -S ntfs-3g
-sudo yay --repo -S less man mandb man-pages glibc
-sudo yay --repo -S nano vim cups cups-pdf
-sudo yay --repo -S brightnessctl playerctl
-sudo yay --repo -S wayland
-sudo yay --repo -S chromium brave
-sudo yay --repo -S pkgstats
+sudo pacman -S --noconfirm --needed dosfstools hardparm mesa-utils
+sudo pacman -S --noconfirm --needed ntfs-3g
+sudo pacman -S --noconfirm --needed ghostty
+sudo pacman -S --noconfirm --needed less man mandb man-pages glibc
+sudo pacman -S --noconfirm --needed nano vim cups cups-pdf
+sudo pacman -S --noconfirm --needed brightnessctl playerctl
+sudo pacman -S --noconfirm --needed wayland ttf-jetbrains-mono-nerd ttf-font-awesome ttf-nerd-fonts-symbols
+sudo pacman -S --noconfirm --needed pkgstats
+
+yay -S --noconfirm --needed zen-browser-bin
 echo 'use pkgstats to send list of packages installed to distro devs'

@@ -80,56 +80,56 @@ vnoremap <leader>p :<C-U>'<,'>w! /tmp/vim_temp.py \| !clear; python /tmp/vim_tem
 " ===     !Text      ====
 autocmd FileType text setlocal noexpandtab tabstop=5 shiftwidth=5 softtabstop=5
 
-" =======================
-" ===    Plugins     ====
-call plug#begin('~/.vim/plugged')
-" List plugins here:
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'prabirshrestha/vim-lsp'
-call plug#end()
-" asyncomplete settings
-let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_auto_hover = 1
-let g:asyncomplete_sources = ['vim-lsp']
-set completeopt=menuone,noinsert,noselect,preview
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-" lsp server
-if executable('jedi-language-server')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'jedi',
-        \ 'cmd': {server_info->['jedi-language-server']},
-        \ 'allowlist': ['python'],
-        \ })
-endif
-if executable('clangd')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'clangd',
-        \ 'cmd': {server_info->['clangd']},
-        \ 'allowlist': ['c', 'objc', 'cpp', 'objcpp'],
-        \ })
-endif
-if executable('bash-language-server')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'bash',
-        \ 'cmd': {server_info->['bash-language-server', 'start']},
-        \ 'allowlist': ['sh', 'bash'],
-        \ })
-endif
-" vim-lsp settings
-noremap <leader>f :LspDocumentFormat<CR>
-function! s:on_lsp_buffer_enabled() abort
-  setlocal omnifunc=lsp#complete
-  setlocal signcolumn=yes
-  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-  nmap <buffer> gd <plug>(lsp-definition)
-  let g:lsp_format_sync_timeout = 1000 
-endfunction
-augroup lsp_install
-  au!
-  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-  " autocmd BufWritePre *.py,*.c,*.cpp call execute('LspDocumentFormatSync')
-augroup END
+"" =======================
+"" ===    Plugins     ====
+"call plug#begin('~/.vim/plugged')
+"" List plugins here:
+"Plug 'prabirshrestha/asyncomplete.vim'
+"Plug 'prabirshrestha/asyncomplete-lsp.vim'
+"Plug 'prabirshrestha/vim-lsp'
+"call plug#end()
+"" asyncomplete settings
+"let g:asyncomplete_auto_popup = 1
+"let g:asyncomplete_auto_hover = 1
+"let g:asyncomplete_sources = ['vim-lsp']
+"set completeopt=menuone,noinsert,noselect,preview
+"autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+"" lsp server
+"if executable('jedi-language-server')
+"  au User lsp_setup call lsp#register_server({
+"        \ 'name': 'jedi',
+"        \ 'cmd': {server_info->['jedi-language-server']},
+"        \ 'allowlist': ['python'],
+"        \ })
+"endif
+"if executable('clangd')
+"  au User lsp_setup call lsp#register_server({
+"        \ 'name': 'clangd',
+"        \ 'cmd': {server_info->['clangd']},
+"        \ 'allowlist': ['c', 'objc', 'cpp', 'objcpp'],
+"        \ })
+"endif
+"if executable('bash-language-server')
+"  au User lsp_setup call lsp#register_server({
+"        \ 'name': 'bash',
+"        \ 'cmd': {server_info->['bash-language-server', 'start']},
+"        \ 'allowlist': ['sh', 'bash'],
+"        \ })
+"endif
+"" vim-lsp settings
+"noremap <leader>f :LspDocumentFormat<CR>
+"function! s:on_lsp_buffer_enabled() abort
+"  setlocal omnifunc=lsp#complete
+"  setlocal signcolumn=yes
+"  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+"  nmap <buffer> gd <plug>(lsp-definition)
+"  let g:lsp_format_sync_timeout = 1000 
+"endfunction
+"augroup lsp_install
+"  au!
+"  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+"  " autocmd BufWritePre *.py,*.c,*.cpp call execute('LspDocumentFormatSync')
+"augroup END
 
 "" =======================
 "" ===     Indent      ===

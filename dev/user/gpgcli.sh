@@ -37,10 +37,20 @@ create_key() {
       clear
       cat <<EOF
 You chose: $key
-Copy and paste into GitHub:
+Copy and paste into GitHub: (hint: highlight with mouse auto copies, middle click to paste)
 
 EOF
       gpg --armor --export "$key_id"
+      read -srn1 -p 'Press any key to continue...'
+      clear
+      read -p 'Use the newly created key as the global signing key? (y/N): ' confirm
+      if [[ "$confirm" =~ ^[Yy]$ ]]; then
+        git config --global user.signingkey "$key_id"
+        echo "This key:$key_id should match: "
+        git config get user.signingkey
+      else
+        echo 'Global signing key left unchanged.'
+      fi
       break
     else
       echo 'Nope, not even close.'

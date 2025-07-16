@@ -10,7 +10,7 @@ read R G B A <<< "$(magick "$TMP" -format "%[fx:int(255*r)] %[fx:int(255*g)] %[f
 COLOR=$(printf "#%02X%02X%02X%02X" "$R" "$G" "$B" "$A")
 # For hex colors:
 #COLOR=$(printf "#%02X%02X%02X" "$R" "$G" "$B")
-notify-send -i "$TMP" "Color: $COLOR X:$X Y:$Y"
+notify-send -i "$TMP" "Color: $COLOR" "X:$X Y:$Y"
 echo -n "$COLOR" | wl-copy
 rm "$TMP"
 
