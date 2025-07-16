@@ -2,11 +2,47 @@
 
 font-family = Press Start 2P
 font-size = 12
-theme =
-background =
-foreground =
+theme = Monokai Pro Light
 adjust-cell-height = 7
 window-padding-x = 4
 window-padding-y = 4
 window-padding-balance = true
 cursor-style = block
+cursor-color = #706b6e
+cursor-text = #706b6e
+background = #faf4f2
+foreground = #29242a
+selection-background = #bfb9ba
+selection-foreground = #29242a
+  # Black
+palette = 0=#faf4f2
+  # Red
+palette = 1=#e14775
+  # Green
+palette = 2=#269d69
+  # Yellow
+palette = 3=#cc7a0a
+  # Blue
+palette = 4=#e16032
+  # Magenta
+palette = 5=#7058be
+  # Cyan
+palette = 6=#1c8ca8
+  # White
+palette = 7=#29242a
+  # Bright Black
+palette = 8=#a59fa0
+  # Bright Red
+palette = 9=#e14775
+  # Bright Green
+palette = 10=#269d69
+  # Bright Yellow
+palette = 11=#cc7a0a
+  # Bright Blue
+palette = 12=#e16032
+  # Bright Magenta
+palette = 13=#7058be
+  # Bright Cyan
+palette = 14=#1c8ca8
+  # Bright White
+palette = 15=#29242a
