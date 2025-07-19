@@ -19,11 +19,13 @@ yay -S --noconfirm --needed aic94xx-firmware
 yay -S --noconfirm --needed wd719x-firmware
 
 sudo pacman -S --noconfirm --needed dosfstools hardparm mesa-utils
+sudo pacman -s --noconfirm --needed thermald power-profiles-daemon
+sudo pacman -s --noconfirm --needed imv
 sudo pacman -S --noconfirm --needed ntfs-3g
 sudo pacman -S --noconfirm --needed ghostty
 sudo pacman -S --noconfirm --needed less man mandb man-pages glibc
 sudo pacman -S --noconfirm --needed nano vim cups cups-pdf
-sudo pacman -S --noconfirm --needed brightnessctl playerctl
+sudo pacman -S --noconfirm --needed brightnessctl playerctl timedatectl
 sudo pacman -S --noconfirm --needed wayland ttf-jetbrains-mono-nerd ttf-font-awesome ttf-nerd-fonts-symbols
 sudo pacman -S --noconfirm --needed pkgstats
 

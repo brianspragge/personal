@@ -19,7 +19,7 @@ nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(netrw#GX(),netrw#CheckI
 inoremap  u
 let &cpo=s:cpo_save
 unlet s:cpo_save
-set background=dark
+"set background=light
 set backspace=indent,eol,start
 set backupdir=~/.cache/vim/backup//
 set directory=~/.cache/vim/swap//
