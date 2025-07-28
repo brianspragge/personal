@@ -97,6 +97,7 @@
 
   "battery": {
     "states": { "warning": 30, "critical": 15 },
+    "full-at": "80%",
     "format": "PWR {capacity}%",
     "format-full": "PWR {capacity}%",
     "format-charging": "CHGN {capacity}%",

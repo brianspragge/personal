@@ -6,7 +6,7 @@
 # =======================
 # ===     Aliases     ===
 alias ls='ls --color=auto --group-directories-first -A'
-alias cls='clear; ls'
+alias cls='clear; ls'  # cls = CLear;SHOW
 
 # =======================
 # ===    Defaults     ===

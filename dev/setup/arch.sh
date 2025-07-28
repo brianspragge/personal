@@ -28,6 +28,7 @@ sudo pacman -S --noconfirm --needed nano vim cups cups-pdf
 sudo pacman -S --noconfirm --needed brightnessctl playerctl timedatectl
 sudo pacman -S --noconfirm --needed wayland ttf-jetbrains-mono-nerd ttf-font-awesome ttf-nerd-fonts-symbols
 sudo pacman -S --noconfirm --needed pkgstats
+sudo pacman -S --noconfirm --needed cups
 
 yay -S --noconfirm --needed zen-browser-bin
 echo 'use pkgstats to send list of packages installed to distro devs'

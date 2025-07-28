@@ -1,12 +1,12 @@
 * {
     font-family: "Press Start 2P", FontAwesome, sans-serif;
     font-size: 10px;
-    color: #4E4E4D;
+    color: #4e4e4d;
 }
 
 window#waybar {
-    background-color: #F8F8F8;
-    text-shadow: 2px 2px 0 #DBDBD6;
+    background-color: #f8f8f8;
+    text-shadow: 2px 2px 0 #dbdbd6;
     border-radius: 16px;
     border: 7px solid #706880;
 }
@@ -23,7 +23,17 @@ window#waybar.hidden {
 }
 
 tooltip {
-    background: #FAF4F2;
+    background: #faf4f2;
+}
+
+#battery.charging {
+    background-color: #42d663;
+    color: #000000;
+}
+
+#battery.warning:not(.charging) {
+    background-color: #fff729;
+    color: #000000;
 }
 
 #battery.critical:not(.charging) {
@@ -40,7 +50,7 @@ tooltip {
 @keyframes blink {
     to {
         background-color: #ffffff;
-        color: #5F5F5F;
+        color: #5f5f5f;
     }
 }
 

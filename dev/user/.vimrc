@@ -1,6 +1,8 @@
 " =======================
 " ===     Setup      ====
 " Use vim.sh from repo personal/dev/setup/
+packadd! comment        " <g,c,c> or visual mode then <g,c>
+packadd! termdebug      " :Termdebug <file>
 
 " =======================
 " ===    Settings    ====
@@ -16,6 +18,10 @@ xmap gx <Plug>NetrwBrowseXVis
 nmap gx <Plug>NetrwBrowseX
 xnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(netrw#GX(),netrw#CheckIfRemote(netrw#GX()))
+nnoremap <silent> <M-j> :resize +2<CR>
+nnoremap <silent> <M-k> :resize -2<CR>
+nnoremap <silent> <M-h> :vertical resize +2<CR>
+nnoremap <silent> <M-l> :vertical resize -2<CR>
 inoremap  u
 let &cpo=s:cpo_save
 unlet s:cpo_save
@@ -37,6 +43,7 @@ set number
 set ruler
 set tabstop=4
 set tags=./tags;~/tags/python_stdlib.tags;~/tags/python_venv_libs.tags
+set termguicolors
 set scrolloff=5
 set shiftwidth=4  " Tab width 
 set showcmd
@@ -62,12 +69,12 @@ autocmd FileType sh setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 " ===       !C       ====
 " compile current file
 autocmd FileType c setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-nnoremap <leader>c :w<CR>:!gcc % -o %< && ./%<<CR>
+vnoremap <leader>c :w<CR>:!gcc -std=c99 % -o %< && ./%<<CR>
 
 " =======================
 " ===      !C++      ====
 autocmd FileType cpp setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-nnoremap <leader>+ :w<CR>:!g++ % -o %< && ./%<<CR>
+vnoremap <leader>+ :w<CR>:!g++ % -o %< && ./%<<CR>
 
 " =======================
 " ===    !Python     ====
