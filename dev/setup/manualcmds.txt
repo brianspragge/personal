@@ -15,4 +15,4 @@
 # UPDATE
 #
 1) purpose: check latest news on how to update system
-	insert: <yay -Qw> for most recent news, or <yay -Qww> for past news
+	insert: <yay -Pw> for most recent news, or <yay -Pww> for past news
