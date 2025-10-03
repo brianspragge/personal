@@ -2,7 +2,6 @@
 # ~/.bashrc
 #
 
-
 # =======================
 # ===     Aliases     ===
 alias ls='ls --color=auto --group-directories-first -A'
@@ -43,11 +42,6 @@ export PATH="$HOME/bin:$PATH"
 
 # =======================
 # ===    Processes    ===
-# Auto-load hyprland at startup
-if uwsm check may-start; then
-    exec uwsm start hyprland-uwsm.desktop
-fi
-#
 # Safety: make sure pacman pkg runs in other terminals
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion

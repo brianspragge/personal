@@ -8,7 +8,8 @@
 # Program: GPG_CRD - Create, Revoke, Delete for GPG keys(My first bash program)
 
 #TODO: Need to add -batch.  Read gpg manpage, specifically the
-#      'unnattended key gen' section.  Use / when in man.
+#      'unnattended key gen' section.  Use / when in man. Example
+#      at the end of gpg man page.
 
 are_keys() {
   local -n _keys="$1"
@@ -48,6 +49,7 @@ EOF
         git config --global user.signingkey "$key_id"
         echo "This key:$key_id should match: "
         git config get user.signingkey
+        echo "If not, this last step failed and you must do manually."
       else
         echo 'Global signing key left unchanged.'
       fi
