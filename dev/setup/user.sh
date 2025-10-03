@@ -34,5 +34,6 @@ link_file "$HOME/personal/dev/user/dunst/dunstrc"   "$HOME/.config/dunst/dunstrc
 link_file "$HOME/personal/dev/user/waybar/config.jsonc"   "$HOME/.config/waybar/config.jsonc"
 link_file "$HOME/personal/dev/user/waybar/style.css"   "$HOME/.config/waybar/style.css"
 link_file "$HOME/personal/dev/user/hypr/hyprland.conf"   "$HOME/.config/hypr/hyprland.conf"
+link_file "$HOME/personal/dev/user/hypr/hyprlandPersonal.conf"   "$HOME/.config/hypr/hyprlandPersonal.conf"
 link_file "$HOME/personal/dev/user/hypr/hyprlock.conf"   "$HOME/.config/hypr/hyprlock.conf"
 link_file "$HOME/personal/dev/user/hypr/hyprpaper.conf"   "$HOME/.config/hypr/hyprpaper.conf"
