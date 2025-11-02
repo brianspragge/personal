@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Many thanks to Bread On Penguins, I used their outline for my own here.
+# Many thanks to Bread On Penguins, I used their outline as reference.
 
 TMP="/tmp/color.png"
 read X Y <<< "$(hyprctl cursorpos | tr -d ' ' | tr ',' ' ')"

@@ -1,16 +1,13 @@
 #
 # ~/.bashrc
 #
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
 
 # =======================
 # ===     Aliases     ===
 alias ls='ls --color=auto --group-directories-first -A'
 alias cls='clear; ls'  # cls = CLear;SHOW
-
-# =======================
-# ===    Defaults     ===
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
 
 # =======================
 # ===      Extra      ===

@@ -1,0 +1,5 @@
+{
+  "waitForEnterForFilteredHints": false,
+  "keyMappings": "# Insert your preferred key mappings here.\nunmap H\nunmap J\nunmap K\nunmap L\nmap K previousTab\nmap J nextTab\nmap L moveTabLeft\nmap H moveTabRight\nmap { goBack\nmap } goForward",
+  "settingsVersion": "2.3"
+}
