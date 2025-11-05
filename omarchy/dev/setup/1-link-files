@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+# ------------------------------------------------------------
+# Symlink user config files from the repo into $HOME
+# ------------------------------------------------------------
+set -euo pipefail
+
+# ------------------------------------------------------------------
+# Helper: create parent dirs, back up old files, create symlink
+# ------------------------------------------------------------------
+link_file() {
+    local src="$1"
+    local dst="$2"
+
+    if [[ ! -e "$src" ]]; then
+        echo "WARNING: Source missing – skipping: $src"
+        return 0
+    fi
+
+    mkdir -p "$(dirname "$dst")"
+
+    if [[ -e "$dst" && ! -L "$dst" ]]; then
+        local bak="${dst}.bak.$(date +%Y%m%d%H%M%S)"
+        echo "Backing up: $dst → $bak"
+        mv -- "$dst" "$bak"
+    fi
+
+    if ln -sf -- "$src" "$dst"; then
+        if [[ "$(readlink -f "$dst")" == "$(realpath "$src")" ]]; then
+            echo "Linked: $dst → $src"
+        else
+            echo "ERROR: symlink created but points elsewhere!"
+            return 1
+        fi
+    else
+        echo "ERROR: failed to create symlink $dst"
+        return 1
+    fi
+}
+
+# ------------------------------------------------------------------
+# Base directory
+# ------------------------------------------------------------------
+BASE="$HOME/personal/omarchy/dev/user"
+
+# ------------------------------------------------------------------
+# All the files
+# ------------------------------------------------------------------
+# config files
+link_file "$BASE/alacritty/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
+# hypr
+link_file "$BASE/hypr/autostart.conf" "$HOME/.config/hypr/autostart.conf"
+link_file "$BASE/hypr/bindings.conf" "$HOME/.config/hypr/bindings.conf"
+link_file "$BASE/hypr/monitors.conf" "$HOME/.config/hypr/monitors.conf"
+link_file "$BASE/hypr/reference.conf" "$HOME/.config/hypr/reference.conf"
+# vimium
+link_file "$BASE/vimium/vimium-options(chromium).json" "$HOME/.config/vimium/vimium-options(chromium).json"
+link_file "$BASE/vimium/vimium-options(zen-browser).json" "$HOME/.config/vimium/vimium-options(zen-browser).json"
+
+# dot-files
+link_file "$BASE/.bashrc" "$HOME/.bashrc"
+link_file "$BASE/.inputrc" "$HOME/.inputrc"
+link_file "$BASE/.vimrc" "$HOME/.vimrc"
+
+# ------------------------------------------------------------
+# Finish
+# ------------------------------------------------------------
+echo "All symlinks processed."
+

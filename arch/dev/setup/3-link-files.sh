@@ -54,11 +54,13 @@ BASE="$HOME/personal/arch/dev/user"
 link_file "$BASE/.config/dunst/dunstrc"                     "$HOME/.config/dunst/dunstrc"
 link_file "$BASE/.config/fastfetch/config.jsonc"           "$HOME/.config/fastfetch/config.jsonc"
 link_file "$BASE/.config/ghostty/config"                   "$HOME/.config/ghostty/config"
+# hypr
 link_file "$BASE/.config/hypr/wallpaper/firered.png"       "$HOME/.config/hypr/wallpaper/firered.png"
 link_file "$BASE/.config/hypr/hyprland.conf"               "$HOME/.config/hypr/hyprland.conf"
 link_file "$BASE/.config/hypr/hyprlandPersonal.conf"       "$HOME/.config/hypr/hyprlandPersonal.conf"
 link_file "$BASE/.config/hypr/hyprlock.conf"               "$HOME/.config/hypr/hyprlock.conf"
 link_file "$BASE/.config/hypr/hyprpaper.conf"              "$HOME/.config/hypr/hyprpaper.conf"
+# waybar
 link_file "$BASE/.config/waybar/config.jsonc"              "$HOME/.config/waybar/config.jsonc"
 link_file "$BASE/.config/waybar/style.css"                 "$HOME/.config/waybar/style.css"
 
@@ -123,3 +125,4 @@ echo "Theme activated! Reboot to see it."
 # Finish
 # ------------------------------------------------------------
 echo "All symlinks processed."
+
