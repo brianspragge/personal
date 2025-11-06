@@ -18,5 +18,9 @@ else
 fi
 
 # =======================
+# ===      PATH       ===
+export PATH="$HOME/.local/bin:$PATH"
+
+# =======================
 # ===    Variables    ===
 ENV() { echo "$VIRTUAL_ENV"; }

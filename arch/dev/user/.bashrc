@@ -35,7 +35,9 @@ PS1=' '
 
 # =======================
 # ===      Paths      ===
-export PATH="$HOME/bin:$PATH"
+# ~/bin for python ENV
+# ~/.local/bin for personal bash scripts
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
 # =======================
 # ===    Processes    ===
