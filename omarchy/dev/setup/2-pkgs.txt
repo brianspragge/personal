@@ -1,0 +1,13 @@
+# A list of programs that need to be manually installed through multiple means.
+
+## Pacman/AUR:
+gimp
+unityhub
+zen-browser
+
+## Omarchy menu:
+Minecraft
+Steam
+
+## Websites:
+blender 3.6.9

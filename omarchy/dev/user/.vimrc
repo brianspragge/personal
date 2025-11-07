@@ -37,7 +37,7 @@ set number
 set ruler
 set tabstop=4
 set tags=./tags;~/tags/python_stdlib.tags;~/tags/python_venv_libs.tags
-set termguicolors
+" set termguicolors  " Messes with Omarchy install
 set scrolloff=5
 set shiftwidth=4  " Tab width 
 set showcmd
