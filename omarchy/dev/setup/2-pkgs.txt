@@ -2,7 +2,6 @@
 
 ## Pacman/AUR:
 gimp
-unityhub
 zen-browser
 
 ## Omarchy menu:
