@@ -51,67 +51,73 @@ BASE="$HOME/personal/arch/dev/user"
 # All the files
 # ------------------------------------------------------------------
 # config files
-link_file "$BASE/.config/dunst/dunstrc"                     "$HOME/.config/dunst/dunstrc"
-link_file "$BASE/.config/fastfetch/config.jsonc"           "$HOME/.config/fastfetch/config.jsonc"
-link_file "$BASE/.config/ghostty/config"                   "$HOME/.config/ghostty/config"
+link_file "$BASE/.config/dunst/dunstrc"          "$HOME/.config/dunst/dunstrc"
+link_file "$BASE/.config/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
+link_file "$BASE/.config/ghostty/config"         "$HOME/.config/ghostty/config"
 # hypr
-link_file "$BASE/.config/hypr/wallpaper/firered.png"       "$HOME/.config/hypr/wallpaper/firered.png"
-link_file "$BASE/.config/hypr/hyprland.conf"               "$HOME/.config/hypr/hyprland.conf"
-link_file "$BASE/.config/hypr/hyprlandPersonal.conf"       "$HOME/.config/hypr/hyprlandPersonal.conf"
-link_file "$BASE/.config/hypr/hyprlock.conf"               "$HOME/.config/hypr/hyprlock.conf"
-link_file "$BASE/.config/hypr/hyprpaper.conf"              "$HOME/.config/hypr/hyprpaper.conf"
+link_file "$BASE/.config/hypr/wallpaper/firered.png" "$HOME/.config/hypr/wallpaper/firered.png"
+link_file "$BASE/.config/hypr/hyprland.conf"         "$HOME/.config/hypr/hyprland.conf"
+link_file "$BASE/.config/hypr/hyprlandPersonal.conf" "$HOME/.config/hypr/hyprlandPersonal.conf"
+link_file "$BASE/.config/hypr/hyprlock.conf"         "$HOME/.config/hypr/hyprlock.conf"
+link_file "$BASE/.config/hypr/hyprpaper.conf"        "$HOME/.config/hypr/hyprpaper.conf"
 # waybar
-link_file "$BASE/.config/waybar/config.jsonc"              "$HOME/.config/waybar/config.jsonc"
-link_file "$BASE/.config/waybar/style.css"                 "$HOME/.config/waybar/style.css"
-
-# dot-files
-link_file "$BASE/.bashrc"          "$HOME/.bashrc"
-link_file "$BASE/.clang-format"    "$HOME/.clang-format"
-link_file "$BASE/.drirc"           "$HOME/.drirc"
-link_file "$BASE/.inputrc"         "$HOME/.inputrc"
-link_file "$BASE/.vimrc"           "$HOME/.vimrc"
+link_file "$BASE/.config/waybar/config.jsonc" "$HOME/.config/waybar/config.jsonc"
+link_file "$BASE/.config/waybar/style.css"    "$HOME/.config/waybar/style.css"
 
 # plain files in .local/bin
-link_file "$BASE/.local/bin/get-color"     "$HOME/.local/bin/get-color"
+link_file "$BASE/.local/bin/get-color"        "$HOME/.local/bin/get-color"
 link_file "$BASE/.local/bin/gpg_crd_cmds.txt" "$HOME/.local/bin/gpg_crd_cmds.txt"
-link_file "$BASE/.local/bin/gpgcli"        "$HOME/.local/bin/gpgcli"
+link_file "$BASE/.local/bin/gpgcli"           "$HOME/.local/bin/gpgcli"
+
+# plain files in .local/share
+link_file "$BASE/.local/share/fonts/PressStart2P-Regular.ttf" "$HOME/.local/share/fonts/PressStart2P-Regular.ttf"
+
+# dot-files
+link_file "$BASE/.bashrc"       "$HOME/.bashrc"
+link_file "$BASE/.clang-format" "$HOME/.clang-format"
+link_file "$BASE/.drirc"        "$HOME/.drirc"
+link_file "$BASE/.inputrc"      "$HOME/.inputrc"
+link_file "$BASE/.vimrc"        "$HOME/.vimrc"
+
 
 # ------------------------------------------------------------------
 # Plymouth theme – charmander
 # ------------------------------------------------------------------
-link_file "$BASE/plymouth/charmander/bullet.png"            "/usr/share/plymouth/themes/charmander/bullet.png"
-link_file "$BASE/plymouth/charmander/capslock.png"          "/usr/share/plymouth/themes/charmander/capslock.png"
-link_file "$BASE/plymouth/charmander/charmander.plymouth"   "/usr/share/plymouth/themes/charmander/charmander.plymouth"
-link_file "$BASE/plymouth/charmander/entry.png"             "/usr/share/plymouth/themes/charmander/entry.png"
-link_file "$BASE/plymouth/charmander/keyboard.png"          "/usr/share/plymouth/themes/charmander/keyboard.png"
-link_file "$BASE/plymouth/charmander/keymap-render.png"     "/usr/share/plymouth/themes/charmander/keymap-render.png"
-link_file "$BASE/plymouth/charmander/lock.png"              "/usr/share/plymouth/themes/charmander/lock.png"
-link_file "$BASE/plymouth/charmander/throbber-0001.png"     "/usr/share/plymouth/themes/charmander/throbber-0001.png"
-link_file "$BASE/plymouth/charmander/throbber-0002.png"     "/usr/share/plymouth/themes/charmander/throbber-0002.png"
-link_file "$BASE/plymouth/charmander/throbber-0003.png"     "/usr/share/plymouth/themes/charmander/throbber-0003.png"
-link_file "$BASE/plymouth/charmander/throbber-0004.png"     "/usr/share/plymouth/themes/charmander/throbber-0004.png"
-link_file "$BASE/plymouth/charmander/throbber-0005.png"     "/usr/share/plymouth/themes/charmander/throbber-0005.png"
-link_file "$BASE/plymouth/charmander/throbber-0006.png"     "/usr/share/plymouth/themes/charmander/throbber-0006.png"
-link_file "$BASE/plymouth/charmander/throbber-0007.png"     "/usr/share/plymouth/themes/charmander/throbber-0007.png"
-link_file "$BASE/plymouth/charmander/throbber-0008.png"     "/usr/share/plymouth/themes/charmander/throbber-0008.png"
-link_file "$BASE/plymouth/charmander/throbber-0009.png"     "/usr/share/plymouth/themes/charmander/throbber-0009.png"
-link_file "$BASE/plymouth/charmander/throbber-0010.png"     "/usr/share/plymouth/themes/charmander/throbber-0010.png"
-link_file "$BASE/plymouth/charmander/throbber-0011.png"     "/usr/share/plymouth/themes/charmander/throbber-0011.png"
-link_file "$BASE/plymouth/charmander/throbber-0012.png"     "/usr/share/plymouth/themes/charmander/throbber-0012.png"
-link_file "$BASE/plymouth/charmander/throbber-0013.png"     "/usr/share/plymouth/themes/charmander/throbber-0013.png"
-link_file "$BASE/plymouth/charmander/throbber-0014.png"     "/usr/share/plymouth/themes/charmander/throbber-0014.png"
-link_file "$BASE/plymouth/charmander/throbber-0015.png"     "/usr/share/plymouth/themes/charmander/throbber-0015.png"
-link_file "$BASE/plymouth/charmander/throbber-0016.png"     "/usr/share/plymouth/themes/charmander/throbber-0016.png"
-link_file "$BASE/plymouth/charmander/throbber-0017.png"     "/usr/share/plymouth/themes/charmander/throbber-0017.png"
-link_file "$BASE/plymouth/charmander/throbber-0018.png"     "/usr/share/plymouth/themes/charmander/throbber-0018.png"
-link_file "$BASE/plymouth/charmander/throbber-0019.png"     "/usr/share/plymouth/themes/charmander/throbber-0019.png"
-link_file "$BASE/plymouth/charmander/throbber-0020.png"     "/usr/share/plymouth/themes/charmander/throbber-0020.png"
-link_file "$BASE/plymouth/charmander/throbber-0021.png"     "/usr/share/plymouth/themes/charmander/throbber-0021.png"
-link_file "$BASE/plymouth/charmander/throbber-0022.png"     "/usr/share/plymouth/themes/charmander/throbber-0022.png"
-link_file "$BASE/plymouth/charmander/throbber-0023.png"     "/usr/share/plymouth/themes/charmander/throbber-0023.png"
-link_file "$BASE/plymouth/charmander/throbber-0024.png"     "/usr/share/plymouth/themes/charmander/throbber-0024.png"
-link_file "$BASE/plymouth/charmander/throbber-0025.png"     "/usr/share/plymouth/themes/charmander/throbber-0025.png"
-link_file "$BASE/plymouth/charmander/watermark.png"         "/usr/share/plymouth/themes/charmander/watermark.png"
+link_file "$BASE/plymouth/themes/charmander/bullet.png"          "/usr/share/plymouth/themes/charmander/bullet.png"
+link_file "$BASE/plymouth/themes/charmander/capslock.png"        "/usr/share/plymouth/themes/charmander/capslock.png"
+link_file "$BASE/plymouth/themes/charmander/charmander.plymouth" "/usr/share/plymouth/themes/charmander/charmander.plymouth"
+link_file "$BASE/plymouth/themes/charmander/entry.png"           "/usr/share/plymouth/themes/charmander/entry.png"
+link_file "$BASE/plymouth/themes/charmander/keyboard.png"        "/usr/share/plymouth/themes/charmander/keyboard.png"
+link_file "$BASE/plymouth/themes/charmander/keymap-render.png"   "/usr/share/plymouth/themes/charmander/keymap-render.png"
+link_file "$BASE/plymouth/themes/charmander/lock.png"            "/usr/share/plymouth/themes/charmander/lock.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0001.png"   "/usr/share/plymouth/themes/charmander/throbber-0001.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0002.png"   "/usr/share/plymouth/themes/charmander/throbber-0002.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0003.png"   "/usr/share/plymouth/themes/charmander/throbber-0003.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0004.png"   "/usr/share/plymouth/themes/charmander/throbber-0004.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0005.png"   "/usr/share/plymouth/themes/charmander/throbber-0005.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0006.png"   "/usr/share/plymouth/themes/charmander/throbber-0006.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0007.png"   "/usr/share/plymouth/themes/charmander/throbber-0007.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0008.png"   "/usr/share/plymouth/themes/charmander/throbber-0008.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0009.png"   "/usr/share/plymouth/themes/charmander/throbber-0009.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0010.png"   "/usr/share/plymouth/themes/charmander/throbber-0010.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0011.png"   "/usr/share/plymouth/themes/charmander/throbber-0011.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0012.png"   "/usr/share/plymouth/themes/charmander/throbber-0012.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0013.png"   "/usr/share/plymouth/themes/charmander/throbber-0013.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0014.png"   "/usr/share/plymouth/themes/charmander/throbber-0014.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0015.png"   "/usr/share/plymouth/themes/charmander/throbber-0015.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0016.png"   "/usr/share/plymouth/themes/charmander/throbber-0016.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0017.png"   "/usr/share/plymouth/themes/charmander/throbber-0017.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0018.png"   "/usr/share/plymouth/themes/charmander/throbber-0018.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0019.png"   "/usr/share/plymouth/themes/charmander/throbber-0019.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0020.png"   "/usr/share/plymouth/themes/charmander/throbber-0020.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0021.png"   "/usr/share/plymouth/themes/charmander/throbber-0021.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0022.png"   "/usr/share/plymouth/themes/charmander/throbber-0022.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0023.png"   "/usr/share/plymouth/themes/charmander/throbber-0023.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0024.png"   "/usr/share/plymouth/themes/charmander/throbber-0024.png"
+link_file "$BASE/plymouth/themes/charmander/throbber-0025.png"   "/usr/share/plymouth/themes/charmander/throbber-0025.png"
+link_file "$BASE/plymouth/themes/charmander/watermark.png"       "/usr/share/plymouth/themes/charmander/watermark.png"
+
+echo "All symlinks processed."
 
 # ------------------------------------------------------------------
 # Activate Plymouth theme (requires sudo)
@@ -124,5 +130,6 @@ echo "Theme activated! Reboot to see it."
 # ------------------------------------------------------------
 # Finish
 # ------------------------------------------------------------
-echo "All symlinks processed."
+echo
+echo "Finished"
 

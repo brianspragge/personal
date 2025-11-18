@@ -16,3 +16,6 @@
 #
 1) purpose: check latest news on how to update system
 	insert: <yay -Pw> for most recent news, or <yay -Pww> for past news
+# FONTS
+#
+1) Set font manually in ghostty config, etc.
