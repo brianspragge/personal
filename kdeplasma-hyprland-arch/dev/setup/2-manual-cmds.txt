@@ -1,0 +1,21 @@
+# SECURITY
+#
+1) purpose: delays login attempts by 4 seconds after failed attempt
+	path: /etc/pam.d/system-login
+	insert: auth optional pam_faildelay.so delay=10000000
+2) purpose: must know user name for sshd, not allowing root
+	path: /etc/ssh/sshd_config
+	insert: PermitRootLogin no  # already there, remove \# and replace with 'no'
+
+# DRIVERS
+#
+1) purpose: check if direct rendering is enabled for improved gpu perf
+	insert: glxinfo | grep "direct rendering"
+
+# UPDATE
+#
+1) purpose: check latest news on how to update system
+	insert: <yay -Pw> for most recent news, or <yay -Pww> for past news
+# FONTS
+#
+1) Set font manually in ghostty config, etc.
