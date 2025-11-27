@@ -1,16 +1,10 @@
 # A list of programs that need to be manually installed through multiple means.
 
-## Pacman:
+## Omarchy Menu:
 gimp
 zen-browser
 man-pages           # Search C API
 
-## AUR:
-sdl2-manpage-git    # Search SDL2 (Graphical Lib) API
-
-## Omarchy menu:
-Minecraft
-Steam
-
 ## Websites:
 blender 3.6.9       # Newer version are unstable on thinkpadx230
+	"https://www.blender.org/download/lts/3-6"

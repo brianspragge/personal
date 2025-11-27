@@ -17,7 +17,7 @@ yay -S --noconfirm --needed mkinitcpio
 sudo pacman -s --noconfirm --needed power-profiles-daemon
 sudo pacman -s --noconfirm --needed imv
 sudo pacman -S --noconfirm --needed ghostty
-sudo pacman -S --noconfirm --needed less man mandb man-pages glibc
+sudo pacman -S --noconfirm --needed less man man-db man-pages glibc
 sudo pacman -S --noconfirm --needed nano vim cups cups-pdf
 sudo pacman -S --noconfirm --needed brightnessctl playerctl timedatectl
 sudo pacman -S --noconfirm --needed wayland ttf-jetbrains-mono-nerd ttf-font-awesome ttf-nerd-fonts-symbols

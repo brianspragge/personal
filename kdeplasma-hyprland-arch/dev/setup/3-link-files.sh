@@ -53,7 +53,6 @@ BASE="$HOME/personal/kdeplasma-hyprland-arch/dev/user"
 # config files
 link_file "$BASE/.config/dunst/dunstrc"          "$HOME/.config/dunst/dunstrc"
 link_file "$BASE/.config/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
-link_file "$BASE/.config/ghostty/config"         "$HOME/.config/ghostty/config"
 # hypr
 link_file "$BASE/.config/hypr/wallpaper/firered.png" "$HOME/.config/hypr/wallpaper/firered.png"
 link_file "$BASE/.config/hypr/hyprland.conf"         "$HOME/.config/hypr/hyprland.conf"

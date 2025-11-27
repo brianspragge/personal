@@ -9,7 +9,7 @@ cd yay
 makepkg -si
 
 # Packages being installed
-sudo pacman -S --noconfirm --needed glibc imv man mandb man-pages pkgstats
+sudo pacman -S --noconfirm --needed glibc imv man man-db man-pages pkgstats
 yay -S --noconfirm --needed zen-browser-bin
 echo
 echo 'use pkgstats to send list of packages installed to distro devs'

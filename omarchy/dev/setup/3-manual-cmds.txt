@@ -2,9 +2,6 @@
   Change the following line within:
     ~/.local/share/omarchy/default/bash/inputrc
   From:
-    set completion-ignore-case off
+    set match-hidden-files off
   To:
-    set completion-ignore-case on
-2)
-  Set font to "Press Start 2P"
-  SUPER ALT, SPACE -> Style -> Font
+    set match-hidden-files on
