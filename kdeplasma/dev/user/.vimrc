@@ -1,10 +1,4 @@
 " =======================
-" ===     Setup      ====
-" Use vim.sh from repo personal/dev/setup/
-packadd! comment        " <g,c,c> or visual mode then <g,c>
-packadd! termdebug      " :Termdebug <file>
-
-" =======================
 " ===    Settings    ====
 version 9.1
 if &cp | set nocp | endif

@@ -36,20 +36,50 @@ Timezone            America/Los_Angeles
 NTP                 Enabled
 
 AFTER FIRST SUCCESSFUL BOOT:
-1) Enable Wifi
-2) Open Konsole, press enter after each line.
-	mkdir ~/builds; cd ~/builds
+Connect to Wifi/Ethernet
+Open Konsole and use each command by itself:
+    mkdir ~/builds; cd ~/builds
 	git clone https://aur.archlinux.org/yay-bin.git
 	cd yay-bin
 	makepkg -si
-3)  git config --global commit.gpgsign true
-4)  git clone https://github.com/brianspragge/personal.git
+git config --global commit.gpgsign true
+git clone https://github.com/brianspragge/personal.git
 
-Search for "Shortcuts"(Configure Keyboard Shortcuts)
-Top right click "Import"
+Start Menu search for "Shortcuts"(Configure Keyboard Shortcuts)
+Top right click 'Import'
 Select 'Custom Scheme'
 Click 'Select File'
 Find the file ~/personal/kdeplasma/dev/user/kde-keybind-schema.kksrc
 Click 'Apply'
+
+( Now is the time you may also take whatever else you wish from the  )
+( many files in the 'personal' repo. Some good ones I recommend are: )
+( .bashrc .vimrc .inputrc /.local/bin/gpgcli                         )
+
+Start Menu search for "Login Screen (SDDM)"(Configure Login Manager)
+Click 'Breeze' theme and 'Apply'
+Select 'Splash Screen'
+    Apply 'Breeze' theme
+Select 'Window Management' then 'Desktop Effects'
+    Enable 'Dim Inactive'(Darken inactive windows)
+Select 'Task Switcher'
+    Switch 'Thumbnail Grid'
+        to 'Compact'
+Select 'Window Behavior'
+    Switch 'Click to focus'
+        to 'Focus follows mouse (mouse precedence)'
+    Switch 'Delay focus by:' 300 ms
+                          to 100 ms
+    Enable 'Raise on hover, delayed by:'
+        Set to 100 ms
+Select 'Window Actions'
+    Switch 'Activate, pass click and raise on release'
+        to 'Activate, raise and pass click'
+    Under 'Inner Window, Titlebar and Frame Actions'
+        Enable 'Mouse wheel:' 
+            Set to 'Change opacity'
+
+Enter your FINAL command in Konsole:
+    sudo pacman -Syu
 
 FINISHED!  Congratulations, you are now using Arch in a very Stylish way.

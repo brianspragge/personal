@@ -6,8 +6,11 @@
 
 # =======================
 # ===     Aliases     ===
-alias ls='ls --color=auto --group-directories-first -A'
-alias cls='clear; ls'  # cls = CLear;SHOW
+alias ls='ls --color=auto --group-directories-first -lh'
+alias cls='clear; ls'
+alias lsa='ls -A'
+alias clsa='clear; lsa'
+alias imv='imv -u nearest_neighbour'
 
 # =======================
 # ===    Functions    ===
