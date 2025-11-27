@@ -20,7 +20,7 @@ sudo pacman -S --noconfirm --needed ghostty
 sudo pacman -S --noconfirm --needed less man man-db man-pages glibc
 sudo pacman -S --noconfirm --needed nano vim cups cups-pdf
 sudo pacman -S --noconfirm --needed brightnessctl playerctl timedatectl
-sudo pacman -S --noconfirm --needed wayland ttf-jetbrains-mono-nerd ttf-font-awesome ttf-nerd-fonts-symbols
+sudo pacman -S --noconfirm --needed wayland ttf-jetbrains-mono-nerd otf-font-awesome ttf-nerd-fonts-symbols
 sudo pacman -S --noconfirm --needed pkgstats
 sudo pacman -S --noconfirm --needed cups
 
