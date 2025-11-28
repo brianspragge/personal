@@ -37,47 +37,47 @@ NTP                 Enabled
 
 AFTER FIRST SUCCESSFUL BOOT:
 Connect to Wifi/Ethernet
-Open Konsole and use each command by itself:
+Open Konsole program and enter each command:
     mkdir ~/builds; cd ~/builds
 	git clone https://aur.archlinux.org/yay-bin.git
 	cd yay-bin
 	makepkg -si
-git config --global commit.gpgsign true
-git clone https://github.com/brianspragge/personal.git
-
-Start Menu search for "Shortcuts"(Configure Keyboard Shortcuts)
-Top right click 'Import'
-Select 'Custom Scheme'
-Click 'Select File'
-Find the file ~/personal/kdeplasma/dev/user/kde-keybind-schema.kksrc
-Click 'Apply'
+    git config --global commit.gpgsign true
+    git clone https://github.com/brianspragge/personal.git
+In Start Menu search "Shortcuts"(Configure Keyboard Shortcuts)
+    Top right click 'Import'
+    Select 'Custom Scheme'
+    Click 'Select File'
+    Find the file ~/personal/kdeplasma/dev/user/kde-keybind-schema.kksrc
+    Click 'Apply'
 
 ( Now is the time you may also take whatever else you wish from the  )
 ( many files in the 'personal' repo. Some good ones I recommend are: )
 ( .bashrc .vimrc .inputrc /.local/bin/gpgcli                         )
 
-Start Menu search for "Login Screen (SDDM)"(Configure Login Manager)
+In Start Menu search "Login Screen (SDDM)"(Configure Login Manager)
 Click 'Breeze' theme and 'Apply'
-Select 'Splash Screen'
-    Apply 'Breeze' theme
+Select 'Splash Screen', Apply 'Breeze' theme
 Select 'Window Management' then 'Desktop Effects'
     Enable 'Dim Inactive'(Darken inactive windows)
-Select 'Task Switcher'
-    Switch 'Thumbnail Grid'
-        to 'Compact'
-Select 'Window Behavior'
-    Switch 'Click to focus'
-        to 'Focus follows mouse (mouse precedence)'
+Select 'Task Switcher', Switch 'Thumbnail Grid'
+                            to 'Compact'
+Select 'Window Behavior', Switch 'Click to focus'
+                              to 'Focus follows mouse (mouse precedence)'
     Switch 'Delay focus by:' 300 ms
                           to 100 ms
-    Enable 'Raise on hover, delayed by:'
-        Set to 100 ms
-Select 'Window Actions'
-    Switch 'Activate, pass click and raise on release'
-        to 'Activate, raise and pass click'
-    Under 'Inner Window, Titlebar and Frame Actions'
-        Enable 'Mouse wheel:' 
-            Set to 'Change opacity'
+    Enable 'Raise on hover, delayed by:' Set to 100 ms
+Select 'Window Actions', Switch 'Activate, pass click and raise on release'
+                             to 'Activate, raise and pass click'
+Under 'Inner Window, Titlebar and Frame Actions', Enable 'Mouse wheel:' Set to 'Change opacity'
+Search 'Default Applications', Switch 'Web browser' from 'Firefox'
+                                                      to 'Chrome'
+
+Enter URL in chrome: chrome://flags
+Search "Extensions on chrome"(:// URLs) and 'Enable' it
+
+SUPER + W to add 9 desktops in order to swap windows to them
+    (MUST EXIST BEFORE USING 'Move Window to Desktop *')
 
 Enter your FINAL command in Konsole:
     sudo pacman -Syu
