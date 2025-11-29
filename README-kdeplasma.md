@@ -62,15 +62,21 @@ Select 'Window Management' then 'Desktop Effects'
     Enable 'Dim Inactive'(Darken inactive windows)
 Select 'Task Switcher', Switch 'Thumbnail Grid'
                             to 'Compact'
-Select 'Window Behavior', Switch 'Click to focus'
-                              to 'Focus follows mouse (mouse precedence)'
+Select 'Window Behavior'
+    Switch 'Window activation policy' 'Click to focus'
+                                   to 'Focus follows mouse (mouse precedence)'
     Switch 'Delay focus by:' 300 ms
                           to 100 ms
     Enable 'Raise on hover, delayed by:' Set to 100 ms
 Select 'Window Actions', Switch 'Activate, pass click and raise on release'
                              to 'Activate, raise and pass click'
-Under 'Inner Window, Titlebar and Frame Actions', Enable 'Mouse wheel:' Set to 'Change opacity'
-Search 'Default Applications', Switch 'Web browser' from 'Firefox'
+Under 'Inner Window, Titlebar and Frame Actions'
+    Enable 'Mouse wheel:' Set to 'Change opacity'
+Select 'Virtual Desktops'
+    Disable 'Show animation when switching:'
+    Enable 'Show on-screen display when switching:' set to 100ms
+
+In Start Menu search 'Default Applications', Switch 'Web browser' from 'Firefox'
                                                       to 'Chrome'
 
 Enter URL in chrome: chrome://flags

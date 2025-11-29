@@ -7,12 +7,17 @@ source ~/.local/share/omarchy/default/bash/rc
 
 # =======================
 # ===     Aliases     ===
-# alias ls='ls --color=auto --group-directories-first -A'
-alias cls='clear; ls'  # cls = CLEAR;SHOW
-alias clsa='clear; lsa'  # cls = CLEAR;SHOW
+alias ls='ls --group-directories-first -ChF'  # Columns
+alias cls='clear; ls'
+alias clsa='clear; lsa'
+alias ll='ls -l'  # Single list
+alias lla='ll -A'
+alias cll='clear; ll'
+alias clla='clear; lla'
 alias lt='eza --group-directories-first --tree --level=2 --long --icons --git --ignore-glob=".git|.gitignore|.gitattributes|node_modules|.venv|__pycache__"'
 alias clt='clear; lt'
 alias clta='clear; lta'
+# Viewing images through terminal through <imv> without blur by default
 alias imv='imv -u nearest_neighbour'
 
 # =======================

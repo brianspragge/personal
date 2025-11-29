@@ -6,10 +6,15 @@
 
 # =======================
 # ===     Aliases     ===
-alias ls='ls --color=auto --group-directories-first -lh'
-alias cls='clear; ls'
+alias ls='ls --color=auto --group-directories-first -ChF'
 alias lsa='ls -A'
+alias cls='clear; ls'
 alias clsa='clear; lsa'
+alias ll='ls -l'
+alias lla='ll -A'
+alias cll='clear; ll'
+alias clla='clear; lla'
+# Viewing images through terminal through <imv> without blur by default
 alias imv='imv -u nearest_neighbour'
 
 # =======================
