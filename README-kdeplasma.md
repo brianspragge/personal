@@ -1,3 +1,5 @@
+# TODO: SecureBoot
+
 Turn off SecureBoot.
 
 Mirrors             United States
@@ -7,7 +9,7 @@ Disk encryption		no
 Btrfs snapshots     no
 Swap                Enabled
 Bootloader          Systemd-boot
-Unified kernel      yes 
+Unified kernel      yes
 Hostname            Example: workstation, homepc, covenant
 Authentication      Example: root, password
                              elite,sangheili
@@ -27,11 +29,13 @@ Additional packages
                     git
                     intel-media-driver
                     intel-ucode
-                    less
                     kde-applications
+                    less
+                    plymouth-kcm
                     sddm-kcm
                     xdg-user-dirs
                     xorg-xwayland
+                    vim
 Timezone            America/Los_Angeles
 NTP                 Enabled
 
@@ -44,6 +48,13 @@ Open Konsole program and enter each command:
 	makepkg -si
     git config --global commit.gpgsign true
     git clone https://github.com/brianspragge/personal.git
+# TODO: Temporary method for removing boot text and making splash screen work
+    sudo vim /etc/kernel/cmdline
+        Add " splash quiet" at the end(Press 'i' to enter 'Insert Mode')
+        Press <SHIFT + ;> and write "wq" and press 'Enter'
+    sudo vim /etc/mkinitcpio.d/linux-lts.preset
+        Add "#" at the beginning of line 13 or where it says 'default_options'
+        Press <SHIFT + ;> and write "wq" and press 'Enter'
 In Start Menu search "Shortcuts"(Configure Keyboard Shortcuts)
     Top right click 'Import'
     Select 'Custom Scheme'
@@ -58,6 +69,7 @@ In Start Menu search "Shortcuts"(Configure Keyboard Shortcuts)
 In Start Menu search "Login Screen (SDDM)"(Configure Login Manager)
 Click 'Breeze' theme and 'Apply'
 Select 'Splash Screen', Apply 'Breeze' theme
+Select 'Boot Splash Screen', Apply 'Breeze' theme
 Select 'Window Management' then 'Desktop Effects'
     Enable 'Dim Inactive'(Darken inactive windows)
 Select 'Task Switcher', Switch 'Thumbnail Grid'
