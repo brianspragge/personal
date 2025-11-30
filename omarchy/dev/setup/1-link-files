@@ -52,9 +52,6 @@ link_file "$BASE/.config/hypr/autostart.conf" "$HOME/.config/hypr/autostart.conf
 link_file "$BASE/.config/hypr/bindings.conf"  "$HOME/.config/hypr/bindings.conf"
 link_file "$BASE/.config/hypr/monitors.conf"  "$HOME/.config/hypr/monitors.conf"
 link_file "$BASE/.config/hypr/reference.conf" "$HOME/.config/hypr/reference.conf"
-# vimium
-link_file "$BASE/.config/vimium/vimium-options(chromium).json"    "$HOME/.config/vimium/vimium-options(chromium).json"
-link_file "$BASE/.config/vimium/vimium-options(zen-browser).json" "$HOME/.config/vimium/vimium-options(zen-browser).json"
 
 # files in .local/bin
 link_file "$BASE/.local/bin/get-color"        "$HOME/.local/bin/get-color"
