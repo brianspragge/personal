@@ -1,103 +1,108 @@
-# TODO: SecureBoot
+# Extremely Easy Arch Linux Installation & Post-Install Setup Guide
 
-Turn off SecureBoot.
+## Installation Settings (Archinstall)
 
-Mirrors             United States
-Partition			btrfs autosuggested compression
-LVM                 no
-Disk encryption		no
-Btrfs snapshots     no
-Swap                Enabled
-Bootloader          Systemd-boot
-Unified kernel      yes
-Hostname            Example: workstation, homepc, covenant
-Authentication      Example: root, password
-                             elite,sangheili
-                             guest,123
-Profile			    KDE Plasma
-    Graphics        All open-source
-    Greeter         sddm
-Applications
-    Bluetooth       Enabled
-    Audio           pipewire
-Kernel			    linux-lts
-Network             Use NetworkManager
-Additional packages
-                    base-devel
-                    breeze-plymouth
-                    coreutils
-                    git
-                    intel-media-driver
-                    intel-ucode
-                    kde-applications
-                    less
-                    plymouth-kcm
-                    sddm-kcm
-                    xdg-user-dirs
-                    xorg-xwayland
-                    vim
-Timezone            America/Los_Angeles
-NTP                 Enabled
+| Option                        | Setting                                      |
+|-------------------------------|----------------------------------------------|
+| **SecureBoot**                | Turn off SecureBoot                          |
+| **Mirrors**                   | United States                                |
+| **Partition**                 | BTRFS (autosuggested compression)            |
+| **LVM**                       | No                                           |
+| **Disk encryption**           | No                                           |
+| **Btrfs snapshots**           | No                                           |
+| **Swap**                      | Enabled                                      |
+| **Bootloader**                | systemd-boot                                 |
+| **Unified kernel**            | Yes                                          |
+| **Hostname**                  | Example: `workstation` / `laptop` / `homepc` |
+| **Authentication**            | Example: `root` / `yourname` / `guest`       |
+| **Profile**                   | KDE Plasma                                   |
+| **Graphics**                  | All open-source                              |
+| **Greeter**                   | SDDM                                         |
+| **Applications**              | Bluetooth Enabled                            |
+| **Audio**                     | PipeWire                                     |
+| **Kernel**                    | `linux-lts`                                  |
+| **Network**                   | NetworkManager                               |
+| **Additional packages**       | `base-devel breeze-plymouth coreutils git intel-media-driver intel-ucode kde-applications less plymouth-kcm sddm-kcm xdg-user-dirs xorg-xwayland vim` |
+| **Timezone**                  | `America/Los_Angeles`                        |
+| **NTP**                       | Enabled                                      |
 
-AFTER FIRST SUCCESSFUL BOOT:
-Connect to Wifi/Ethernet
-Open Konsole program and enter each command:
-    mkdir ~/builds; cd ~/builds
-	git clone https://aur.archlinux.org/yay-bin.git
-	cd yay-bin
-	makepkg -si
-    git config --global commit.gpgsign true
-    git clone https://github.com/brianspragge/personal.git
-# TODO: Temporary method for removing boot text and making splash screen work
-    sudo vim /etc/kernel/cmdline
-        Add " splash quiet" at the end(Press 'i' to enter 'Insert Mode')
-        Press <SHIFT + ;> and write "wq" and press 'Enter'
-    sudo vim /etc/mkinitcpio.d/linux-lts.preset
-        Add "#" at the beginning of line 13 or where it says 'default_options'
-        Press <SHIFT + ;> and write "wq" and press 'Enter'
-In Start Menu search "Shortcuts"(Configure Keyboard Shortcuts)
-    Top right click 'Import'
-    Select 'Custom Scheme'
-    Click 'Select File'
-    Find the file ~/personal/kdeplasma/dev/user/kde-keybind-schema.kksrc
-    Click 'Apply'
+---
 
-( Now is the time you may also take whatever else you wish from the  )
-( many files in the 'personal' repo. Some good ones I recommend are: )
-( .bashrc .vimrc .inputrc /.local/bin/gpgcli                         )
+## After First Successful Boot
 
-In Start Menu search "Login Screen (SDDM)"(Configure Login Manager)
-Click 'Breeze' theme and 'Apply'
-Select 'Splash Screen', Apply 'Breeze' theme
-Select 'Boot Splash Screen', Apply 'Breeze' theme
-Select 'Window Management' then 'Desktop Effects'
-    Enable 'Dim Inactive'(Darken inactive windows)
-Select 'Task Switcher', Switch 'Thumbnail Grid'
-                            to 'Compact'
-Select 'Window Behavior'
-    Switch 'Window activation policy' 'Click to focus'
-                                   to 'Focus follows mouse (mouse precedence)'
-    Switch 'Delay focus by:' 300 ms
-                          to 100 ms
-    Enable 'Raise on hover, delayed by:' Set to 100 ms
-Select 'Window Actions', Switch 'Activate, pass click and raise on release'
-                             to 'Activate, raise and pass click'
-Under 'Inner Window, Titlebar and Frame Actions'
-    Enable 'Mouse wheel:' Set to 'Change opacity'
-Select 'Virtual Desktops'
-    Disable 'Show animation when switching:'
-    Enable 'Show on-screen display when switching:' set to 100ms
+1. Connect to Wi-Fi or Ethernet  
+2. Open **Konsole** and run the following commands one by one:
 
-In Start Menu search 'Default Applications', Switch 'Web browser' from 'Firefox'
-                                                      to 'Chrome'
+```bash
+mkdir ~/builds && cd ~/builds
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si
+git config --global commit.gpgsign true
+git clone https://github.com/brianspragge/personal.git
+```
 
-Enter URL in chrome: chrome://flags
-Search "Extensions on chrome"(:// URLs) and 'Enable' it
+---
 
-SUPER + W to add 9 desktops in order to swap windows to them
-    (MUST EXIST BEFORE USING 'Move Window to Desktop *')
+## Temporary Plymouth Splash Screen Fix (Remove boot text)
 
-Enter your FINAL command in Konsole:
-    sudo pacman -Syu
+```bash
+sudo vim /etc/kernel/cmdline
+```
+→ Add ` splash quiet` at the end of the line  
+→ Press `i` → edit → `Esc` → `:wq` → Enter
 
-FINISHED!  Congratulations, you are now using Arch in a very Stylish way.
+---
+
+## Import Custom KDE Keyboard Shortcuts
+
+1. Open **System Settings** → Search "Shortcuts" (Configure Keyboard Shortcuts)  
+2. Top right → **Import** → **Custom Scheme**  
+3. Click **Select File** → Choose `~/personal/kdeplasma/dev/user/kde-keybind-schema.kksrc`  
+4. Click **Apply**
+
+> Optional: Copy useful dotfiles from the `personal` repo to ~/ and ~/.local/bin 
+> Recommended: `.bashrc`, `.vimrc`, `.inputrc`, `~/.local/bin/gpgcli`
+
+---
+
+## SDDM & KDE Appearance Tweaks
+
+1. Open **Login Screen (SDDM)**  
+   - Theme → **Breeze** → Apply  
+   - Splash Screen → **Breeze** → Apply  
+   - Boot Splash Screen → **Breeze** → Apply  
+
+2. **Window Management → Desktop Effects**  
+   - Enable **Dim Inactive**  
+
+3. **Task Switcher**  
+   - Change from "Thumbnail Grid" to **Compact**  
+
+4. **Window Behavior**  
+   - Activation policy: **Focus follows mouse (mouse precedence)**  
+   - Delay focus: **100 ms**  
+   - Enable **Raise on hover**, delay: **100 ms**  
+
+5. **Window Actions**  
+   - Inactive Inner Window Actions, Left click: **Activate, raise and pass click**  
+   - Mouse wheel on titlebar: **Change opacity**  
+
+6. **Virtual Desktops**  
+   - **Add Desktop** until there are nine desktops
+   - Enable navigation wrap around
+   - Disable switching animation
+   - On-screen display when switching: **100 ms**
+   - Disable desktop layout indicators
+
+---
+
+## Final Step
+
+```bash
+sudo pacman -Syu
+reboot
+```
+
+**FINISHED!**  
+Congratulations, you are now using Arch in a very **Stylish** way! 
