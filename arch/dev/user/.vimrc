@@ -61,6 +61,21 @@ syntax on
 filetype plugin indent on
 " vim: set filetype=vim :
 
+" Center after jumping
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+" Center after half-page jumps
+nnoremap <C-u> <C-u>zz
+nnoremap <C-d> <C-d>zz
+" Center after jumping to mark
+nnoremap ' 'zz
+" Center after jumping to bottom
+nnoremap G Gzz
+
 " =======================
 " ===     !Bash      ====
 autocmd FileType sh setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
