@@ -71,8 +71,9 @@ nnoremap g# g#zz
 " Center after half-page jumps
 nnoremap <C-u> <C-u>zz
 nnoremap <C-d> <C-d>zz
-" Center after jumping to mark
-nnoremap ' 'zz
+" Center after paragraph jumps
+nnoremap { {zz
+nnoremap } }zz
 " Center after jumping to bottom
 nnoremap G Gzz
 
