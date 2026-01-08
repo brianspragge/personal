@@ -1,0 +1,7 @@
+set completion-ignore-case on
+set completion-map-case on
+set editing-mode vi
+set vi-ins-mode-string "○ "
+set vi-cmd-mode-string "● "
+set show-mode-in-prompt on
+set colored-stats on

@@ -1,0 +1,13 @@
+# =======================
+# ===     Aliases     ===
+alias ls='ls --color=auto'
+alias lsa='ls -A'
+alias cls='clear; ls'
+alias clsa='clear; lsa'
+alias ll='ls --color=auto -lFh'
+alias lla='ll -A'
+alias cll='clear; ll'
+alias clla='clear; lla'
+# Viewing images through terminal through <imv> without blur by default
+alias imv='imv -u nearest_neighbour'
+
