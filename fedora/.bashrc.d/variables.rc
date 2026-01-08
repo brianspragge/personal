@@ -1,0 +1,4 @@
+# =======================
+# ===    Variables    ===
+ENV() { echo "$VIRTUAL_ENV"; }
+export EDITOR=vim

@@ -1,0 +1,9 @@
+# =======================
+# ===    Functions    ===
+# <history> becomes very neat, thanks to SOandSO.
+if [[ -n "$HISTCONTROL" ]]; then
+  export HISTCONTROL="${HISTCONTOL}:ignoredups:erasedups:ignorespace;"
+else
+  export HISTCONTROL="ignoredups:erasedups:ignorespace"
+fi
+
