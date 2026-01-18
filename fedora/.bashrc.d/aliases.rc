@@ -1,13 +1,22 @@
 # =======================
 # ===     Aliases     ===
+
+
+alias BRIANS_PWD='printf " ○ %s: \n" "$PWD"'
+
+# Many Columns
 alias ls='ls --color=auto'
 alias lsa='ls -A'
-alias cls='clear; ls'
-alias clsa='clear; lsa'
+alias cls='clear; BRIANS_PWD; ls'
+alias clsa='clear; BRIANS_PWD; lsa'
+
+# Single Column Verbose
 alias ll='ls --color=auto -lFh'
 alias lla='ll -A'
-alias cll='clear; ll'
-alias clla='clear; lla'
+alias cll='clear; BRIANS_PWD; ll'
+alias clla='clear; BRIANS_PWD; lla'
+
+
 # Viewing images through terminal through <imv> without blur by default
 alias imv='imv -u nearest_neighbour'
 
