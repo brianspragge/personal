@@ -29,6 +29,8 @@ set termwinsize=8*0        " size of a terminal window
 set ttimeout               " time out on mappings
 set ttimeoutlen=100        " time out time for key codes in milliseconds
 
+syntax enable
+
 " resize windows better keybinds
 nnoremap <silent> <M-j> :resize +2<CR>
 nnoremap <silent> <M-k> :resize -2<CR>
