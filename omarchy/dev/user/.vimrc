@@ -1,6 +1,4 @@
-" =======================
-" ===    Settings    ====
-colorscheme zaibatsu  " pink/purple theme
+"colorscheme zaibatsu  " pink/purple theme
 
 set backupdir=~/.cache/vim/backup//  " list of directories for the backup file
 set directory=~/.cache/vim/swap//    " list of directory names for the swap file
@@ -17,11 +15,15 @@ set wildignore+=*.tmp,*.swp,*.swo,*.DS_Store
 set wildmenu                    " use menu for command line completion
 set wildmode=longest:full,full  " mode for 'wildchar' command-line expansion
 
+set breakindent            " wrapped line repeats indent
 set display=truncate,uhex  " list of flags for how to display text
 set expandtab              " use spaces when <Tab> is inserted
 set mouse=a                " enable the use of mouse clicks
 set number                 " display the current line pos in lower right corner
 set scrolloff=999          " minimum nr. of lines above and below cursor
+set sidescroll=1           " minimum number of columns to scroll horizontal
+set sidescrolloff=10       " min. nr. of columns to left and right of cursor
+
 set shiftwidth=4           " number of spaces to use for (auto)indent step
 set softtabstop=4          " number of columns between two soft tab stops
 set termguicolors          " use GUI colors for the terminal
@@ -65,6 +67,10 @@ vnoremap <leader>p :<C-U>'<,'>w! /tmp/vim_temp.py \| !clear; python /tmp/vim_tem
 " =======================
 " ===     !Text      ====
 autocmd FileType text setlocal noexpandtab tabstop=5 shiftwidth=5 softtabstop=5
+
+" =======================
+" ===     !VIM       ====
+autocmd FileType vim setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 " =======================
 " ===      Extra      ===
