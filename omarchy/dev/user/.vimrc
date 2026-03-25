@@ -16,6 +16,8 @@ set wildmenu                    " use menu for command line completion
 set wildmode=longest:full,full  " mode for 'wildchar' command-line expansion
 
 set breakindent            " wrapped line repeats indent
+set breakindentopt=shift:-6" settings for 'breakindent'
+set showbreak=<WRAP>       " string to use at the start of wrapped lines
 set display=truncate,uhex  " list of flags for how to display text
 set expandtab              " use spaces when <Tab> is inserted
 set mouse=a                " enable the use of mouse clicks
@@ -66,7 +68,8 @@ vnoremap <leader>p :<C-U>'<,'>w! /tmp/vim_temp.py \| !clear; python /tmp/vim_tem
 
 " =======================
 " ===     !Text      ====
-autocmd FileType text setlocal noexpandtab tabstop=5 shiftwidth=5 softtabstop=5
+"autocmd FileType text setlocal noexpandtab tabstop=5 shiftwidth=5 softtabstop=5
+autocmd FileType text setlocal noexpandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 " =======================
 " ===     !VIM       ====
