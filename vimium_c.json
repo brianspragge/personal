@@ -1,0 +1,28 @@
+{
+	"name": "Vimium C",
+	"@time": "4/17/2026, 6:51:51 PM",
+	"time": 1776477111020,
+	"environment": {
+		"extension": "2.12.2",
+		"platform": "linux",
+		"chromium": 147
+	},
+	"allBrowserUrls": true,
+	"keyLayout": 2,
+	"keyMappings": [
+		"#!no-check",
+		"unmap H",
+		"unmap J",
+		"unmap K",
+		"unmap L",
+		"map H previousTab",
+		"map L nextTab",
+		"map J moveTabLeft",
+		"map K moveTabRight",
+		"map { goBack",
+		"map } goForward",
+		""
+	],
+	"keyupTime": 50,
+	"vimSync": true
+}
