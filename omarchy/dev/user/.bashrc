@@ -43,3 +43,5 @@ export PATH="$HOME/.local/bin:$PATH"
 # =======================
 # ===    Variables    ===
 ENV() { echo "$VIRTUAL_ENV"; }
+# activate env in current dir
+alias SRCENV='source .env/bin/activate; ENV'

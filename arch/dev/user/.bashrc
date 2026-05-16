@@ -55,6 +55,8 @@ fi
 # =======================
 # ===    Variables    ===
 ENV() { echo "$VIRTUAL_ENV"; }
+# activate env in current dir
+alias SRCENV='source .env/bin/activate; ENV'
 export GPG_TTY=$(tty)
 export EDITOR=vim
 #export LESS="-R --use-color -Dd+r -Du+b"
