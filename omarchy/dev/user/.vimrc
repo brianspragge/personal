@@ -1,7 +1,11 @@
 "colorscheme zaibatsu  " pink/purple theme
 
+packadd! comment        " <g,c,c> or visual mode then <g,c>
+
 set backupdir=~/.cache/vim/backup//  " list of directories for the backup file
 set directory=~/.cache/vim/swap//    " list of directory names for the swap file
+set undodir=~/.cache/vim/undo//      " where to store undo files
+set undofile                         " save undo information in a file
 
 " suffixes that are ignored with multiple match
 set suffixes=.bak,~,.o,.info,.swp,.aux,.bbl,.blg,.brf,.cb,.dvi,.idx,.ilg,.ind
@@ -30,6 +34,7 @@ set shiftwidth=4           " number of spaces to use for (auto)indent step
 set softtabstop=4          " number of columns between two soft tab stops
 set termguicolors          " use GUI colors for the terminal
 set termwinsize=8*0        " size of a terminal window
+set thesaurus+=$HOME/.vim/thesaurus/english.txt
 set ttimeout               " time out on mappings
 set ttimeoutlen=100        " time out time for key codes in milliseconds
 
@@ -59,12 +64,22 @@ autocmd FileType cpp setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 vnoremap <leader>+ :w<CR>:!g++ % -o %< && ./%<<CR>
 
 " =======================
+" ===   JavaScript   ====
+autocmd FileType js setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+" execute code in new terminal buffer
+vnoremap <leader>j :<C-U>'<,'>w! /tmp/vim_temp.js \| !clear; node /tmp/vim_temp.js<CR>
+" execute whole lines where code is highlighted
+nnoremap <leader>j :w! /tmp/vim_temp.js \| !clear; node /tmp/vim_temp.js<CR>
+
+" =======================
 " ===    !Python     ====
 set tags=./tags;~/tags/python_stdlib.tags;~/tags/python_venv_libs.tags
 let mapleader = "\\"
 autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-" execute highlighted code in new terminal buffer
+" execute code in new terminal buffer
 vnoremap <leader>p :<C-U>'<,'>w! /tmp/vim_temp.py \| !clear; python /tmp/vim_temp.py<CR>
+" execute whole lines where code is highlighted
+nnoremap <leader>p :w! /tmp/vim_temp.py \| !clear; python /tmp/vim_temp.py<CR>
 
 " =======================
 " ===     !Text      ====
