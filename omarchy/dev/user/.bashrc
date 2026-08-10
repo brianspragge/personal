@@ -17,10 +17,6 @@ source ~/.local/share/omarchy/default/bash/rc
 # alias ls='ls --group-directories-first -ChF'  # Columns
 alias cls='clear; ls'
 alias clsa='clear; lsa'
-# alias ll='ls -l'  # Single list
-# alias lla='ll -A'
-# alias cll='clear; ll'
-# alias clla='clear; lla'
 alias lt='eza --group-directories-first --tree --level=2 --long --icons --git --ignore-glob=".git|.gitignore|.gitattributes|node_modules|.venv|__pycache__"'
 alias clt='clear; lt'
 alias clta='clear; lta'
@@ -45,3 +41,4 @@ export PATH="$HOME/.local/bin:$PATH"
 ENV() { echo "$VIRTUAL_ENV"; }
 # activate env in current dir
 alias SRCENV='source .env/bin/activate; ENV'
+export EDITOR=vim

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Wayland-Docs
+Comment=Wayland-Docs
+Exec=omarchy-launch-webapp file:///usr/share/doc/wayland/Wayland/en-US/book/Foreword.html
+Terminal=false
+Type=Application
+Icon=/home/monk/.local/share/applications/icons/wayland.png
+StartupNotify=true

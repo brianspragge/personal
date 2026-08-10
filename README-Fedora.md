@@ -34,11 +34,11 @@ Extremely Easy Linux Installation &amp; Post-Install Setup Guide (Fedora)
 
 ```bash
 git config --global commit.gpgsign true
-cd; git clone https://github.com/brianspragge/personal.git
+cd; git clone https://github.com/brianspragge/personal.git ~/Repos/personal
 sudo dnf install vim git
 ```
 
-> Copy files from the personal/fedora/ directory to ~/
+> Copy files from the ~/Repos/personal/fedora/ directory to ~/
 
 ---
 
@@ -46,7 +46,7 @@ sudo dnf install vim git
 
 1. Open **System Settings** → Search "Shortcuts" (Configure Keyboard Shortcuts)  
 2. Top right → **Import** → **Custom Scheme**  
-3. Click **Select File** → Choose `~/personal/fedora/kde-keybind-schema.kksrc`  
+3. Click **Select File** → Choose `~/Repos/personal/fedora/kde-keybind-schema.kksrc`  
 4. Click **Apply**
 
 ---

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Casio Calculator
+Comment=Casio Calculator
+Exec=omarchy-launch-webapp file:///home/monk/College/Precalculus/Fx-570es_plus-1.png
+Terminal=false
+Type=Application
+Icon=/home/monk/.local/share/applications/icons/Casio Calculator.png
+StartupNotify=true

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=GF2
+Comment=graphical gdb
+Exec=/usr/local/bin/gf2
+Terminal=false
+Type=Application
+Icon=/home/monk/.local/share/applications/icons/gf2.png
+StartupNotify=true

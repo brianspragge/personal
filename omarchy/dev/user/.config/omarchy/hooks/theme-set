@@ -1,0 +1,54 @@
+#!/bin/bash
+
+THEME_DIR="$HOME/.config/omarchy/themes/$1"
+WAYBAR_DIR="$HOME/.config/waybar"
+DEFAULT_DIR="$HOME/.local/share/omarchy/config/waybar"
+
+if [[ -f "$THEME_DIR/config.jsonc" ]]; then
+  cp "$THEME_DIR/config.jsonc" "$WAYBAR_DIR/config.jsonc"
+else
+  cp "$DEFAULT_DIR/config.jsonc" "$WAYBAR_DIR/config.jsonc"
+fi
+
+# Omarchy auto-restarts waybar before this hook runs, so copying the theme's
+# config.jsonc above would have no effect without a second restart here.
+pkill -9 -x waybar 2>/dev/null
+setsid uwsm-app -- waybar >/dev/null 2>&1 &
+
+# These themes ship as local VSCode extensions (not on the marketplace).
+# Omarchy's built-in vscode-set only handles marketplace extensions, so
+# register ours manually so VSCode discovers them on disk.
+VSCODE_JSON="$THEME_DIR/vscode.json"
+if [[ -f $VSCODE_JSON ]]; then
+  EXTENSION=$(jq -r '.extension' "$VSCODE_JSON")
+  EXTENSIONS_FILE="$HOME/.vscode/extensions/extensions.json"
+  if [[ -n $EXTENSION ]] && [[ -f $EXTENSIONS_FILE ]]; then
+    if ! jq -e --arg id "$EXTENSION" '.[] | select(.identifier.id == $id)' "$EXTENSIONS_FILE" >/dev/null 2>&1; then
+      EXT_DIR_NAME="${EXTENSION##*.}"
+      EXT_DIR="$HOME/.vscode/extensions/$EXT_DIR_NAME"
+      EXT_VER=$(jq -r '.version' "$EXT_DIR/package.json" 2>/dev/null || echo "1.0.0")
+      if [[ -d $EXT_DIR ]]; then
+        jq --arg id "$EXTENSION" --arg path "$EXT_DIR" --arg rel "$EXT_DIR_NAME" --arg ver "$EXT_VER" \
+          '. + [{"identifier": {"id": $id}, "version": $ver, "location": {"$mid": 1, "path": $path, "scheme": "file"}, "relativeLocation": $rel}]' \
+          "$EXTENSIONS_FILE" > "${EXTENSIONS_FILE}.tmp" && mv "${EXTENSIONS_FILE}.tmp" "$EXTENSIONS_FILE"
+        omarchy-theme-set-vscode
+      fi
+    fi
+  fi
+fi
+
+# Helix loads the theme via the omarchy symlink at
+# ~/.config/helix/themes/omarchy.toml.  Our helix.toml is
+# already in the theme dir, so omarchy's theme-switch copies
+# it into place.  Just reload to pick up any changes.
+if pgrep -x helix >/dev/null 2>&1; then
+  omarchy-restart-helix
+fi
+
+# Point symlink to source dir so next theme switch starts fresh
+# (current/theme/backgrounds/ has same filenames across themes, causing cycling)
+BG_SRC="$THEME_DIR/backgrounds/01 - Bliss.jpg"
+if [[ -f $BG_SRC ]]; then
+  ln -sf "$BG_SRC" "$HOME/.config/omarchy/current/background"
+fi
+
