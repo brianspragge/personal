@@ -7,3 +7,4 @@ Terminal=false
 Type=Application
 Icon=/home/monk/.local/share/applications/icons/gf2.png
 StartupNotify=true
+Categories=Development;Debugger;

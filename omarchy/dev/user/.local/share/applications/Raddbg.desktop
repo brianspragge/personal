@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=Raddbg
+Comment=RAD Debugger
+Exec=/home/monk/.local/bin/raddbg
+Terminal=false
+Type=Application
+Icon=/home/monk/.local/share/applications/icons/raddbg.png
+StartupNotify=true
+Categories=Development;Debugger;

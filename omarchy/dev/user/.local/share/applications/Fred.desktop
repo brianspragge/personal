@@ -7,3 +7,4 @@ Terminal=false
 Type=Application
 Icon=/home/monk/.local/share/applications/icons/fred.svg
 StartupNotify=true
+Categories=Utility;TextEditor;
