@@ -49,10 +49,10 @@ copy_one() {
     fi
 
     local ans
-    read -r -p "    Copy $desc? [y/N] " ans
+    read -r -p "    Copy $desc? [Y/n] " ans
     case "${ans,,}" in
-        y|yes) ;;
-        *) echo "    skipped."; return 0 ;;
+        n|no) echo "    skipped."; return 0 ;;
+        *) ;;
     esac
 
     mkdir -p "$(dirname "$dst")"
@@ -76,19 +76,10 @@ copy_one "$BASE/.bashrc"  "$HOME/.bashrc"  ".bashrc"
 copy_one "$BASE/.inputrc" "$HOME/.inputrc" ".inputrc"
 copy_one "$BASE/.vimrc"   "$HOME/.vimrc"   ".vimrc"
 
-# terminal
-copy_one "$BASE/.config/alacritty/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml" "alacritty.toml"
-
 # hypr
-for f in autostart bindings hypridle hyprland hyprlock input looknfeel monitors; do
-    copy_one "$BASE/.config/hypr/$f.conf" "$HOME/.config/hypr/$f.conf" "hypr/$f.conf"
+for f in autostart bindings input looknfeel monitors; do
+    copy_one "$BASE/.config/hypr/$f.lua" "$HOME/.config/hypr/$f.lua" "hypr/$f.lua"
 done
-
-# waybar
-copy_one "$BASE/.config/waybar/config.jsonc" "$HOME/.config/waybar/config.jsonc" "waybar/config.jsonc"
-
-# nvim
-copy_one "$BASE/.config/nvim" "$HOME/.config/nvim" "nvim"
 
 # scripts in .local/bin
 copy_one "$BASE/.local/bin/getcolor"  "$HOME/.local/bin/getcolor"  "getcolor"
@@ -97,12 +88,6 @@ copy_one "$BASE/.local/bin/gpg_ref.txt" "$HOME/.local/bin/gpg_ref.txt" "gpg_ref.
 
 # vim thesaurus
 copy_one "$BASE/.vim/thesaurus" "$HOME/.vim/thesaurus" ".vim/thesaurus"
-
-# custom omarchy script. ~/.local/bin is ahead of omarchy's bin on PATH,
-# so this overrides the upstream gaps-toggle.
-copy_one "$BASE/.local/omarchy/bin/omarchy-hyprland-window-gaps-toggle" \
-         "$HOME/.local/bin/omarchy-hyprland-window-gaps-toggle" \
-         "omarchy-hyprland-window-gaps-toggle"
 
 # personal .desktop launchers
 copy_one "$BASE/.local/share/applications/Casio Calculator.desktop" \
@@ -137,9 +122,12 @@ copy_one "$BASE/.local/share/applications/icons/wayland.png" \
 # ------------------------------------------------------------------
 if command -v ctags >/dev/null 2>&1; then
     echo "--- vim ctags"
-    read -r -p "    Regenerate ~/.vim/tags (C++ and Python stdlib)? [y/N] " ans
+    read -r -p "    Regenerate ~/.vim/tags (C++ and Python stdlib)? [Y/n] " ans
     case "${ans,,}" in
-        y|yes)
+        n|no)
+            echo "    skipped."
+            ;;
+        *)
             mkdir -p "$HOME/.vim/tags"
             echo "    building C++ tags from /usr/include (this takes a while)..."
             ctags -R --languages=C,C++ --fields=+iaS --extras=+q \
@@ -152,23 +140,24 @@ if command -v ctags >/dev/null 2>&1; then
             fi
             echo "    tags written to ~/.vim/tags/"
             ;;
-        *) echo "    skipped." ;;
     esac
 fi
 
 # ------------------------------------------------------------------
 # bash tab-completion: show hidden files
 # ------------------------------------------------------------------
-INPUTC="$HOME/.local/share/omarchy/default/bash/inputrc"
+INPUTC="${OMARCHY_PATH:-/usr/share/omarchy}/default/bash/inputrc"
 if [[ -f "$INPUTC" ]] && grep -q "set match-hidden-files off" "$INPUTC"; then
     echo "--- bash tab-completion currently hides dotfiles"
-    read -r -p "    Show hidden files in tab-completion? [y/N] " ans
+    read -r -p "    Show hidden files in tab-completion? [Y/n] " ans
     case "${ans,,}" in
-        y|yes)
+        n|no)
+            echo "    skipped."
+            ;;
+        *)
             sed -i 's/^set match-hidden-files off/set match-hidden-files on/' "$INPUTC"
             echo "    set -> match-hidden-files on"
             ;;
-        *) echo "    skipped." ;;
     esac
 else
     echo "--- bash inputrc: match-hidden-files already on (or file missing), skipping."
