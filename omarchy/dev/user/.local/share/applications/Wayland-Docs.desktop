@@ -5,6 +5,6 @@ Comment=Wayland-Docs
 Exec=omarchy-launch-webapp file:///usr/share/doc/wayland/Wayland/en-US/book/Foreword.html
 Terminal=false
 Type=Application
-Icon=/home/monk/.local/share/applications/icons/wayland.png
+Icon=/home/bms/.local/share/applications/icons/wayland.png
 StartupNotify=true
 Categories=System;Documentation;

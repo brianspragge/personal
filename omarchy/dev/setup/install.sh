@@ -104,9 +104,9 @@ copy_one "$BASE/.local/share/applications/Wayland-Docs.desktop" \
          "Wayland-Docs.desktop"
 
 # icons for the launchers above
-copy_one "$BASE/.local/share/applications/icons/Casio Calculator.png" \
-         "$HOME/.local/share/applications/icons/Casio Calculator.png" \
-         "icons/Casio Calculator.png"
+copy_one "$BASE/.local/share/applications/icons/casiocalc.png" \
+         "$HOME/.local/share/applications/icons/casiocalc.png" \
+         "icons/casiocalc.png"
 copy_one "$BASE/.local/share/applications/icons/fred.svg" \
          "$HOME/.local/share/applications/icons/fred.svg" \
          "icons/fred.svg"

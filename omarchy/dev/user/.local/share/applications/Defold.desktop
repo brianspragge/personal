@@ -2,9 +2,9 @@
 Version=1.13
 Name=Defold
 Comment=Game Engine
-Exec=/home/monk/.local/share/Defold/Defold
+Exec=/home/bms/.local/share/Defold/Defold
 Terminal=false
 Type=Application
-Icon=/home/monk/.local/share/Defold/logo_blue.png
+Icon=/home/bms/.local/share/Defold/logo_blue.png
 StartupNotify=true
 Categories=Development;IDE;

@@ -2,9 +2,9 @@
 Version=1.0
 Name=Fred
 Comment=Friendly-Editor
-Exec=/home/monk/.local/bin/fred
+Exec=/home/bms/.local/bin/fred
 Terminal=false
 Type=Application
-Icon=/home/monk/.local/share/applications/icons/fred.svg
+Icon=/home/bms/.local/share/applications/icons/fred.svg
 StartupNotify=true
 Categories=Utility;TextEditor;

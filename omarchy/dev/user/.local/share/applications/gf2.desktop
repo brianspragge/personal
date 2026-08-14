@@ -5,6 +5,6 @@ Comment=graphical gdb
 Exec=/usr/local/bin/gf2
 Terminal=false
 Type=Application
-Icon=/home/monk/.local/share/applications/icons/gf2.png
+Icon=/home/bms/.local/share/applications/icons/gf2.png
 StartupNotify=true
 Categories=Development;Debugger;

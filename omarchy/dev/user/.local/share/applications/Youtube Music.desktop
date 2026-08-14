@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=Youtube Music
+Comment=Youtube Music
+Exec=omarchy-launch-webapp https://music.youtube.com/
+Terminal=false
+Type=Application
+Icon=/home/bms/.local/share/applications/icons/Youtube Music.png
+StartupNotify=true
+Categories=Network;WebBrowser;

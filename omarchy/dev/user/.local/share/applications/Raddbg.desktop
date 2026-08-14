@@ -2,9 +2,9 @@
 Version=1.0
 Name=Raddbg
 Comment=RAD Debugger
-Exec=/home/monk/.local/bin/raddbg
+Exec=/home/bms/.local/bin/raddbg
 Terminal=false
 Type=Application
-Icon=/home/monk/.local/share/applications/icons/raddbg.png
+Icon=/home/bms/.local/share/applications/icons/raddbg.png
 StartupNotify=true
 Categories=Development;Debugger;
