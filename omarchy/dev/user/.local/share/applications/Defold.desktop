@@ -1,10 +1,10 @@
 [Desktop Entry]
-Version=1.13
+Version=1.0
 Name=Defold
 Comment=Game Engine
 Exec=/home/bms/.local/share/Defold/Defold
 Terminal=false
 Type=Application
-Icon=/home/bms/.local/share/Defold/logo_blue.png
+Icon=/home/bms/.local/share/applications/icons/defold.png
 StartupNotify=true
 Categories=Development;IDE;

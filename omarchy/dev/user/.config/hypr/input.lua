@@ -8,13 +8,23 @@ hl.config({
     repeat_rate = 25,
     repeat_delay = 200,
     numlock_by_default = true,
-    sensitivity = 0,
     touchpad = {
       natural_scroll = true,
       scroll_factor = 0.3,
     },
   },
 })
+
+-- x230.TrackPoint
+hl.device({
+  name = "tpps/2-ibm-trackpoint",
+  sensitivity = 0,
+})
+-- x13.TrackPoint
+-- hl.device({
+--   name = "tpps/2-synaptics-trackpoint",
+--   sensitivity = -1,
+-- })
 
 -- Scroll nicely in the terminal
 o.window("(Alacritty|kitty|foot)", { scroll_touchpad = 1.5 })

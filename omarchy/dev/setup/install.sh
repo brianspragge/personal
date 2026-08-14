@@ -90,32 +90,67 @@ copy_one "$BASE/.local/bin/gpg_ref.txt" "$HOME/.local/bin/gpg_ref.txt" "gpg_ref.
 copy_one "$BASE/.vim/thesaurus" "$HOME/.vim/thesaurus" ".vim/thesaurus"
 
 # personal .desktop launchers
+copy_one "$BASE/.local/share/applications/Aseprite.desktop" \
+         "$HOME/.local/share/applications/Aseprite.desktop" \
+         "Aseprite.desktop"
 copy_one "$BASE/.local/share/applications/Casio Calculator.desktop" \
          "$HOME/.local/share/applications/Casio Calculator.desktop" \
          "Casio Calculator.desktop"
+copy_one "$BASE/.local/share/applications/Defold.desktop" \
+         "$HOME/.local/share/applications/Defold.desktop" \
+         "Defold.desktop"
 copy_one "$BASE/.local/share/applications/Fred.desktop" \
          "$HOME/.local/share/applications/Fred.desktop" \
          "Fred.desktop"
 copy_one "$BASE/.local/share/applications/gf2.desktop" \
          "$HOME/.local/share/applications/gf2.desktop" \
          "gf2.desktop"
+copy_one "$BASE/.local/share/applications/Raddbg.desktop" \
+         "$HOME/.local/share/applications/Raddbg.desktop" \
+         "Raddbg.desktop"
 copy_one "$BASE/.local/share/applications/Wayland-Docs.desktop" \
          "$HOME/.local/share/applications/Wayland-Docs.desktop" \
          "Wayland-Docs.desktop"
+copy_one "$BASE/.local/share/applications/WhatsApp.desktop" \
+         "$HOME/.local/share/applications/WhatsApp.desktop" \
+         "WhatsApp.desktop"
+copy_one "$BASE/.local/share/applications/Youtube Music.desktop" \
+         "$HOME/.local/share/applications/Youtube Music.desktop" \
+         "Youtube Music.desktop"
 
 # icons for the launchers above
+copy_one "$BASE/.local/share/applications/icons/ase64.png" \
+         "$HOME/.local/share/applications/icons/ase64.png" \
+         "icons/ase64.png"
 copy_one "$BASE/.local/share/applications/icons/casiocalc.png" \
          "$HOME/.local/share/applications/icons/casiocalc.png" \
          "icons/casiocalc.png"
+copy_one "$BASE/.local/share/applications/icons/defold.png" \
+         "$HOME/.local/share/applications/icons/defold.png" \
+         "icons/defold.png"
 copy_one "$BASE/.local/share/applications/icons/fred.svg" \
          "$HOME/.local/share/applications/icons/fred.svg" \
          "icons/fred.svg"
 copy_one "$BASE/.local/share/applications/icons/gf2.png" \
          "$HOME/.local/share/applications/icons/gf2.png" \
          "icons/gf2.png"
+copy_one "$BASE/.local/share/applications/icons/raddbg.png" \
+         "$HOME/.local/share/applications/icons/raddbg.png" \
+         "icons/raddbg.png"
 copy_one "$BASE/.local/share/applications/icons/wayland.png" \
          "$HOME/.local/share/applications/icons/wayland.png" \
          "icons/wayland.png"
+copy_one "$BASE/.local/share/applications/icons/WhatsApp.png" \
+         "$HOME/.local/share/applications/icons/WhatsApp.png" \
+         "icons/WhatsApp.png"
+copy_one "$BASE/.local/share/applications/icons/Youtube Music.png" \
+         "$HOME/.local/share/applications/icons/Youtube Music.png" \
+         "icons/Youtube Music.png"
+
+# content the Casio Calculator launcher opens (photo of the calculator buttons)
+copy_one "$BASE/.local/share/applications/Fx-570es_plus-1.png" \
+         "$HOME/.local/share/applications/Fx-570es_plus-1.png" \
+         "Fx-570es_plus-1.png"
 
 # ------------------------------------------------------------------
 # vim ctags (tags/ is not tracked; regenerate on demand)
@@ -162,5 +197,14 @@ if [[ -f "$INPUTC" ]] && grep -q "set match-hidden-files off" "$INPUTC"; then
 else
     echo "--- bash inputrc: match-hidden-files already on (or file missing), skipping."
 fi
+
+# ------------------------------------------------------------------
+# git signing config
+# ------------------------------------------------------------------
+echo "--- git signing"
+git config --global commit.gpgsign true
+git config --global tag.gpgsign true
+git config --global log.showSignature true
+echo "    commit.gpgsign / tag.gpgsign / log.showSignature set to true"
 
 echo "Done."
