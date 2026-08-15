@@ -21,10 +21,10 @@ hl.device({
   sensitivity = 0,
 })
 -- x13.TrackPoint
--- hl.device({
---   name = "tpps/2-synaptics-trackpoint",
---   sensitivity = -1,
--- })
+hl.device({
+  name = "tpps/2-synaptics-trackpoint",
+  sensitivity = -1,
+})
 
 -- Scroll nicely in the terminal
 o.window("(Alacritty|kitty|foot)", { scroll_touchpad = 1.5 })

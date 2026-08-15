@@ -55,7 +55,7 @@ o.bind("SUPER + J", "Move focus down", hl.dsp.focus({ direction = "d" }))
 o.bind("SUPER + CTRL + J", "Toggle window split", hl.dsp.layout("togglesplit"))
 
 -- Toggle Dwindle/Master layout (unbound in the Omarchy defaults).
-o.bind("SUPER + CTRL + ALT + L", "Toggle Dwindle/Master layout", 'hyprctl keyword general:layout "$(hyprctl getoption general:layout | grep -q dwindle && echo master || echo dwindle)"')
+o.bind("SUPER + CTRL + ALT + L", "Toggle Dwindle/Master layout", 'hyprctl eval "hl.config({ general = { layout = \\"$(hyprctl getoption general:layout | grep -q dwindle && echo master || echo dwindle)\\" } })"')
 
 -- Swap active window with the one next to it with SUPER + SHIFT + hjkl.
 o.bind("SUPER + SHIFT + H", "Swap window to the left", hl.dsp.window.swap({ direction = "l" }))
