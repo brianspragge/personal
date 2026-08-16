@@ -64,10 +64,15 @@ o.bind("SUPER + SHIFT + K", "Swap window up", hl.dsp.window.swap({ direction = "
 o.bind("SUPER + SHIFT + J", "Swap window down", hl.dsp.window.swap({ direction = "d" }))
 
 -- Move window to scratchpad (default: SUPER + ALT + S).
+-- SUPER + SHIFT + S is Google Maps keybind
 hl.unbind("SUPER + ALT + S")
-o.bind("SUPER + SHIFT + S", "Move window to scratchpad", hl.dsp.window.move({ workspace = "special:scratchpad", follow = false }))
+hl.unbind("SUPER + SHIFT + S")
+o.bind("SUPER + SHIFT + S", "Move window to scratchpad", hl.dsp.window.move({ workspace = "special:scratchpad", follow = true }))
+o.bind("SUPER + ALT + S", "Move window silently to scratchpad", hl.dsp.window.move({ workspace = "special:scratchpad", follow = false }))
 
 -- Resize active window.
+-- SUPER + ALT + K is Omarchy's 'show keybinds' keybind
+hl.unbind("SUPER + ALT + K")
 o.bind("SUPER + ALT + L", "Expand window left", hl.dsp.window.resize({ x = 100, y = 0, relative = true }))
 o.bind("SUPER + ALT + H", "Shrink window left", hl.dsp.window.resize({ x = -100, y = 0, relative = true }))
 o.bind("SUPER + ALT + K", "Shrink window up", hl.dsp.window.resize({ x = 0, y = -100, relative = true }))
