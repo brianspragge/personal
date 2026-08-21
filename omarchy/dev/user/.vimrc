@@ -1,3 +1,6 @@
+" " Switch CWD to the directory of the open buffer
+" map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
 " colorscheme zaibatsu  " pink/purple theme
 silent! source ~/.config/omarchy/current/theme/vimrc
 
@@ -78,6 +81,8 @@ nnoremap <C-S-l> :bn<CR>
 " Choose specific buffer
 nnoremap <C-S-b> :ls<cr>:b<space>
 
+" Align text based on ' '
+vnoremap <leader><space> :!column -t -o ' ' -s ' '<CR>
 " Align text based on '='
 vnoremap <leader>= :!column -t -o = -s =<CR>
 
@@ -123,7 +128,28 @@ nnoremap <leader>W :w<CR>:!clear; x86_64-w64-mingw32-g++ -std=c++17 -Wall -Wextr
 nnoremap <leader>C :w<CR>:!clear; g++ -std=c++17 -Wall -Wextra -Wconversion -fsanitize=address,undefined % -o %< && ./%<<CR>
 
 " =======================
-" ===   JavaScript   ====
+" ===      !Go       ====
+autocmd FileType go setlocal
+  \ tags+=~/.vim/tags/go_stdlib.tags
+  \ noexpandtab
+  \ tabstop=2
+" function to auto format right before saving file/buffer
+function! GoLangFormatOnSave()
+  let view = winsaveview()
+  silent! %!gofmt
+  if v:shell_error
+    silent undo
+  endif
+  call winrestview(view)
+endfunction
+autocmd BufWritePre *.go call GoLangFormatOnSave()
+" execute current file
+nnoremap <leader>g :w<CR>:!clear; go build '%' && ./'%<'<CR>
+" execute highlighted lines in /tmp
+" vnoremap <leader>g :<C-U>'<,'>w! /tmp/vim_temp.js \| !clear; node /tmp/vim_temp.js<CR>
+
+" =======================
+" ===  !JavaScript   ====
 autocmd FileType javascript
   \ setlocal
   \ expandtab

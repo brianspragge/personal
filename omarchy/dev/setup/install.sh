@@ -164,14 +164,25 @@ if command -v ctags >/dev/null 2>&1; then
             ;;
         *)
             mkdir -p "$HOME/.vim/tags"
+            # C++
             echo "    building C++ tags from /usr/include (this takes a while)..."
             ctags -R --languages=C,C++ --fields=+iaS --extras=+q \
-                -f "$HOME/.vim/tags/cpp.tags" /usr/include 2>/dev/null || true
+                -f "$HOME/.vim/tags/cpp.tags" "/usr/include" 2>/dev/null || true
+            # Python
             PYSTDLIB=$(python -c "import sysconfig; print(sysconfig.get_path('stdlib'))" 2>/dev/null)
             if [[ -n "$PYSTDLIB" ]]; then
                 echo "    building Python stdlib tags..."
                 ctags -R --languages=Python --fields=+iaS --extras=+q \
                     -f "$HOME/.vim/tags/python_stdlib.tags" "$PYSTDLIB" 2>/dev/null || true
+            fi
+            # Go
+            if command -v go >/dev/null 2>&1; then
+                GOROOT=$(go env GOROOT)
+                if [[ -n "$GOROOT" && -d "$GOROOT/src" ]]; then
+                    echo "    building Go stdlib tags..."
+                    ctags -R --languages=Go --fields=+iaS --extras=+q \
+                        -f "$HOME/.vim/tags/go_stdlib.tags" "$GOROOT/src" 2>/dev/null || true
+                fi
             fi
             echo "    tags written to ~/.vim/tags/"
             ;;
