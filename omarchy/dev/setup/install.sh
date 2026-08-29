@@ -157,7 +157,7 @@ copy_one "$BASE/.local/share/applications/Fx-570es_plus-1.png" \
 # ------------------------------------------------------------------
 if command -v ctags >/dev/null 2>&1; then
     echo "--- vim ctags"
-    read -r -p "    Regenerate ~/.vim/tags (C++ and Python stdlib)? [Y/n] " ans
+    read -r -p "    Regenerate ~/.vim/tags (C++, Python, Go, and Rust stdlib)? [Y/n] " ans
     case "${ans,,}" in
         n|no)
             echo "    skipped."
@@ -182,6 +182,15 @@ if command -v ctags >/dev/null 2>&1; then
                     echo "    building Go stdlib tags..."
                     ctags -R --languages=Go --fields=+iaS --extras=+q \
                         -f "$HOME/.vim/tags/go_stdlib.tags" "$GOROOT/src" 2>/dev/null || true
+                fi
+            fi
+            # Rust
+            if command -v rustc >/dev/null 2>&1; then
+                RUSTLIB=$(rustc --print sysroot 2>/dev/null)
+                if [[ -n "$RUSTLIB" && -d "$RUSTLIB/lib/rustlib/src/rust/library" ]]; then
+                    echo "    building Rust stdlib tags..."
+                    ctags -R --languages=Rust --fields=+iaS --extras=+q \
+                        -f "$HOME/.vim/tags/rust_stdlib.tags" "$RUSTLIB/lib/rustlib/src/rust/library" 2>/dev/null || true
                 fi
             fi
             echo "    tags written to ~/.vim/tags/"
