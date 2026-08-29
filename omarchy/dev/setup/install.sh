@@ -223,6 +223,7 @@ fi
 # ------------------------------------------------------------------
 echo "--- git signing"
 git config --global commit.gpgsign true
+git config --global commit.signoff true
 git config --global tag.gpgsign true
 git config --global log.showSignature true
 echo "    commit.gpgsign / tag.gpgsign / log.showSignature set to true"
