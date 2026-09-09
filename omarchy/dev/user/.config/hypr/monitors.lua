@@ -3,8 +3,8 @@
 
 -- Keep Omarchy's knobs intact: omarchy-hyprland-monitor-scaling (SUPER + /)
 -- persists into these two locals, and the clamshell handler reads them.
-local omarchy_gdk_scale = 2
-local omarchy_monitor_scale = "auto"
+local omarchy_gdk_scale = 1
+local omarchy_monitor_scale = 1  -- "auto"
 
 hl.env("GDK_SCALE", tostring(omarchy_gdk_scale))
 hl.monitor({ output = "", mode = "preferred", position = "auto", scale = omarchy_monitor_scale })

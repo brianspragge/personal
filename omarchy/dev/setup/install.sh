@@ -118,6 +118,18 @@ copy_one "$BASE/.local/share/applications/Youtube Music.desktop" \
          "$HOME/.local/share/applications/Youtube Music.desktop" \
          "Youtube Music.desktop"
 
+# fix hardcoded home paths in .desktop files
+DESKTOP_DIR="$HOME/.local/share/applications"
+if [[ "$HOME" != "/home/bms" ]] && grep -q "/home/bms" "$DESKTOP_DIR"/*.desktop 2>/dev/null; then
+    echo "--- *.desktop files contain /home/bms paths"
+    read -r -p "    Update to $HOME? [Y/n] " ans
+    case "${ans,,}" in
+        n|no) echo "    skipped." ;;
+        *) sed -i "s|/home/bms|$HOME|g" "$DESKTOP_DIR"/*.desktop
+           echo "    paths updated" ;;
+    esac
+fi
+
 # icons for the launchers above
 copy_one "$BASE/.local/share/applications/icons/ase64.png" \
          "$HOME/.local/share/applications/icons/ase64.png" \
