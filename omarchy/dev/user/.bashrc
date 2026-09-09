@@ -10,12 +10,15 @@ source "$OMARCHY_PATH/default/bash/rc"
 
 # Personal
 #
+cowsay -f /usr/share/cowsay/cows/mutilated.cow "Hey!  It's Brian...a little help here?"
+#
 # =======================
 # ===     Aliases     ===
 # alias ls='ls --group-directories-first -ChF'  # Columns
 alias cls='clear; ls'
 alias clsa='clear; lsa'
-alias lt='eza --group-directories-first --tree --level=2 --long --icons --git --ignore-glob=".git|.gitignore|.gitattributes|node_modules|.venv|__pycache__"'
+alias lt='eza --group-directories-first --tree --level=2 --long --icons --git'
+# alias lt='eza --group-directories-first --tree --level=2 --long --icons --git --ignore-glob=".git|.gitignore|.gitattributes|node_modules|.venv|__pycache__"'
 alias clt='clear; lt'
 alias clta='clear; lta'
 # Viewing images through terminal through <imv> without blur by default
@@ -31,8 +34,17 @@ else
 fi
 
 # =======================
+# ===      NVM        ===
+# Node Version Manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# =======================
 # ===      PATH       ===
 export PATH="$HOME/.local/bin:$PATH"
+# for rust
+export PATH="$HOME/.cargo/env:$PATH"
 
 # =======================
 # ===    Variables    ===

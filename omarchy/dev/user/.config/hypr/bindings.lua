@@ -30,6 +30,14 @@ o.bind("SUPER + SHIFT + W", "WhatsApp", { webapp = "https://web.whatsapp.com/", 
 hl.unbind("SUPER + SHIFT + Y") -- default: YouTube (plain launch)
 o.bind("SUPER + SHIFT + Y", "YouTube", { webapp = "https://youtube.com/", focus = true })
 
+-- Plugin bindings ------------------------------------------------------------
+
+-- VideoCorner popup toggle (bms.videocorner youtube search) (default: unbound).
+o.bind("SUPER + CTRL + Y", "VideoCorner", "omarchy-shell shell toggle bms.videocorner")
+
+-- Find files (bms.gofind file search) (default: unbound).
+o.bind("SUPER + CTRL + G", "GoFind Files", "omarchy-shell shell toggle bms.gofind")
+
 -- Window management ----------------------------------------------------------
 
 -- Close window (default close is SUPER + W).

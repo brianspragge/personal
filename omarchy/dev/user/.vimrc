@@ -24,6 +24,7 @@ set wildignore+=*.tmp,*.swp,*.swo,*.DS_Store
 set wildmenu                    " use menu for command line completion
 set wildmode=longest:full,full  " mode for 'wildchar' command-line expansion
 
+set autochdir              " change directory to the file in the current window
 set autowrite              " automatically write file if changed
 set breakindent            " wrapped line repeats indent
 set breakindentopt=shift:-1" settings for 'breakindent'
@@ -48,7 +49,7 @@ set ttimeout               " time out on mappings
 set ttimeoutlen=100        " time out time for key codes in milliseconds
 
 let mapleader = "\\"
-" syntax enable
+syntax enable
 
 " resize windows better keybinds
 nnoremap <silent> <M-j> :resize +2<CR>
@@ -173,12 +174,42 @@ nnoremap <leader>P :w<CR>:!clear; python %<CR>
 vnoremap <leader>P :<C-U>'<,'>w! /tmp/vim_temp.py \| !clear; python /tmp/vim_temp.py<CR>
 
 " =======================
+" ===     !Rust      ====
+autocmd FileType rust setlocal
+  \ tags+=~/.vim/tags/rust_stdlib.tags
+  \ expandtab
+  \ shiftwidth=2
+  \ softtabstop=-1
+
+" =======================
 " ===     !Text      ====
 "autocmd FileType text setlocal noexpandtab tabstop=5 shiftwidth=5 softtabstop=5
 autocmd FileType text setlocal
   \ expandtab
   \ shiftwidth=2
   \ softtabstop=-1
+
+" =======================
+" ===  !Typescript   ====
+autocmd Filetype typescript setlocal
+  \ expandtab
+  \ shiftwidth=2
+  \ softtabstop=-1
+" execute current file
+nnoremap <leader>t :w! % \| !clear; ts-node %<CR>
+" execute highlighted lines in /tmp
+vnoremap <leader>t :<C-U>'<,'>w! /tmp/vim_temp.ts \| !clear; ts-node /tmp/vim_temp.ts<CR>
+
+" =======================
+" ===  !Type/React   ====
+autocmd Filetype typescriptreact setlocal
+  \ expandtab
+  \ shiftwidth=2
+  \ softtabstop=-1
+" execute current file
+nnoremap <leader>T :w! % \| !clear; yarn ts-node %<CR>
+" execute highlighted lines in /tmp
+vnoremap <leader>T :<C-U>'<,'>w! /tmp/vim_temp.tsx \| !clear; yarn ts-node /tmp/vim_temp.tsx<CR>
 
 " =======================
 " ===     !VIM       ====
