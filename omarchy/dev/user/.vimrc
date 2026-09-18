@@ -1,6 +1,3 @@
-" " Switch CWD to the directory of the open buffer
-" map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
 " colorscheme zaibatsu  " pink/purple theme
 silent! source ~/.config/omarchy/current/theme/vimrc
 
@@ -24,6 +21,8 @@ set wildignore+=*.tmp,*.swp,*.swo,*.DS_Store
 set wildmenu                    " use menu for command line completion
 set wildmode=longest:full,full  " mode for 'wildchar' command-line expansion
 
+" (UNTESTED): Switch CWD to the directory of the open buffer
+" map <leader>cd :cd %:p:h<cr>:pwd<cr>
 set autochdir              " change directory to the file in the current window
 set autowrite              " automatically write file if changed
 set breakindent            " wrapped line repeats indent
@@ -90,6 +89,21 @@ vnoremap <leader>= :!column -t -o = -s =<CR>
 " move indent logic to ~/.vim/indent/whatever-language.vim if below is 'on'
 filetype plugin indent on
 " =======================
+" ===      !ASM      ====
+autocmd FileType asm setlocal
+  \ expandtab
+  \ shiftwidth=4
+  \ softtabstop=-1
+" split window with assembly(intel) output of current file
+nnoremap <leader>a :w<CR>:!gcc -std=c11 -S -fverbose-asm -masm=intel -Wall -Wextra -Wconversion % -o /tmp/vim_temp.s<CR>:vs /tmp/vim_temp.s<CR>
+" compile+run current file
+nnoremap <leader>c :w<CR>:!clear; gcc -std=c11 -Wall -Wextra -Wconversion -fsanitize=address,undefined % -o %< && ./%<<CR>
+" split window with assembly(intel) output of current WINDOWS file
+nnoremap <leader>q :w<CR>:!x86_64-w64-mingw32-gcc -std=c11 -S -fverbose-asm -masm=intel -Wall -Wextra -Wconversion % -o /tmp/vim_temp.s<CR>:vs /tmp/vim_temp.s<CR>
+" compile+run current WINDOWS file
+nnoremap <leader>w :w<CR>:!clear; x86_64-w64-mingw32-gcc -std=c11 -Wall -Wextra -Wconversion % -o %< && wine %<<CR>
+
+" =======================
 " ===     !Bash      ====
 autocmd FileType sh setlocal
   \ expandtab
@@ -145,7 +159,8 @@ function! GoLangFormatOnSave()
 endfunction
 autocmd BufWritePre *.go call GoLangFormatOnSave()
 " execute current file
-nnoremap <leader>g :w<CR>:!clear; go build '%' && ./'%<'<CR>
+nnoremap <leader>g :w<CR>:!clear; go run ./main.go ./cinreader.go<CR>
+" nnoremap <leader>g :w<CR>:!clear; go build '%' && ./'%<'<CR>
 " execute highlighted lines in /tmp
 " vnoremap <leader>g :<C-U>'<,'>w! /tmp/vim_temp.js \| !clear; node /tmp/vim_temp.js<CR>
 
