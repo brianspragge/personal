@@ -23,5 +23,5 @@ Personal setup and configs, organized per system.
 
 ## Other systems
 
-- `arch/` — older pre-omarchy Arch setup (setup scripts under `arch/dev/setup/`)
+- `arch/` — standalone Arch/Hyprland setup. Run `arch/dev/setup/install.sh` as a normal user.
 - `fedora/` — see `README-Fedora.md`

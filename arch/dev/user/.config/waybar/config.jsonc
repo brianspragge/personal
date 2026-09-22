@@ -22,6 +22,7 @@
     "memory",
     "pulseaudio",
     "network",
+    "tray",
     "backlight",
     "battery",
     "clock",
@@ -125,4 +126,3 @@
   }
 
 }
-

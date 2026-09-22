@@ -1,7 +1,17 @@
 #
 # ~/.bashrc
 #
-# If not running interactively, don't do anything
+# Environment setup also applies to non-interactive shells.
+export PATH="$HOME/.env/bin:$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+export NVM_DIR="$HOME/.nvm"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  . "$NVM_DIR/nvm.sh"
+elif [ -s /usr/share/nvm/init-nvm.sh ]; then
+  . /usr/share/nvm/init-nvm.sh
+fi
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+
+# If not running interactively, don't do anything else.
 [[ $- != *i* ]] && return
 
 # =======================
@@ -17,6 +27,9 @@ alias ll='ls --color=auto -lFh'
 alias lla='ll -A'
 alias cll='clear; BRIANS_PWD; ll'
 alias clla='clear; BRIANS_PWD; lla'
+alias lt='eza --group-directories-first --tree --level=2 --long --icons --git'
+alias clt='clear; lt'
+alias clta='clear; lt -a'
 # Viewing images through terminal through <imv> without blur by default
 alias imv='imv -u nearest_neighbour'
 
@@ -43,8 +56,6 @@ PS1=' '
 # ===      Paths      ===
 # ~/bin for python ENV
 # ~/.local/bin for personal bash scripts
-export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-
 # =======================
 # ===    Processes    ===
 # Safety: make sure pacman pkg runs in other terminals

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+model=''
+for field in product_name product_version product_family; do
+    if [[ -r "/sys/devices/virtual/dmi/id/$field" ]]; then
+        model+=" $(< "/sys/devices/virtual/dmi/id/$field")"
+    fi
+done
+
+if [[ "$model" == *X230* || "$model" == *"ThinkPad X230"* ]]; then
+    exec alacritty "$@"
+elif command -v ghostty >/dev/null 2>&1; then
+    exec ghostty "$@"
+else
+    exec alacritty "$@"
+fi

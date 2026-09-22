@@ -1,6 +1,6 @@
 " =======================
 " ===     Setup      ====
-" Use vim.sh from repo personal/dev/setup/
+" vim-plug is installed by arch/dev/setup/install.sh
 packadd! comment        " <g,c,c> or visual mode then <g,c>
 packadd! termdebug      " :Termdebug <file>
 
@@ -295,4 +295,3 @@ autocmd BufWinLeave * call ClearRuler()
 " =======================
 " ===      Extra      ===
 " :help thesaurus
-
