@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=BambuStudio
+Comment=Bambu Lab 3D printer slicer
+Exec=/home/bms/.local/share/BambuStudio/BambuStudio.AppImage
+Terminal=false
+Type=Application
+Icon=/home/bms/.local/share/applications/icons/bambu-studio.png
+StartupNotify=true
+Categories=Graphics;3DGraphics;Engineering;

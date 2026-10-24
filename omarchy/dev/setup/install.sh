@@ -93,6 +93,9 @@ copy_one "$BASE/.vim/thesaurus" "$HOME/.vim/thesaurus" ".vim/thesaurus"
 copy_one "$BASE/.local/share/applications/Aseprite.desktop" \
          "$HOME/.local/share/applications/Aseprite.desktop" \
          "Aseprite.desktop"
+copy_one "$BASE/.local/share/applications/BambuStudio.desktop" \
+         "$HOME/.local/share/applications/BambuStudio.desktop" \
+         "BambuStudio.desktop"
 copy_one "$BASE/.local/share/applications/Casio Calculator.desktop" \
          "$HOME/.local/share/applications/Casio Calculator.desktop" \
          "Casio Calculator.desktop"
@@ -134,6 +137,9 @@ fi
 copy_one "$BASE/.local/share/applications/icons/ase64.png" \
          "$HOME/.local/share/applications/icons/ase64.png" \
          "icons/ase64.png"
+copy_one "$BASE/.local/share/applications/icons/bambu-studio.png" \
+         "$HOME/.local/share/applications/icons/bambu-studio.png" \
+         "icons/bambu-studio.png"
 copy_one "$BASE/.local/share/applications/icons/casiocalc.png" \
          "$HOME/.local/share/applications/icons/casiocalc.png" \
          "icons/casiocalc.png"
