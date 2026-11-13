@@ -3,6 +3,7 @@ Version=1.0
 Name=WhatsApp
 Comment=WhatsApp
 Exec=omarchy-launch-webapp https://web.whatsapp.com/
+StartupWMClass=chrome-web.whatsapp.com__-Default
 Terminal=false
 Type=Application
 Icon=/home/bms/.local/share/applications/icons/WhatsApp.png

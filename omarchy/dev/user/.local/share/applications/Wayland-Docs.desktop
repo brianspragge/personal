@@ -8,3 +8,4 @@ Type=Application
 Icon=/home/bms/.local/share/applications/icons/wayland.png
 StartupNotify=true
 Categories=System;Documentation;
+StartupWMClass=chrome-__usr_share_doc_wayland_Wayland_en-US_book_Foreword.html-Default

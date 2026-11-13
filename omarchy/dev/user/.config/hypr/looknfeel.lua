@@ -13,3 +13,8 @@ hl.config({
 -- Border colors come from the active theme (colors.toml), not this file.
 
 -- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
+
+-- Opt another application in to Omarchy's standard transparency.
+-- Find its class with: hyprctl clients
+-- o.transparent_window("my-app")
+-- o.transparent_window("my-app", "0.9 0.85") -- Custom active/inactive opacity.

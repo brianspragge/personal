@@ -15,14 +15,11 @@ o.bind("SUPER + ALT + RETURN", "Tmux", "omarchy-launch-terminal tmux new")
 hl.unbind("SUPER + SHIFT + G")
 o.bind("SUPER + SHIFT + G", "Gimp", { launch = "gimp" })
 
--- Activity monitor.
-o.bind("SUPER + SHIFT + T", "Activity", { tui = "btop" })
-
 -- Web apps. If the url contains #, type it as ## so it isn't read as a comment.
 hl.unbind("SUPER + SHIFT + M") -- default: Music
 o.bind("SUPER + SHIFT + M", "Messenger", { webapp = "https://messenger.com" })
 
-o.bind("SUPER + SHIFT + I", "Instagram", { webapp = "https://instagram.com" })
+o.rebind("SUPER + SHIFT + I", "Instagram", { webapp = "https://instagram.com" })
 
 hl.unbind("SUPER + SHIFT + W") -- default: Omawrite
 o.bind("SUPER + SHIFT + W", "WhatsApp", { webapp = "https://web.whatsapp.com/", focus = true })
@@ -40,9 +37,8 @@ o.bind("SUPER + CTRL + G", "GoFind Files", "omarchy-shell shell toggle bms.gofin
 
 -- Window management ----------------------------------------------------------
 
--- Close window (default close is SUPER + W).
+-- Keep Omarchy's default SUPER + Q close binding; disable SUPER + W.
 hl.unbind("SUPER + W")
-o.bind("SUPER + Q", "Close window", hl.dsp.window.close())
 
 -- Show key bindings on SUPER + CTRL + K (SUPER + K is Omarchy's keybindings,
 -- SUPER + CTRL + K is Herdr's keybindings).
@@ -81,7 +77,14 @@ o.bind("SUPER + ALT + S", "Move window silently to scratchpad", hl.dsp.window.mo
 -- Resize active window.
 -- SUPER + ALT + K is Omarchy's 'show keybinds' keybind
 hl.unbind("SUPER + ALT + K")
-o.bind("SUPER + ALT + L", "Expand window left", hl.dsp.window.resize({ x = 100, y = 0, relative = true }))
+o.rebind("SUPER + ALT + L", "Expand window left", hl.dsp.window.resize({ x = 100, y = 0, relative = true }))
 o.bind("SUPER + ALT + H", "Shrink window left", hl.dsp.window.resize({ x = -100, y = 0, relative = true }))
 o.bind("SUPER + ALT + K", "Shrink window up", hl.dsp.window.resize({ x = 0, y = -100, relative = true }))
 o.bind("SUPER + ALT + J", "Expand window down", hl.dsp.window.resize({ x = 0, y = 100, relative = true }))
+
+-- Dictation keys from before Alt + Space and Right Alt became the defaults.
+-- Remove these lines to give the keys back to applications.
+if o.dictation_installed and o.dictation_installed() then
+  o.bind("SUPER + CTRL + X", "Toggle dictation", "omarchy-dictation toggle")
+  o.bind_hold("F9", "Start dictation (push-to-talk)", "omarchy-dictation start", "Stop dictation (push-to-talk)", "omarchy-dictation stop")
+end

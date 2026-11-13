@@ -1,11 +1,19 @@
 " colorscheme zaibatsu  " pink/purple theme
+
+" Auto enable Vim theme for certain Omarchy themes (WindowsXP)
 silent! source ~/.config/omarchy/current/theme/vimrc
 
 packadd! comment      " <g,c,c> or visual mode then <g,c>
+packadd! editorconfig " Loads parent directory .editorconfig file for default
+                      " syntax rules
+packadd! hlyank       " This package briefly highlights the affected region of
+                      " the last yank command
 
 set backupdir=~/.cache/vim/backup//  " list of directories for the backup file
 set directory=~/.cache/vim/swap//    " list of directory names for the swap file
 set tags=./tags;                     " list of file names used by the tag command
+set path+=**                         " list of directories searched with "gf" et.al.
+" Slow-^
 set undodir=~/.cache/vim/undo//      " where to store undo files
 set undofile                         " save undo information in a file
 
@@ -21,34 +29,36 @@ set wildignore+=*.tmp,*.swp,*.swo,*.DS_Store
 set wildmenu                    " use menu for command line completion
 set wildmode=longest:full,full  " mode for 'wildchar' command-line expansion
 
-" (UNTESTED): Switch CWD to the directory of the open buffer
-" map <leader>cd :cd %:p:h<cr>:pwd<cr>
 set autochdir              " change directory to the file in the current window
-set autowrite              " automatically write file if changed
-set breakindent            " wrapped line repeats indent
-set breakindentopt=shift:-1" settings for 'breakindent'
-set showbreak=">"          " string to use at the start of wrapped lines
-" set clipboard=unnamedplus  " use the clipboard as the unnamed register
+" set autowrite              " automatically write file if changed
+set autoindent             " take indent for new line from previous line
+set breakindent            " wrapped line repeats indent (see 'showbreak')
+set breakindentopt=shift:-2" settings for 'breakindent'
+set cpoptions+=n           " flags for Vi-compatible behavior
+set cursorline             " highlight the screen line of the cursor
 set display=truncate,uhex  " list of flags for how to display text
-" set expandtab              " use spaces when <Tab> is inserted
+set hlsearch               " highlight matches with last search pattern
+set incsearch              " highlight match while typing search pattern
 set mouse=nvi              " enable the use of mouse clicks
 set mousemodel=popup_setpos" changes meaning of mouse buttons
-set nowrap                 " long lines wrap and continue on the next line
+set wrap                   " long lines wrap and continue on the next line
 set nonumber               " display the current line pos in lower right corner
+set norelativenumber       " show relative line number in front of each line
 set scrolloff=3            " minimum nr. of lines above and below cursor
 set sidescroll=1           " minimum number of columns to scroll horizontal
 set sidescrolloff=3        " min. nr. of columns to left and right of cursor
-
-" set shiftwidth=4           " number of spaces to use for (auto)indent step
-" set softtabstop=4          " number of columns between two soft tab stops
 set termguicolors          " use GUI colors for the terminal
 set termwinsize=8*0        " size of a terminal window
 set thesaurus+=$HOME/.vim/thesaurus/english.txt
 set ttimeout               " time out on mappings
 set ttimeoutlen=100        " time out time for key codes in milliseconds
+set visualbell             " use visual bell instead of beeping
+set nowrapscan             " searches wrap around the end of the file
 
-let mapleader = "\\"
+let &showbreak = '> '      " string to use at the start of wrapped lines
 syntax enable
+" (UNTESTED): Switch CWD to the directory of the open buffer (see 'autochdir')
+" map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " resize windows better keybinds
 nnoremap <silent> <M-j> :resize +2<CR>
@@ -57,12 +67,12 @@ nnoremap <silent> <M-h> :vertical resize +2<CR>
 nnoremap <silent> <M-l> :vertical resize -2<CR>
 
 " " Center after jumping
-" nnoremap n nzt
-" nnoremap N Nzt
-" nnoremap * *zt
-" nnoremap # #zt
-" nnoremap g* g*zt
-" nnoremap g# g#zt
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
 " " Center after half-page jumps
 " nnoremap <C-u> <C-u>zt
 " nnoremap <C-d> <C-d>zt
@@ -75,33 +85,29 @@ nnoremap <silent> <M-l> :vertical resize -2<CR>
 " nnoremap <C-i> <C-i>zz
 " nnoremap <C-o> <C-o>zz
 
+" Choose specific buffer with <:ls b>, <your number choice>, <Enter>
 " Cycle through buffers
-nnoremap <C-S-h> :bp<CR>
-nnoremap <C-S-l> :bn<CR>
-" Choose specific buffer
-nnoremap <C-S-b> :ls<cr>:b<space>
+nnoremap <C-h> :bp<CR>
+nnoremap <C-l> :bn<CR>
 
+" TODO: only affect first = and space
 " Align text based on ' '
 vnoremap <leader><space> :!column -t -o ' ' -s ' '<CR>
 " Align text based on '='
 vnoremap <leader>= :!column -t -o = -s =<CR>
 
 " move indent logic to ~/.vim/indent/whatever-language.vim if below is 'on'
+" TODO: I don't remember what this does anymore, research it
 filetype plugin indent on
 " =======================
 " ===      !ASM      ====
 autocmd FileType asm setlocal
   \ expandtab
-  \ shiftwidth=4
+  \ shiftwidth=8
   \ softtabstop=-1
-" split window with assembly(intel) output of current file
-nnoremap <leader>a :w<CR>:!gcc -std=c11 -S -fverbose-asm -masm=intel -Wall -Wextra -Wconversion % -o /tmp/vim_temp.s<CR>:vs /tmp/vim_temp.s<CR>
-" compile+run current file
-nnoremap <leader>c :w<CR>:!clear; gcc -std=c11 -Wall -Wextra -Wconversion -fsanitize=address,undefined % -o %< && ./%<<CR>
-" split window with assembly(intel) output of current WINDOWS file
-nnoremap <leader>q :w<CR>:!x86_64-w64-mingw32-gcc -std=c11 -S -fverbose-asm -masm=intel -Wall -Wextra -Wconversion % -o /tmp/vim_temp.s<CR>:vs /tmp/vim_temp.s<CR>
-" compile+run current WINDOWS file
-nnoremap <leader>w :w<CR>:!clear; x86_64-w64-mingw32-gcc -std=c11 -Wall -Wextra -Wconversion % -o %< && wine %<<CR>
+  \ autoindent
+nnoremap <leader>f :w<CR>:!fasm % && ld -o %< %<.o<CR>
+nnoremap <leader>n :!echo "TODO(leader n): vim keybind not implemented and reserved for nasm"<CR>
 
 " =======================
 " ===     !Bash      ====
@@ -114,12 +120,13 @@ autocmd FileType sh setlocal
 " ===       !C       ====
 autocmd FileType c setlocal
   \ expandtab
-  \ shiftwidth=4
+  \ shiftwidth=1
   \ softtabstop=-1
 " split window with assembly(intel) output of current file
 nnoremap <leader>a :w<CR>:!gcc -std=c11 -S -fverbose-asm -masm=intel -Wall -Wextra -Wconversion % -o /tmp/vim_temp.s<CR>:vs /tmp/vim_temp.s<CR>
 " compile+run current file
 nnoremap <leader>c :w<CR>:!clear; gcc -std=c11 -Wall -Wextra -Wconversion -fsanitize=address,undefined % -o %< && ./%<<CR>
+nnoremap <leader>d :w<CR>:!clear; gcc -g -std=c11 -Wall -Wextra -Wconversion -fsanitize=address,undefined % -o %<<CR>
 " split window with assembly(intel) output of current WINDOWS file
 nnoremap <leader>q :w<CR>:!x86_64-w64-mingw32-gcc -std=c11 -S -fverbose-asm -masm=intel -Wall -Wextra -Wconversion % -o /tmp/vim_temp.s<CR>:vs /tmp/vim_temp.s<CR>
 " compile+run current WINDOWS file
@@ -133,14 +140,16 @@ autocmd FileType cpp setlocal
   \ expandtab
   \ shiftwidth=2
   \ softtabstop=-1
+  \ cinoptions+=g1,h1
 " split window with assembly(intel) output of current file
 nnoremap <leader>A :w<CR>:!gcc -std=c++17 -S -fverbose-asm -masm=intel -Wall -Wextra -Wconversion % -o /tmp/vim_temp.s<CR>:vs /tmp/vim_temp.s<CR>
+" compile+run current file
+nnoremap <leader>C :w<CR>:!clear; g++ -std=c++17 -Wall -Wextra -Wconversion -fsanitize=address,undefined % -o %< && ./%<<CR>
+nnoremap <leader>D :w<CR>:!clear; g++ -g -std=c++17 -Wall -Wextra -Wconversion -fsanitize=address,undefined % -o %<<CR>
 " split window with assembly(intel) output of current WINDOWS file
 nnoremap <leader>Q :w<CR>:!x86_64-w64-mingw32-g++ -std=c++17 -S -fverbose-asm -masm=intel -Wall -Wextra -Wconversion % -o /tmp/vim_temp.s<CR>:vs /tmp/vim_temp.s<CR>
 " compile+run current WINDOWS file
 nnoremap <leader>W :w<CR>:!clear; x86_64-w64-mingw32-g++ -std=c++17 -Wall -Wextra -Wconversion % -o %< && wine %<<CR>
-" compile+run current file
-nnoremap <leader>C :w<CR>:!clear; g++ -std=c++17 -Wall -Wextra -Wconversion -fsanitize=address,undefined % -o %< && ./%<<CR>
 
 " =======================
 " ===      !Go       ====
@@ -159,22 +168,9 @@ function! GoLangFormatOnSave()
 endfunction
 autocmd BufWritePre *.go call GoLangFormatOnSave()
 " execute current file
-nnoremap <leader>g :w<CR>:!clear; go run ./main.go ./cinreader.go<CR>
 " nnoremap <leader>g :w<CR>:!clear; go build '%' && ./'%<'<CR>
-" execute highlighted lines in /tmp
-" vnoremap <leader>g :<C-U>'<,'>w! /tmp/vim_temp.js \| !clear; node /tmp/vim_temp.js<CR>
-
-" =======================
-" ===  !JavaScript   ====
-autocmd FileType javascript
-  \ setlocal
-  \ expandtab
-  \ shiftwidth=2
-  \ softtabstop=-1
-" execute current file
-nnoremap <leader>j :w! /tmp/vim_temp.js \| !clear; node /tmp/vim_temp.js<CR>
-" execute highlighted lines in /tmp
-vnoremap <leader>j :<C-U>'<,'>w! /tmp/vim_temp.js \| !clear; node /tmp/vim_temp.js<CR>
+nnoremap <leader>g :w<CR>:!clear; go run '%'<CR>
+nnoremap <leader>G :w<CR>:!clear; go test *.go -v<CR>
 
 " =======================
 " ===    !Python     ====
@@ -197,38 +193,20 @@ autocmd FileType rust setlocal
   \ softtabstop=-1
 
 " =======================
-" ===     !Text      ====
+" ===      !VIM      ====
+" ===      !TXT      ====
 "autocmd FileType text setlocal noexpandtab tabstop=5 shiftwidth=5 softtabstop=5
-autocmd FileType text setlocal
+autocmd FileType text,vim setlocal
   \ expandtab
   \ shiftwidth=2
   \ softtabstop=-1
 
 " =======================
-" ===  !Typescript   ====
-autocmd Filetype typescript setlocal
-  \ expandtab
-  \ shiftwidth=2
-  \ softtabstop=-1
-" execute current file
-nnoremap <leader>t :w! % \| !clear; ts-node %<CR>
-" execute highlighted lines in /tmp
-vnoremap <leader>t :<C-U>'<,'>w! /tmp/vim_temp.ts \| !clear; ts-node /tmp/vim_temp.ts<CR>
-
-" =======================
-" ===  !Type/React   ====
-autocmd Filetype typescriptreact setlocal
-  \ expandtab
-  \ shiftwidth=2
-  \ softtabstop=-1
-" execute current file
-nnoremap <leader>T :w! % \| !clear; yarn ts-node %<CR>
-" execute highlighted lines in /tmp
-vnoremap <leader>T :<C-U>'<,'>w! /tmp/vim_temp.tsx \| !clear; yarn ts-node /tmp/vim_temp.tsx<CR>
-
-" =======================
-" ===     !VIM       ====
-autocmd FileType vim setlocal
+" ===      !WEB       ===
+autocmd FileType javascript,json,jsonc,css,scss,html,prisma,env,sql,toml,
+                \typescript,typescriptreact,graphql,markdown,yaml,vue,
+                \svelte,editorconfig,gitignore
+  \ setlocal
   \ expandtab
   \ shiftwidth=2
   \ softtabstop=-1

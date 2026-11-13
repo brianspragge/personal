@@ -76,6 +76,11 @@ copy_one "$BASE/.bashrc"  "$HOME/.bashrc"  ".bashrc"
 copy_one "$BASE/.inputrc" "$HOME/.inputrc" ".inputrc"
 copy_one "$BASE/.vimrc"   "$HOME/.vimrc"   ".vimrc"
 
+# image used by the mycal alias in .bashrc
+copy_one "$BASE/Pictures/Macbaconai-floating-oriental-roofing-island.jpeg" \
+         "$HOME/Pictures/Macbaconai-floating-oriental-roofing-island.jpeg" \
+         "Pictures/Macbaconai-floating-oriental-roofing-island.jpeg"
+
 # hypr
 for f in autostart bindings input looknfeel monitors; do
     copy_one "$BASE/.config/hypr/$f.lua" "$HOME/.config/hypr/$f.lua" "hypr/$f.lua"
@@ -123,13 +128,15 @@ copy_one "$BASE/.local/share/applications/Youtube Music.desktop" \
 
 # fix hardcoded home paths in .desktop files
 DESKTOP_DIR="$HOME/.local/share/applications"
-if [[ "$HOME" != "/home/bms" ]] && grep -q "/home/bms" "$DESKTOP_DIR"/*.desktop 2>/dev/null; then
+if [[ "$HOME" != "/home/bms" ]] && grep -qE '/home/bms|__home_bms_' "$DESKTOP_DIR"/*.desktop 2>/dev/null; then
     echo "--- *.desktop files contain /home/bms paths"
     read -r -p "    Update to $HOME? [Y/n] " ans
     case "${ans,,}" in
         n|no) echo "    skipped." ;;
-        *) sed -i "s|/home/bms|$HOME|g" "$DESKTOP_DIR"/*.desktop
-           echo "    paths updated" ;;
+        *) encoded_home="__${HOME#/}"
+           encoded_home="${encoded_home//\//_}_"
+           sed -i -e "s|/home/bms|$HOME|g" -e "s|__home_bms_|$encoded_home|g" "$DESKTOP_DIR"/*.desktop
+           echo "    paths and window classes updated" ;;
     esac
 fi
 

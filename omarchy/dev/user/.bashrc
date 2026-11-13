@@ -10,14 +10,19 @@ source "$OMARCHY_PATH/default/bash/rc"
 
 # Personal
 #
-cowsay -f /usr/share/cowsay/cows/mutilated.cow "Hey!  It's Brian...a little help here?"
-#
+# TODO(bms): convert all aliases into functions?  Reason being, functions are prefered, and are looked up before
+#            aliases.  There are also other issues with aliases, such as expanding when read and not affecting
+#            commands on proceeding lines.
 # =======================
 # ===     Aliases     ===
+alias mycal='cal; catimg -H 31 ~/Pictures/Macbaconai-floating-oriental-roofing-island.jpeg'
+alias mycow="cowsay -f /usr/share/cowsay/cows/mutilated.cow \"Hey!  It's Brian...a little help here?\""
+mycal
 # alias ls='ls --group-directories-first -ChF'  # Columns
 alias cls='clear; ls'
 alias clsa='clear; lsa'
-alias lt='eza --group-directories-first --tree --level=2 --long --icons --git'
+# alias lt='eza --group-directories-first --tree --level=2 --long --icons --git'
+alias lt='eza --group-directories-first --tree --level=2 --long --icons --git --ignore-glob=".git|.gitignore|.gitattributes|node_modules|__pycache__"'
 # alias lt='eza --group-directories-first --tree --level=2 --long --icons --git --ignore-glob=".git|.gitignore|.gitattributes|node_modules|.venv|__pycache__"'
 alias clt='clear; lt'
 alias clta='clear; lta'
