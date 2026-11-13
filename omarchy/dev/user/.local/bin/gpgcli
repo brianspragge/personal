@@ -45,8 +45,8 @@ EOF
       gpg --armor --export "$key_id"
       read -srn1 -p 'Press any key to continue...'
       clear
-      read -p 'Use the newly created key as the global signing key? (y/N): ' confirm
-      if [[ "$confirm" =~ ^[Yy]$ ]]; then
+      read -p 'Use the newly created key as the global signing key? (Y/n): ' confirm
+      if [[ ! "$confirm" =~ ^[Nn]$ ]]; then
         git config --global user.signingkey "$key_id"
         echo "This key:$key_id should match: "
         git config get user.signingkey
