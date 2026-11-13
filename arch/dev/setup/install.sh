@@ -165,7 +165,11 @@ remove_obsolete_link() {
 }
 
 install_desktop_files() {
-    local src dst tmp
+    local src dst tmp encoded_home
+
+    # Chromium encodes file:// paths in StartupWMClass as __home_user_.
+    encoded_home="__${HOME#/}"
+    encoded_home="${encoded_home//\//_}_"
 
     mkdir -p "$HOME/.local/share/applications"
     for src in "$BASE/.local/share/applications"/*.desktop; do
@@ -173,6 +177,7 @@ install_desktop_files() {
         dst="$HOME/.local/share/applications/$(basename "$src")"
         tmp="$(mktemp)"
         sed -e "s|/home/bms|$HOME|g" \
+            -e "s|__home_bms_|$encoded_home|g" \
             -e "s|omarchy-launch-webapp|$HOME/.local/bin/webapp-launcher|g" \
             "$src" >"$tmp"
         chmod 0644 "$tmp"
@@ -289,6 +294,7 @@ link_file "$BASE/.config/dunst/dunstrc" "$HOME/.config/dunst/dunstrc"
 link_file "$BASE/.config/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
 link_file "$BASE/.config/ghostty/config" "$HOME/.config/ghostty/config"
 link_file "$BASE/.config/mpd/mpd.conf" "$HOME/.config/mpd/mpd.conf"
+link_file "$BASE/.config/opencode/cli.json" "$HOME/.config/opencode/cli.json"
 rm -f "$HOME/.config/hypr/wallpaper/firered.png"
 link_file "$BASE/.config/hypr/wallpaper/jade.png" "$HOME/.config/hypr/wallpaper/jade.png"
 for module in hyprland monitors input looknfeel bindings programs; do

@@ -37,6 +37,7 @@ window#waybar.hidden {
 
 /* Shared spacing for the horizontal modules. */
 #mpd,
+#mpris,
 #cpu,
 #memory,
 #pulseaudio,
@@ -53,6 +54,7 @@ window#waybar.hidden {
 }
 
 #mpd:hover,
+#mpris:hover,
 #cpu:hover,
 #memory:hover,
 #pulseaudio:hover,
@@ -79,16 +81,18 @@ window#waybar.empty #window {
     background: transparent;
 }
 
-/* Music. */
+/* MPD local library (hidden unless playing or paused). */
 #mpd {
-    margin-left: 6px;
+    margin: 0 2px 0 6px;
     color: #8fd59b;
     font-size: 10px;
 }
 
-#mpd.disconnected,
-#mpd.stopped {
-    color: #55715d;
+/* Any MPRIS media (hidden unless playing or paused). */
+#mpris {
+    margin: 0 2px 0 6px;
+    color: #8fd59b;
+    font-size: 10px;
 }
 
 /* System. */

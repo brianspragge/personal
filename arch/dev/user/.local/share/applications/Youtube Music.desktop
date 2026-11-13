@@ -8,3 +8,4 @@ Type=Application
 Icon=/home/bms/.local/share/applications/icons/Youtube Music.png
 StartupNotify=true
 Categories=Network;WebBrowser;
+StartupWMClass=chrome-music.youtube.com__-Default

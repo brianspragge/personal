@@ -8,3 +8,4 @@ Type=Application
 Icon=/home/bms/.local/share/applications/icons/casiocalc.png
 StartupNotify=true
 Categories=Network;WebBrowser;
+StartupWMClass=chrome-__home_bms_.local_share_applications_Fx-570es_plus-1.png-Default

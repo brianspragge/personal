@@ -19,9 +19,9 @@ hl.monitor({ output = "DP-1", mode = "1920x1080@60", position = "1366x-850", sca
 
 -- ThinkPad X13 + external display.
 hl.monitor({ output = "eDP-1", mode = "1920x1200@60.003", position = "0x0", scale = monitor_scale })
-hl.monitor({ output = "DP-2", mode = "1920x1080@60", position = "1920x-850", scale = monitor_scale })
--- The laptop only keeps workspace 1; external displays get workspaces 2-10.
-hl.workspace_rule({ workspace = "1", monitor = "eDP-1" })
-for ws = 2, 10 do
+hl.monitor({ output = "DP-2", mode = "1920x1080@60", position = "-1920x0", scale = monitor_scale })
+-- The laptop only keeps workspace 10; external displays get workspaces 1-9.
+hl.workspace_rule({ workspace = "10", monitor = "eDP-1" })
+for ws = 1, 9 do
     hl.workspace_rule({ workspace = tostring(ws), monitor = "DP-2" })
 end
