@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=Casio Calculator
+Comment=Image to see buttons
+Exec=/home/bms/.local/bin/webapp-launcher file:///home/bms/.local/share/applications/Fx-570es_plus-1.png
+Terminal=false
+Type=Application
+Icon=/home/bms/.local/share/applications/icons/casiocalc.png
+StartupNotify=true
+Categories=Network;WebBrowser;

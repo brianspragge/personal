@@ -1,13 +1,13 @@
-" =======================
-" ===     Setup      ====
-" vim-plug is installed by arch/dev/setup/install.sh
+" colorscheme zaibatsu  " pink/purple theme
 packadd! comment        " <g,c,c> or visual mode then <g,c>
 packadd! termdebug      " :Termdebug <file>
 
 " =======================
 " ===    Settings    ====
+" =======================
 set backupdir=~/.cache/vim/backup//  " list of directories for the backup file
 set directory=~/.cache/vim/swap//    " list of directory names for the swap file
+set tags=./tags;                     " list of file names used by the tag command
 set undodir=~/.cache/vim/undo//      " where to store undo files
 set undofile                         " save undo information in a file
 
@@ -23,17 +23,35 @@ set wildignore+=*.tmp,*.swp,*.swo,*.DS_Store
 set wildmenu                    " use menu for command line completion
 set wildmode=longest:full,full  " mode for 'wildchar' command-line expansion
 
+" (UNTESTED): Switch CWD to the directory of the open buffer
+" map <leader>cd :cd %:p:h<cr>:pwd<cr>
+set autochdir              " change directory to the file in the current window
+set autowrite              " automatically write file if changed
+set breakindent            " wrapped line repeats indent
+set breakindentopt=shift:-1 " settings for 'breakindent'
+set showbreak=>            " string to use at the start of wrapped lines
+" set clipboard=unnamedplus  " use the clipboard as the unnamed register
 set display=truncate,uhex  " list of flags for how to display text
-set expandtab              " use spaces when <Tab> is inserted
-set mouse=a                " enable the use of mouse clicks
-set number                 " display the current line pos in lower right corner
-" set scrolloff=999          " minimum nr. of lines above and below cursor
-set shiftwidth=4           " number of spaces to use for (auto)indent step
-set softtabstop=4          " number of columns between two soft tab stops
+" set expandtab              " use spaces when <Tab> is inserted
+set mouse=nvi              " enable the use of mouse clicks
+set mousemodel=popup_setpos " changes meaning of mouse buttons
+set nowrap                 " long lines wrap and continue on the next line
+set nonumber               " display the current line pos in lower right corner
+set scrolloff=3            " minimum nr. of lines above and below cursor
+set sidescroll=1           " minimum number of columns to scroll horizontal
+set sidescrolloff=3        " min. nr. of columns to left and right of cursor
+
+" set shiftwidth=4           " number of spaces to use for (auto)indent step
+" set softtabstop=4          " number of columns between two soft tab stops
 set termguicolors          " use GUI colors for the terminal
 set termwinsize=8*0        " size of a terminal window
+set thesaurus+=$HOME/.vim/thesaurus/english.txt
 set ttimeout               " time out on mappings
 set ttimeoutlen=100        " time out time for key codes in milliseconds
+
+let mapleader = "\\"
+syntax enable
+filetype plugin indent on
 
 " resize windows better keybinds
 nnoremap <silent> <M-j> :resize +2<CR>
@@ -41,62 +59,186 @@ nnoremap <silent> <M-k> :resize -2<CR>
 nnoremap <silent> <M-h> :vertical resize +2<CR>
 nnoremap <silent> <M-l> :vertical resize -2<CR>
 
-" Center after jumping
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
-nnoremap g* g*zz
-nnoremap g# g#zz
-" Center after half-page jumps
-nnoremap <C-u> <C-u>zz
-nnoremap <C-d> <C-d>zz
-" Center after paragraph jumps
-nnoremap { {zz
-nnoremap } }zz
-" Center after jumping to bottom
-nnoremap G Gzz
+" " Center after jumping
+" nnoremap n nzt
+" nnoremap N Nzt
+" nnoremap * *zt
+" nnoremap # #zt
+" nnoremap g* g*zt
+" nnoremap g# g#zt
+" " Center after half-page jumps
+" nnoremap <C-u> <C-u>zt
+" nnoremap <C-d> <C-d>zt
+" " Center after paragraph jumps
+" nnoremap { {zt
+" nnoremap } }zt
+" " Center after jumping to bottom
+" nnoremap G Gzb
+" " Center after jumping prev/next positions
+" nnoremap <C-i> <C-i>zz
+" nnoremap <C-o> <C-o>zz
+
+" Cycle through buffers
+nnoremap <C-S-h> :bp<CR>
+nnoremap <C-S-l> :bn<CR>
+" Choose specific buffer
+nnoremap <C-S-b> :ls<cr>:b<space>
+
+" Align text based on ' '
+vnoremap <leader><space> :!column -t -o ' ' -s ' '<CR>
+" Align text based on '='
+vnoremap <leader>= :!column -t -o = -s =<CR>
+
+" move indent logic to ~/.vim/indent/whatever-language.vim if below is 'on'
+filetype plugin indent on
+
+" =======================
+" ===      !ASM      ====
+autocmd FileType asm setlocal
+  \ expandtab
+  \ shiftwidth=4
+  \ softtabstop=-1
+" split window with assembly(intel) output of current file
+nnoremap <leader>a :w<CR>:!gcc -std=c11 -S -fverbose-asm -masm=intel -Wall -Wextra -Wconversion % -o /tmp/vim_temp.s<CR>:vs /tmp/vim_temp.s<CR>
+" compile+run current file
+nnoremap <leader>c :w<CR>:!clear; gcc -std=c11 -Wall -Wextra -Wconversion -fsanitize=address,undefined % -o %< && ./%<<CR>
+" split window with assembly(intel) output of current WINDOWS file
+nnoremap <leader>q :w<CR>:!x86_64-w64-mingw32-gcc -std=c11 -S -fverbose-asm -masm=intel -Wall -Wextra -Wconversion % -o /tmp/vim_temp.s<CR>:vs /tmp/vim_temp.s<CR>
+" compile+run current WINDOWS file
+nnoremap <leader>w :w<CR>:!clear; x86_64-w64-mingw32-gcc -std=c11 -Wall -Wextra -Wconversion % -o %< && wine %<<CR>
 
 " =======================
 " ===     !Bash      ====
-autocmd FileType sh setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType sh setlocal
+  \ expandtab
+  \ shiftwidth=2
+  \ softtabstop=-1
 
 " =======================
 " ===       !C       ====
-" compile current file
-autocmd FileType c setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-vnoremap <leader>c :w<CR>:!gcc -std=c99 % -o %< && ./%<<CR>
+autocmd FileType c setlocal
+  \ expandtab
+  \ shiftwidth=4
+  \ softtabstop=-1
+" split window with assembly(intel) output of current file
+nnoremap <leader>a :w<CR>:!gcc -std=c11 -S -fverbose-asm -masm=intel -Wall -Wextra -Wconversion % -o /tmp/vim_temp.s<CR>:vs /tmp/vim_temp.s<CR>
+" compile+run current file
+nnoremap <leader>c :w<CR>:!clear; gcc -std=c11 -Wall -Wextra -Wconversion -fsanitize=address,undefined % -o %< && ./%<<CR>
+" split window with assembly(intel) output of current WINDOWS file
+nnoremap <leader>q :w<CR>:!x86_64-w64-mingw32-gcc -std=c11 -S -fverbose-asm -masm=intel -Wall -Wextra -Wconversion % -o /tmp/vim_temp.s<CR>:vs /tmp/vim_temp.s<CR>
+" compile+run current WINDOWS file
+nnoremap <leader>w :w<CR>:!clear; x86_64-w64-mingw32-gcc -std=c11 -Wall -Wextra -Wconversion % -o %< && wine %<<CR>
 
 " =======================
 " ===      !C++      ====
-autocmd FileType cpp setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-vnoremap <leader>+ :w<CR>:!g++ % -o %< && ./%<<CR>
+autocmd FileType cpp setlocal
+  \ tags+=~/.vim/tags/cpp.tags
+  \ expandtab
+  \ shiftwidth=2
+  \ softtabstop=-1
+" split window with assembly(intel) output of current file
+nnoremap <leader>A :w<CR>:!gcc -std=c++17 -S -fverbose-asm -masm=intel -Wall -Wextra -Wconversion % -o /tmp/vim_temp.s<CR>:vs /tmp/vim_temp.s<CR>
+" split window with assembly(intel) output of current WINDOWS file
+nnoremap <leader>Q :w<CR>:!x86_64-w64-mingw32-g++ -std=c++17 -S -fverbose-asm -masm=intel -Wall -Wextra -Wconversion % -o /tmp/vim_temp.s<CR>:vs /tmp/vim_temp.s<CR>
+" compile+run current WINDOWS file
+nnoremap <leader>W :w<CR>:!clear; x86_64-w64-mingw32-g++ -std=c++17 -Wall -Wextra -Wconversion % -o %< && wine %<<CR>
+" compile+run current file
+nnoremap <leader>C :w<CR>:!clear; g++ -std=c++17 -Wall -Wextra -Wconversion -fsanitize=address,undefined % -o %< && ./%<<CR>
 
 " =======================
-" ===   JavaScript   ====
-autocmd FileType js setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-" execute code in new terminal buffer
-vnoremap <leader>j :<C-U>'<,'>w! /tmp/vim_temp.js \| !clear; node /tmp/vim_temp.js<CR>
-" execute whole lines where code is highlighted
+" ===      !Go       ====
+autocmd FileType go setlocal
+  \ tags+=~/.vim/tags/go_stdlib.tags
+  \ noexpandtab
+  \ tabstop=2
+" function to auto format right before saving file/buffer
+function! GoLangFormatOnSave()
+  let view = winsaveview()
+  silent! %!gofmt
+  if v:shell_error
+    silent undo
+  endif
+  call winrestview(view)
+endfunction
+autocmd BufWritePre *.go call GoLangFormatOnSave()
+" execute current file
+nnoremap <leader>g :w<CR>:!clear; go run ./main.go ./cinreader.go<CR>
+" nnoremap <leader>g :w<CR>:!clear; go build '%' && ./'%<'<CR>
+" execute highlighted lines in /tmp
+" vnoremap <leader>g :<C-U>'<,'>w! /tmp/vim_temp.js \| !clear; node /tmp/vim_temp.js<CR>
+
+" =======================
+" ===  !JavaScript   ====
+autocmd FileType javascript
+  \ setlocal
+  \ expandtab
+  \ shiftwidth=2
+  \ softtabstop=-1
+" execute current file
 nnoremap <leader>j :w! /tmp/vim_temp.js \| !clear; node /tmp/vim_temp.js<CR>
+" execute highlighted lines in /tmp
+vnoremap <leader>j :<C-U>'<,'>w! /tmp/vim_temp.js \| !clear; node /tmp/vim_temp.js<CR>
 
 " =======================
 " ===    !Python     ====
-set tags=./tags;~/tags/python_stdlib.tags;~/tags/python_venv_libs.tags
-let mapleader = "\\"
-autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-" execute code in new terminal buffer
-vnoremap <leader>p :<C-U>'<,'>w! /tmp/vim_temp.py \| !clear; python /tmp/vim_temp.py<CR>
-" execute whole lines where code is highlighted
-nnoremap <leader>p :w! /tmp/vim_temp.py \| !clear; python /tmp/vim_temp.py<CR>
+autocmd FileType python setlocal
+  \ tags+=~/.vim/tags/python_stdlib.tags;~/.vim/tags/python_venv_libs.tags
+  \ expandtab
+  \ shiftwidth=4
+  \ softtabstop=-1
+" execute current file
+nnoremap <leader>P :w<CR>:!clear; python %<CR>
+" execute highlighted lines in /tmp
+vnoremap <leader>P :<C-U>'<,'>w! /tmp/vim_temp.py \| !clear; python /tmp/vim_temp.py<CR>
+
+" =======================
+" ===     !Rust      ====
+autocmd FileType rust setlocal
+  \ tags+=~/.vim/tags/rust_stdlib.tags
+  \ expandtab
+  \ shiftwidth=2
+  \ softtabstop=-1
 
 " =======================
 " ===     !Text      ====
-" autocmd FileType text setlocal noexpandtab tabstop=5 shiftwidth=5 softtabstop=5
-autocmd FileType text setlocal noexpandtab tabstop=2 shiftwidth=2 softtabstop=2
+"autocmd FileType text setlocal noexpandtab tabstop=5 shiftwidth=5 softtabstop=5
+autocmd FileType text setlocal
+  \ expandtab
+  \ shiftwidth=2
+  \ softtabstop=-1
+
+" =======================
+" ===  !Typescript   ====
+autocmd FileType typescript setlocal
+  \ expandtab
+  \ shiftwidth=2
+  \ softtabstop=-1
+" execute current file
+nnoremap <leader>t :w<CR>:!clear; ts-node %<CR>
+" execute highlighted lines in /tmp
+vnoremap <leader>t :<C-U>'<,'>w! /tmp/vim_temp.ts \| !clear; ts-node /tmp/vim_temp.ts<CR>
+
+" =======================
+" ===  !Type/React   ====
+autocmd FileType typescriptreact setlocal
+  \ expandtab
+  \ shiftwidth=2
+  \ softtabstop=-1
+" execute current file
+nnoremap <leader>T :w<CR>:!clear; yarn ts-node %<CR>
+" execute highlighted lines in /tmp
+vnoremap <leader>T :<C-U>'<,'>w! /tmp/vim_temp.tsx \| !clear; yarn ts-node /tmp/vim_temp.tsx<CR>
+
+" =======================
+" ===     !VIM       ====
+autocmd FileType vim setlocal
+  \ expandtab
+  \ shiftwidth=2
+  \ softtabstop=-1
 
 " =======================
 " ===    Plugins     ====
+" =======================
 call plug#begin('~/.vim/plugged')
 " List plugins here:
 Plug 'prabirshrestha/asyncomplete.vim'
@@ -138,7 +280,7 @@ function! s:on_lsp_buffer_enabled() abort
   setlocal signcolumn=yes
   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
   nmap <buffer> gd <plug>(lsp-definition)
-  let g:lsp_format_sync_timeout = 1000 
+  let g:lsp_format_sync_timeout = 1000
 endfunction
 augroup lsp_install
   au!
@@ -146,91 +288,9 @@ augroup lsp_install
   " autocmd BufWritePre *.py,*.c,*.cpp call execute('LspDocumentFormatSync')
 augroup END
 
-"" =======================
-"" ===     Indent      ===
-"highlight IndentGuide ctermfg=245
-"let g:indent_levels = 5
-"set conceallevel=1
-"" define highlight groups
-"for i in range(0, g:indent_levels)
-"  execute 'highlight default link IndentLevel' . i . ' IndentGuide'
-"endfor
-"" clear previous indent matches
-"function! ClearIndent() abort
-"  for i in range(0, g:indent_levels)
-"    let varbase = 'indent_match' . i
-"    if exists('w:' . varbase)
-"      call matchdelete(get(w:, varbase))
-"      execute 'unlet w:' . varbase
-"    endif
-"  endfor
-"endfunction
-"" toggle function
-"function! ToggleIndent() abort
-"  if getbufvar('%', 'indent_enabled', 0)
-"    call setbufvar('%', 'indent_enabled', 0)
-"    call ClearIndent()
-"    echo "Indent disabled"
-"  else
-"    call setbufvar('%', 'indent_enabled', 1)
-"    call HighlightIndent()
-"    echo "Indent enabled"
-"  endif
-"endfunction
-"" indent highlight per <shiftwidth> or tab ability
-"function! HighlightIndent()
-"  if getbufvar('%', 'indent_enabled', 0)
-"    call ClearIndent()
-"    let l:sw = &shiftwidth
-"    let l:ts = &tabstop
-"    let l:et = &expandtab
-"    if l:sw == 0 | return | endif
-"    let l:conceal = '┊'
-"    for i in range(1, g:indent_levels)
-"      let l:group = 'IndentLevel' . (i - 1)
-"      let l:varbase = 'indent_match' . (i - 1)
-"      if !exists('b:indent_removed') || index(b:indent_removed, i - 1) == -1
-"        if l:et
-"          let l:pattern = '^' . repeat('\%(' . repeat(' ', l:sw) . '\)', i)
-"        else
-"          let l:pattern = '^' . repeat('\t', i)
-"        endif
-"        execute 'let w:' . l:varbase . ' = matchadd("' . l:group . '", "' . l:pattern . '", 10, -1, {"conceal":"' . l:conceal . '"})'
-"      endif
-"    endfor
-"  endif
-"endfunction
-"" help message
-"function! IndentHelp() abort
-"  echohl Title
-"  echo "Indent Guide Help:"
-"  echohl None
-"  echo "  • Uses ┊ as indent guide."
-"  echo "  • Enabled = " . (getbufvar('%', 'indent_enabled', 0) ? "Yes" : "No")
-"  echohl Statement
-"  echo "Commands:"
-"  echo "  :Indent        – This help menu"
-"  echo "  :IndentOn      – Enable for this buffer"
-"  echo "  :IndentOff     – Disable for this buffer"
-"  echo "  :IndentToggle  – Toggle on/off"
-"  echohl None
-"endfunction
-"" define commands
-"command! Indent       call IndentHelp()
-"command! IndentOn     call setbufvar('%', 'indent_enabled', 1) | call HighlightIndent() | echo "Indent enabled"
-"command! IndentOff    call setbufvar('%', 'indent_enabled', 0) | call ClearIndent()  | echo "Indent disabled"
-"command! IndentToggle call ToggleIndent()
-"" auto-enable for certain filetypes
-"autocmd FileType c,cpp,python call setbufvar('%', 'indent_enabled', 1) | call HighlightIndent()
-"" refresh on WinEnter/Leave
-"autocmd BufWinEnter * if getbufvar('%', 'indent_enabled', 0) | call HighlightIndent() | endif
-"autocmd BufWinLeave * if getbufvar('%', 'indent_enabled', 0) | call ClearIndent()    | endif
-"" Re-highlight when shiftwidth changes
-"autocmd OptionSet shiftwidth if getbufvar('%', 'indent_enabled', 0) | call HighlightIndent() | endif
-"
-
 " =======================
 " ===      Ruler      ===
+" =======================
 let g:ruler_place = 79
 let b:ruler_column = g:ruler_place
 highlight Ruler ctermbg=yellow ctermfg=black
@@ -241,7 +301,7 @@ function! ClearRuler()
     unlet w:ruler_match
   endif
 endfunction
-" highlight ruler per buffer 
+" highlight ruler per buffer
 function! HighlightRuler()
   call ClearRuler()
   let l:col = getbufvar('%', 'ruler_column', g:ruler_place)
@@ -285,7 +345,7 @@ endfunction
 command! Ruler call RulerHelp()
 command! RulerOn call HighlightRuler()
 command! RulerOff call ClearRuler()
-command! -nargs=1 RulerSet call SetRuler(<args>) 
+command! -nargs=1 RulerSet call SetRuler(<args>)
 command! RulerReset call ResetRuler()
 command! RulerToggle call ToggleRuler()
 " apply to all buffers

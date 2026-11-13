@@ -15,6 +15,14 @@ fi
 [[ $- != *i* ]] && return
 
 # =======================
+# ===     Welcome     ===
+# =======================
+if command -v cowsay >/dev/null 2>&1 &&
+    [ -r /usr/share/cowsay/cows/mutilated.cow ]; then
+  cowsay -f /usr/share/cowsay/cows/mutilated.cow "Hey!  It's Brian...a little help here?"
+fi
+
+# =======================
 # ===     Aliases     ===
 alias BRIANS_PWD='printf " ○ %s: \n" "$PWD"'
 # Many Columns
@@ -28,8 +36,9 @@ alias lla='ll -A'
 alias cll='clear; BRIANS_PWD; ll'
 alias clla='clear; BRIANS_PWD; lla'
 alias lt='eza --group-directories-first --tree --level=2 --long --icons --git'
+alias lta='lt -a'
 alias clt='clear; lt'
-alias clta='clear; lt -a'
+alias clta='clear; lta'
 # Viewing images through terminal through <imv> without blur by default
 alias imv='imv -u nearest_neighbour'
 
@@ -37,7 +46,7 @@ alias imv='imv -u nearest_neighbour'
 # ===    Functions    ===
 # <history> becomes very neat, thanks to SOandSO.
 if [[ -n "$HISTCONTROL" ]]; then
-  export HISTCONTROL="${HISTCONTOL}:ignoredups:erasedups:ignorespace;"
+  export HISTCONTROL="${HISTCONTROL}:ignoredups:erasedups:ignorespace"
 else
   export HISTCONTROL="ignoredups:erasedups:ignorespace"
 fi

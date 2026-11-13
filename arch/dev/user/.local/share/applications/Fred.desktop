@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=Fred
+Comment=Friendly-Editor
+Exec=/home/bms/.local/bin/fred
+Terminal=false
+Type=Application
+Icon=/home/bms/.local/share/applications/icons/fred.svg
+StartupNotify=true
+Categories=Utility;TextEditor;
