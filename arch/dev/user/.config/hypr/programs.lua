@@ -8,6 +8,6 @@ return {
     browser = "zen-browser",
     privateBrowser = "zen-browser --private-window",
     webapp = "$HOME/.local/bin/webapp-launcher",
-    wallpaper = "$HOME/.config/hypr/wallpaper/firered.png",
+    wallpaper = "$HOME/.config/hypr/wallpaper/jade.png",
     lock = "hyprlock",
 }

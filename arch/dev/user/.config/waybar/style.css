@@ -1,56 +1,218 @@
+/* Jade — quiet, minimal top bar for Hyprland. */
+
 * {
-    font-family: "Press Start 2P", FontAwesome, sans-serif;
-    font-size: 10px;
-    color: #4e4e4d;
+    font-family: "JetBrainsMono Nerd Font", FontAwesome, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: #b7d8c0;
+    min-height: 0;
+    border: none;
+    text-shadow: none;
 }
 
+/* Keep the toplevel transparent; the rounded surface lives on the inner box.
+   This avoids the black square corners some compositors paint outside the radius. */
 window#waybar {
-    background-color: #f8f8f8;
-    text-shadow: 2px 2px 0 #dbdbd6;
-    border-radius: 16px;
-    border: 7px solid #706880;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+window#waybar > decoration {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+window#waybar > box {
+    background-color: #061c10;
+    border: 1px solid #2f5d3b;
+    border-radius: 12px;
+    padding: 0 20px;
 }
 
 window#waybar.hidden {
-    opacity: 0.2;
+    opacity: 0.15;
 }
 
-#workspaces button {
-    background: none;
-    border: none;
+/* Shared spacing for the horizontal modules. */
+#mpd,
+#cpu,
+#memory,
+#pulseaudio,
+#network,
+#bluetooth,
+#backlight,
+#battery,
+#clock,
+#custom-lock {
+    margin: 0 2px;
+    padding: 0 8px;
+    border-radius: 8px;
+    background-color: transparent;
+}
+
+#mpd:hover,
+#cpu:hover,
+#memory:hover,
+#pulseaudio:hover,
+#network:hover,
+#bluetooth:hover,
+#backlight:hover,
+#battery:hover,
+#clock:hover,
+#custom-lock:hover {
+    background-color: rgba(137, 201, 141, 0.10);
+    color: #e4f7e8;
+}
+
+/* Window title. */
+#window {
+    margin: 0 10px 0 2px;
     padding: 0;
-    margin: 0;
+    color: #7fa98a;
+    font-size: 11px;
+    font-weight: 400;
 }
 
-tooltip {
-    background: #faf4f2;
+window#waybar.empty #window {
+    background: transparent;
 }
 
-#battery.charging {
-    background-color: #42d663;
-    color: #000000;
+/* Music. */
+#mpd {
+    margin-left: 6px;
+    color: #8fd59b;
+    font-size: 10px;
+}
+
+#mpd.disconnected,
+#mpd.stopped {
+    color: #55715d;
+}
+
+/* System. */
+#cpu,
+#memory {
+    color: #9ac9a5;
+}
+
+#pulseaudio {
+    color: #b7d8c0;
+}
+
+#pulseaudio.muted {
+    color: #5b7462;
+}
+
+#backlight {
+    color: #c9df9f;
+}
+
+#network {
+    color: #a9cfb3;
+}
+
+#network.disconnected {
+    color: #6b7f71;
+}
+
+/* Bluetooth. */
+#bluetooth {
+    color: #8fd59b;
+}
+
+#bluetooth.off,
+#bluetooth.disabled,
+#bluetooth.no-controller {
+    color: #5b7462;
+}
+
+/* Battery. */
+#battery {
+    color: #b7d8c0;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: #8fd59b;
 }
 
 #battery.warning:not(.charging) {
-    background-color: #fff729;
-    color: #000000;
+    color: #e0c879;
 }
 
 #battery.critical:not(.charging) {
-    background-color: #c82828;
-    color: #ffffff;
-    animation: blink 0.5s steps(12) infinite alternate;
+    color: #f08a8a;
+    animation: jade-pulse 2s steps(24) infinite alternate;
 }
 
-#temperature.critical {
-    background-color: #c82828;
-    color: #ffffff;
+/* Clock and date. */
+#clock {
+    padding: 0 6px;
+    color: #dff4e3;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
 }
 
-@keyframes blink {
+#clock.date {
+    padding: 0 6px 0 0;
+    color: #6f9c7a;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+}
+
+/* Lock. */
+#custom-lock {
+    color: #8fd59b;
+    font-size: 12px;
+}
+
+/* Workspaces (kept ready if the module is re-enabled). */
+#workspaces button {
+    margin: 0 2px;
+    padding: 0 6px;
+    border-radius: 6px;
+    background: transparent;
+    color: #5f826a;
+}
+
+#workspaces button:hover {
+    background: rgba(137, 201, 141, 0.12);
+    color: #dff4e3;
+}
+
+#workspaces button.active {
+    background: #89c98d;
+    color: #04140b;
+    box-shadow: 0 0 10px rgba(137, 201, 141, 0.45);
+}
+
+#workspaces button.urgent {
+    background: rgba(200, 40, 40, 0.35);
+    color: #ffd7d7;
+}
+
+/* Tooltips. */
+tooltip {
+    background: rgba(4, 18, 11, 0.98);
+    border: 1px solid rgba(137, 201, 141, 0.30);
+    border-radius: 10px;
+}
+
+tooltip label {
+    color: #cfe9d4;
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 11px;
+}
+
+@keyframes jade-pulse {
+    from {
+        color: #f08a8a;
+    }
     to {
-        background-color: #ffffff;
-        color: #5f5f5f;
+        color: #ffd0d0;
     }
 }
-

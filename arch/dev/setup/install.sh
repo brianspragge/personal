@@ -289,7 +289,8 @@ link_file "$BASE/.config/dunst/dunstrc" "$HOME/.config/dunst/dunstrc"
 link_file "$BASE/.config/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
 link_file "$BASE/.config/ghostty/config" "$HOME/.config/ghostty/config"
 link_file "$BASE/.config/mpd/mpd.conf" "$HOME/.config/mpd/mpd.conf"
-link_file "$BASE/.config/hypr/wallpaper/firered.png" "$HOME/.config/hypr/wallpaper/firered.png"
+rm -f "$HOME/.config/hypr/wallpaper/firered.png"
+link_file "$BASE/.config/hypr/wallpaper/jade.png" "$HOME/.config/hypr/wallpaper/jade.png"
 for module in hyprland monitors input looknfeel bindings programs; do
     link_file "$BASE/.config/hypr/$module.lua" "$HOME/.config/hypr/$module.lua"
 done

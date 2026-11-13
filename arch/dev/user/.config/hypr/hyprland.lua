@@ -23,8 +23,6 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("dunst")
     hl.exec_cmd("/usr/lib/polkit-kde-authentication-agent-1")
-    hl.exec_cmd("blueman-applet")
-    hl.exec_cmd("nm-applet --indicator")
     hl.exec_cmd("systemctl --user start pipewire.socket pipewire-pulse.socket wireplumber.service")
     hl.exec_cmd("systemctl --user start mpd.service")
 
