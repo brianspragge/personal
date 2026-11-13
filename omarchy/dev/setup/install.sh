@@ -86,6 +86,9 @@ for f in autostart bindings input looknfeel monitors; do
     copy_one "$BASE/.config/hypr/$f.lua" "$HOME/.config/hypr/$f.lua" "hypr/$f.lua"
 done
 
+# opencode
+copy_one "$BASE/.config/opencode/cli.json" "$HOME/.config/opencode/cli.json" "opencode/cli.json"
+
 # scripts in .local/bin
 copy_one "$BASE/.local/bin/getcolor"  "$HOME/.local/bin/getcolor"  "getcolor"
 copy_one "$BASE/.local/bin/gpgcli"     "$HOME/.local/bin/gpgcli"     "gpgcli"

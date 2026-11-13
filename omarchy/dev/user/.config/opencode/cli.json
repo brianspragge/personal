@@ -1,0 +1,40 @@
+{
+  "$schema": "https://opencode.ai/v2/cli.json",
+  "theme": {
+    "name": "system",
+    "mode": "dark"
+  },
+  "diffs": {
+    "wrap": "word"
+  },
+  "session": {
+    "sidebar": "auto",
+    "scrollbar": true,
+    "thinking": "show"
+  },
+  "animations": true,
+  "keybinds": {
+    "session.new": ["ctrl+t", "<leader>n"],
+    "session.tab.close": ["ctrl+q", "<leader>w"],
+    "session.interrupt": ["escape", "ctrl+["],
+    "prompt.autocomplete.hide": ["escape", "ctrl+["],
+    "diff.close": ["escape", "q", "ctrl+["],
+    "session.tab.select.1": ["alt+1", "ctrl+1"],
+    "session.tab.select.2": ["alt+2", "ctrl+2"],
+    "session.tab.select.3": ["alt+3", "ctrl+3"],
+    "session.tab.select.4": ["alt+4", "ctrl+4"],
+    "session.tab.select.5": ["alt+5", "ctrl+5"],
+    "session.tab.select.6": ["alt+6", "ctrl+6"],
+    "session.tab.select.7": ["alt+7", "ctrl+7"],
+    "session.tab.select.8": ["alt+8", "ctrl+8"],
+    "session.tab.select.9": ["alt+9", "ctrl+9"],
+    "session.tab.select.10": ["alt+0", "ctrl+0"],
+    "pane.focus.left": ["ctrl+h", "<leader>left"],
+    "pane.focus.right": ["ctrl+l", "<leader>right"],
+    "terminal.select": ["ctrl+j", "<leader>down"],
+    "terminal.close": ["ctrl+k", "<leader>up"],
+    "variant.cycle": "<leader>v",
+    "input.newline": ["shift+return", "ctrl+return", "alt+return"],
+    "input.delete.to.line.end": "alt+k"
+  }
+}
