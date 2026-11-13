@@ -1,0 +1,7 @@
+# Jade calendar colors for util-linux cal(1).
+# Valid names: header, workday, weekend, today, weeks, weeknumber.
+header 1;32
+workday 32
+weekend 33
+today 30;42
+weeks 36

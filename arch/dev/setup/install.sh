@@ -72,7 +72,7 @@ install_packages() {
         xdg-desktop-portal-hyprland xdg-desktop-portal-gtk qt5-wayland qt6-wayland \
         wofi dolphin gimp grim slurp wl-clipboard imagemagick libnotify pavucontrol dmenu xdg-utils \
         polkit-kde-agent chromium \
-        eza btop cowsay nvm rustup bash-completion \
+        eza btop cowsay catimg nvm rustup bash-completion \
         pipewire pipewire-audio pipewire-pulse wireplumber \
         ttf-jetbrains-mono-nerd otf-font-awesome ttf-nerd-fonts-symbols \
         fastfetch pkgstats \
@@ -295,6 +295,7 @@ link_file "$BASE/.config/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config
 link_file "$BASE/.config/ghostty/config" "$HOME/.config/ghostty/config"
 link_file "$BASE/.config/mpd/mpd.conf" "$HOME/.config/mpd/mpd.conf"
 link_file "$BASE/.config/opencode/cli.json" "$HOME/.config/opencode/cli.json"
+link_file "$BASE/.config/terminal-colors.d/cal.scheme" "$HOME/.config/terminal-colors.d/cal.scheme"
 rm -f "$HOME/.config/hypr/wallpaper/firered.png"
 link_file "$BASE/.config/hypr/wallpaper/jade.png" "$HOME/.config/hypr/wallpaper/jade.png"
 for module in hyprland monitors input looknfeel bindings programs; do
@@ -313,6 +314,8 @@ link_file "$BASE/.local/bin/gpg_ref.txt" "$HOME/.local/bin/gpg_ref.txt"
 link_file "$BASE/.local/bin/gpgcli" "$HOME/.local/bin/gpgcli"
 link_file "$BASE/.local/share/fonts/PressStart2P-Regular.ttf" \
     "$HOME/.local/share/fonts/PressStart2P-Regular.ttf"
+link_file "$BASE/Pictures/Macbaconai-floating-oriental-roofing-island.jpeg" \
+    "$HOME/Pictures/Macbaconai-floating-oriental-roofing-island.jpeg"
 link_file "$BASE/.bashrc" "$HOME/.bashrc"
 link_file "$BASE/.clang-format" "$HOME/.clang-format"
 link_file "$BASE/.drirc" "$HOME/.drirc"

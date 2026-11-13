@@ -33,7 +33,7 @@ alias imv='imv -u nearest_neighbour'
 # ===    Functions    ===
 # <history> becomes very neat, thanks to SOandSO.
 if [[ -n "$HISTCONTROL" ]]; then
-  export HISTCONTROL="${HISTCONTOL}:ignoredups:erasedups:ignorespace;"
+  export HISTCONTROL="${HISTCONTROL}:ignoredups:erasedups:ignorespace"
 else
   export HISTCONTROL="ignoredups:erasedups:ignorespace"
 fi

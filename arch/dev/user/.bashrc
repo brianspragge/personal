@@ -15,16 +15,14 @@ fi
 [[ $- != *i* ]] && return
 
 # =======================
-# ===     Welcome     ===
-# =======================
-if command -v cowsay >/dev/null 2>&1 &&
-    [ -r /usr/share/cowsay/cows/mutilated.cow ]; then
-  cowsay -f /usr/share/cowsay/cows/mutilated.cow "Hey!  It's Brian...a little help here?"
-fi
-
-# =======================
 # ===     Aliases     ===
+# TODO(bms): convert all aliases into functions?  Reason being, functions are prefered, and are looked up before
+#            aliases.  There are also other issues with aliases, such as expanding when read and not affecting
+#            commands on proceeding lines.
 alias BRIANS_PWD='printf " ○ %s: \n" "$PWD"'
+alias mycal='cal; catimg -H 31 ~/Pictures/Macbaconai-floating-oriental-roofing-island.jpeg'
+alias mycow="cowsay -f /usr/share/cowsay/cows/mutilated.cow \"Hey!  It's Brian...a little help here?\""
+mycal
 # Many Columns
 alias ls='ls --color=auto --group-directories-first -ChF'
 alias lsa='ls -A'
